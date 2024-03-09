@@ -34,7 +34,7 @@ struct Meta: Decodable {
 struct Document: Decodable, Hashable {
     let title: String
     let url: String
-    let authors: [String]
+    let authors: String
     let publisher: String
     let thumbnail: String
     
@@ -50,7 +50,17 @@ struct Document: Decodable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.title = try container.decode(String.self, forKey: .title)
         self.url = try container.decode(String.self, forKey: .url)
-        self.authors = try container.decode([String].self, forKey: .authors)
+        
+        let authorList = try container.decode([String].self, forKey: .authors)
+        let reducedAuthors = authorList.reduce("") { result, element in
+            if result.count < 1 {
+                return result + element
+            } else {
+                return result + ", " + element
+            }
+        }
+        self.authors = reducedAuthors
+        
         self.publisher = try container.decode(String.self, forKey: .publisher)
         self.thumbnail = try container.decode(String.self, forKey: .thumbnail)
     }

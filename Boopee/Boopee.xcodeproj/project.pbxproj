@@ -25,6 +25,7 @@
 		DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD92B948302004230CF /* SearchViewController.swift */; };
 		DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ADB2B9483AE004230CF /* MyPageViewController.swift */; };
 		DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */; };
+		DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		DC416AD92B948302004230CF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC416ADB2B9483AE004230CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBookMemoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			children = (
 				DC416AA52B94299B004230CF /* Boopee */,
 				DC416AA42B94299B004230CF /* Products */,
+				DC416AE62B99C129004230CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +129,7 @@
 			children = (
 				DC416AAA2B94299B004230CF /* HomeViewController.swift */,
 				DC416AD92B948302004230CF /* SearchViewController.swift */,
+				DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */,
 				DC416ADB2B9483AE004230CF /* MyPageViewController.swift */,
 				DC416AD62B945F24004230CF /* TabBarController.swift */,
 				DC416ADF2B96B0A0004230CF /* Cell */,
@@ -147,6 +151,13 @@
 				DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC416AE62B99C129004230CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +250,7 @@
 				DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
+				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* ViewModel.swift in Sources */,
 				DC416ACD2B942B02004230CF /* BookNetwork.swift in Sources */,

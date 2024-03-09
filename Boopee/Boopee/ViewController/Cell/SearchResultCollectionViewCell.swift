@@ -70,17 +70,10 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     public func configure(item: Document) {
         let thumbnailURL = URL(string: item.thumbnail)
-        let reducedAuthorText = item.authors.reduce("") { result, element in
-            if result.count < 1 {
-                return result + element
-            } else {
-                return result + ", " + element
-            }
-        }
         
         searchResultThumbnailImageView.kf.setImage(with: thumbnailURL)
         searchResultTitleLabel.text = item.title
-        searchResultAuthorsLabel.text = reducedAuthorText
+        searchResultAuthorsLabel.text = item.authors
         searchResultPublisherLabel.text = item.publisher
     }
     

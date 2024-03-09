@@ -16,7 +16,7 @@ enum Item: Hashable {
     case document(Document)
 }
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UIScrollViewDelegate {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Document>?
     
     let bookTrigger = PublishSubject<Void>()
@@ -29,11 +29,20 @@ class SearchViewController: UIViewController {
         return collectionView
     }()
     
+    var items: [Document] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
+        
         setupSearchController()
         setupUI()
+        setCollectionViewItemSelectedRx()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - searchController
@@ -88,15 +97,15 @@ class SearchViewController: UIViewController {
         let input = ViewModel.Input(bookTrigger: bookTrigger.asObservable())
         let output = viewModel.transform(input: input, path: path)
         
-        output.bookList.bind { bookList in
+        output.bookList.bind { [weak self] bookList in
             var snapshot = NSDiffableDataSourceSnapshot<Section, Document>()
-            let items = bookList.map { $0 }
+            self?.items = bookList.map { $0 }
             let section = Section.searchResult
             
             snapshot.appendSections([section])
-            snapshot.appendItems(items, toSection: section)
+            snapshot.appendItems(self?.items ?? [], toSection: section)
             
-            self.dataSource?.apply(snapshot)
+            self?.dataSource?.apply(snapshot)
         }.disposed(by: disposeBag)
     }
     
@@ -109,6 +118,17 @@ class SearchViewController: UIViewController {
             
             return cell
         })
+    }
+    
+    // MARK: - selected collectionview item
+    private func setCollectionViewItemSelectedRx() {
+        collectionView.rx.itemSelected
+            .subscribe { [weak self] indexPath in
+                let createBookMemoViewController = CreateBookMemoViewController()
+                self?.navigationController?.pushViewController(createBookMemoViewController, animated: true)
+                guard let documentItem = self?.items[indexPath.element?.row ?? 0] else { return }
+                createBookMemoViewController.config(item: documentItem)
+            }.disposed(by: disposeBag)
     }
 
 }
