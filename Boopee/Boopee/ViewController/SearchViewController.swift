@@ -53,11 +53,10 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         searchController.searchBar.placeholder = "책 검색"
         searchController.hidesNavigationBarDuringPresentation = false
         
+        self.navigationItem.searchController = searchController
         self.navigationItem.title = "책 검색"
         self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationItem.hidesSearchBarWhenScrolling = true
-        
-        self.navigationItem.searchController = searchController
+        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     // MARK: - ui
@@ -84,7 +83,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.53))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(350))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

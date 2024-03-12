@@ -18,9 +18,9 @@ class TabBarController: UITabBarController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let heightTabBar: CGFloat = 89
-        
         var tabFrame = self.tabBar.frame
+        let heightTabBar: CGFloat = tabFrame.size.height + 8
+        
         tabFrame.size.height = heightTabBar
         tabFrame.origin.y = self.view.frame.size.height - heightTabBar
         self.tabBar.frame = tabFrame
@@ -56,3 +56,9 @@ class TabBarController: UITabBarController {
         return navigation
     }
 }
+
+
+@available(iOS 17.0, *)
+#Preview(traits: .defaultLayout, body: {
+    TabBarController()
+})

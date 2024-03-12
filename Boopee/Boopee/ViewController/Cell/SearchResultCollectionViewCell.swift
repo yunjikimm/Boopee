@@ -18,22 +18,20 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     private let searchResultTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        label.backgroundColor = .black
-        label.textColor = .white
         return label
     }()
     private let searchResultAuthorsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.backgroundColor = .black
-        label.textColor = .white
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 12, weight: .light)
         return label
     }()
     private let searchResultPublisherLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.backgroundColor = .black
-        label.textColor = .white
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 12, weight: .light)
         return label
     }()
     
@@ -54,7 +52,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(255)
         }
         searchResultTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(searchResultThumbnailImageView.snp.bottom)
+            make.top.equalTo(searchResultThumbnailImageView.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
         }
         searchResultAuthorsLabel.snp.makeConstraints { make in
