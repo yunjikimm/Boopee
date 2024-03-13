@@ -13,7 +13,7 @@
 - Deployment Target
     - iOS 15.0
 - 라이브러리
-    - RxSwift, RxAlamofire, Kingfisher, Snapkit, (Firebase, SwiftLint 예정)
+    - RxSwift, RxAlamofire, Kingfisher, Snapkit
 - API
     - Kakao REST API
 
