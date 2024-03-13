@@ -16,15 +16,18 @@ struct MemoConst {
 
 class CreateBookMemoViewController: UIViewController {
     let disposeBag = DisposeBag()
+    private var bookDocument: Document?
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .systemBackground
         self.tabBarController?.tabBar.isHidden = true
         memoTextView.delegate = self
         
         setupUI()
         bindMemoTextView()
+        bindMemoCreateButton()
         tapGesture()
     }
     
@@ -156,6 +159,7 @@ class CreateBookMemoViewController: UIViewController {
     
     // MARK: - config()
     public func config(item: Document) {
+        bookDocument = item
         let thumbnailURL = URL(string: item.thumbnail)
         
         searchResultThumbnailImageView.kf.setImage(with: thumbnailURL)
@@ -166,15 +170,28 @@ class CreateBookMemoViewController: UIViewController {
 
 }
 
-// MARK: - extension textView
+// MARK: - extension button bind
+private extension CreateBookMemoViewController {
+    private func bindMemoCreateButton() {
+        createMemoButton.rx.tap
+            .bind { _ in
+                guard let memoText = self.memoTextView.text else { return }
+                guard let bookDocument = self.bookDocument else { return }
+                
+                let memo = Memo(memoText: memoText, createdAt: Date().description, updatedAt: Date().description, bookDocument: bookDocument)
+            }.disposed(by: disposeBag)
+    }
+}
+
+// MARK: - extension textView bind
 private extension CreateBookMemoViewController {
     private func bindMemoTextView() {
         memoTextView.rx.didChange
             .bind {
                 if self.memoTextView.text != ""  {
                     self.createMemoButton.isEnabled = true
-                    self.createMemoButton.setTitleColor(.label, for: .normal)
-                    self.createMemoButton.backgroundColor = .systemBackground
+                    self.createMemoButton.setTitleColor(.systemBackground, for: .normal)
+                    self.createMemoButton.backgroundColor = .black
                 } else {
                     self.createMemoButton.isEnabled = false
                     self.createMemoButton.backgroundColor = .secondarySystemBackground
@@ -238,7 +255,7 @@ extension CreateBookMemoViewController: UITextViewDelegate {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview(traits: .defaultLayout, body: {
-    CreateBookMemoViewController()
-})
+//@available(iOS 17.0, *)
+//#Preview(traits: .defaultLayout, body: {
+//    CreateBookMemoViewController()
+//})

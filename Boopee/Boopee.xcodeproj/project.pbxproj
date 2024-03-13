@@ -26,6 +26,9 @@
 		DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ADB2B9483AE004230CF /* MyPageViewController.swift */; };
 		DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */; };
 		DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */; };
+		DC416AF22BA1A119004230CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AF12BA1A119004230CF /* Memo.swift */; };
+		DC416AF42BA1AC45004230CF /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AF32BA1AC45004230CF /* MemoViewModel.swift */; };
+		DCFBBC592BA1E47500B58311 /* MemoStorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC582BA1E47500B58311 /* MemoStorageType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		DC416ADB2B9483AE004230CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBookMemoViewController.swift; sourceTree = "<group>"; };
+		DC416AF12BA1A119004230CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		DC416AF32BA1AC45004230CF /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
+		DCFBBC582BA1E47500B58311 /* MemoStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStorageType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +92,7 @@
 			children = (
 				DC416ADD2B96B07C004230CF /* ViewController */,
 				DC416ADE2B96B089004230CF /* ViewModel */,
+				DCFBBC572BA1D9F700B58311 /* Service */,
 				DC416AC72B942AC1004230CF /* Network */,
 				DC416AD82B9482A0004230CF /* App */,
 				DC416AAF2B94299D004230CF /* Assets.xcassets */,
@@ -111,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				DC416AD42B945E85004230CF /* BookListModel.swift */,
+				DC416AF12BA1A119004230CF /* Memo.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				DC416AD12B942B4C004230CF /* ViewModel.swift */,
+				DC416AF32BA1AC45004230CF /* MemoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -158,6 +167,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCFBBC572BA1D9F700B58311 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBBC582BA1E47500B58311 /* MemoStorageType.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,12 +264,15 @@
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
 				DC416AC92B942ACE004230CF /* Network.swift in Sources */,
 				DC416AD72B945F24004230CF /* TabBarController.swift in Sources */,
+				DCFBBC592BA1E47500B58311 /* MemoStorageType.swift in Sources */,
 				DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* ViewModel.swift in Sources */,
+				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
+				DC416AF42BA1AC45004230CF /* MemoViewModel.swift in Sources */,
 				DC416ACD2B942B02004230CF /* BookNetwork.swift in Sources */,
 				DC416AD52B945E85004230CF /* BookListModel.swift in Sources */,
 			);
