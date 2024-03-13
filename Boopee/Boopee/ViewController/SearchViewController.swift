@@ -13,11 +13,11 @@ enum Section: Hashable {
     case searchResult
 }
 enum Item: Hashable {
-    case document(Document)
+    case bookList(BookList)
 }
 
 class SearchViewController: UIViewController, UIScrollViewDelegate {
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Document>?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, BookList>?
     
     let bookTrigger = PublishSubject<Void>()
     let disposeBag = DisposeBag()
@@ -29,7 +29,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         return collectionView
     }()
     
-    var items: [Document] = []
+    var items: [BookList] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +97,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         let output = viewModel.transform(input: input, path: path)
         
         output.bookList.bind { [weak self] bookList in
-            var snapshot = NSDiffableDataSourceSnapshot<Section, Document>()
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BookList>()
             self?.items = bookList.map { $0 }
             let section = Section.searchResult
             
@@ -110,7 +110,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - dataSource
     private func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Document>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Section, BookList>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell
             
             cell?.configure(item: itemIdentifier)
@@ -125,7 +125,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
             .subscribe { [weak self] indexPath in
                 let createBookMemoViewController = CreateBookMemoViewController()
                 self?.navigationController?.pushViewController(createBookMemoViewController, animated: true)
-                guard let documentItem = self?.items[indexPath.element?.row ?? 0] else { return }
+                guard let documentItem = self?.items[indexPath.row ?? 0] else { return }
                 createBookMemoViewController.config(item: documentItem)
             }.disposed(by: disposeBag)
     }

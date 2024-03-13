@@ -9,13 +9,13 @@ import UIKit
 import RxSwift
 
 final class BookNetwork {
-    private let network: Netwrok<BookListModel>
+    private let network: Netwrok<BookApi>
     
-    init(network: Netwrok<BookListModel>) {
+    init(network: Netwrok<BookApi>) {
         self.network = network
     }
     
-    func getSearchedBookList(path: String) -> Observable<BookListModel> {
+    func getSearchedBookList(path: String) -> Observable<BookApi> {
         return network.getSearchedBookList(path: path)
     }
 }

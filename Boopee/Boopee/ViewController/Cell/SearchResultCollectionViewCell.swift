@@ -66,7 +66,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
     }
     
-    public func configure(item: Document) {
+    public func configure(item: BookList) {
         let thumbnailURL = URL(string: item.thumbnail)
         
         searchResultThumbnailImageView.kf.setImage(with: thumbnailURL)

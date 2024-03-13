@@ -12,5 +12,5 @@ struct Memo {
     let memoText: String
     let createdAt: String
     let updatedAt: String
-    let bookDocument: Document
+    let bookList: BookList
 }

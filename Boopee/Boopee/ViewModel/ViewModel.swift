@@ -23,11 +23,11 @@ class ViewModel {
     }
     
     struct Output {
-        let bookList: Observable<[Document]>
+        let bookList: Observable<[BookList]>
     }
     
     func transform(input: Input, path: String) -> Output {
-        let bookList = input.bookTrigger.flatMapLatest { [unowned self] _ -> Observable<[Document]> in
+        let bookList = input.bookTrigger.flatMapLatest { [unowned self] _ -> Observable<[BookList]> in
             self.bookNetwork.getSearchedBookList(path: path).map { $0.documents }
         }
         

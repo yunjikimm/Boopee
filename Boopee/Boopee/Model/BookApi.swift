@@ -1,5 +1,5 @@
 //
-//  BookListModel.swift
+//  BookApi.swift
 //  Boopee
 //
 //  Created by yunjikim on 3/3/24.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct BookListModel: Decodable {
+struct BookApi: Decodable {
     let meta: Meta
-    let documents: [Document]
+    let documents: [BookList]
 }
 
 struct Meta: Decodable {
@@ -31,7 +31,7 @@ struct Meta: Decodable {
     }
 }
 
-struct Document: Decodable, Hashable {
+struct BookList: Decodable, Hashable {
     let title: String
     let url: String
     let authors: String

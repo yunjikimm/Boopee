@@ -20,7 +20,7 @@
 		DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ACA2B942AE9004230CF /* NetworkProvider.swift */; };
 		DC416ACD2B942B02004230CF /* BookNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ACC2B942B02004230CF /* BookNetwork.swift */; };
 		DC416AD22B942B4C004230CF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD12B942B4C004230CF /* ViewModel.swift */; };
-		DC416AD52B945E85004230CF /* BookListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD42B945E85004230CF /* BookListModel.swift */; };
+		DC416AD52B945E85004230CF /* BookApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD42B945E85004230CF /* BookApi.swift */; };
 		DC416AD72B945F24004230CF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD62B945F24004230CF /* TabBarController.swift */; };
 		DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD92B948302004230CF /* SearchViewController.swift */; };
 		DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ADB2B9483AE004230CF /* MyPageViewController.swift */; };
@@ -44,7 +44,7 @@
 		DC416ACC2B942B02004230CF /* BookNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookNetwork.swift; sourceTree = "<group>"; };
 		DC416AD12B942B4C004230CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		DC416AD32B942D5D004230CF /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		DC416AD42B945E85004230CF /* BookListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListModel.swift; sourceTree = "<group>"; };
+		DC416AD42B945E85004230CF /* BookApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookApi.swift; sourceTree = "<group>"; };
 		DC416AD62B945F24004230CF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DC416AD92B948302004230CF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC416ADB2B9483AE004230CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +92,7 @@
 			children = (
 				DC416ADD2B96B07C004230CF /* ViewController */,
 				DC416ADE2B96B089004230CF /* ViewModel */,
+				DC416ACE2B942B11004230CF /* Model */,
 				DCFBBC572BA1D9F700B58311 /* Service */,
 				DC416AC72B942AC1004230CF /* Network */,
 				DC416AD82B9482A0004230CF /* App */,
@@ -109,18 +110,17 @@
 				DC416AC82B942ACE004230CF /* Network.swift */,
 				DC416ACA2B942AE9004230CF /* NetworkProvider.swift */,
 				DC416ACC2B942B02004230CF /* BookNetwork.swift */,
-				DC416ACE2B942B11004230CF /* Entities */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		DC416ACE2B942B11004230CF /* Entities */ = {
+		DC416ACE2B942B11004230CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DC416AD42B945E85004230CF /* BookListModel.swift */,
+				DC416AD42B945E85004230CF /* BookApi.swift */,
 				DC416AF12BA1A119004230CF /* Memo.swift */,
 			);
-			path = Entities;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		DC416AD82B9482A0004230CF /* App */ = {
@@ -274,7 +274,7 @@
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
 				DC416AF42BA1AC45004230CF /* MemoViewModel.swift in Sources */,
 				DC416ACD2B942B02004230CF /* BookNetwork.swift in Sources */,
-				DC416AD52B945E85004230CF /* BookListModel.swift in Sources */,
+				DC416AD52B945E85004230CF /* BookApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

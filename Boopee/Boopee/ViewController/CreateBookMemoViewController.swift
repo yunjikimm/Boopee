@@ -16,7 +16,7 @@ struct MemoConst {
 
 class CreateBookMemoViewController: UIViewController {
     let disposeBag = DisposeBag()
-    private var bookDocument: Document?
+    private var bookList: BookList?
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
@@ -158,8 +158,8 @@ class CreateBookMemoViewController: UIViewController {
     }
     
     // MARK: - config()
-    public func config(item: Document) {
-        bookDocument = item
+    public func config(item: BookList) {
+        bookList = item
         let thumbnailURL = URL(string: item.thumbnail)
         
         searchResultThumbnailImageView.kf.setImage(with: thumbnailURL)
@@ -176,9 +176,9 @@ private extension CreateBookMemoViewController {
         createMemoButton.rx.tap
             .bind { _ in
                 guard let memoText = self.memoTextView.text else { return }
-                guard let bookDocument = self.bookDocument else { return }
+                guard let bookList = self.bookList else { return }
                 
-                let memo = Memo(memoText: memoText, createdAt: Date().description, updatedAt: Date().description, bookDocument: bookDocument)
+                let memo = Memo(memoText: memoText, createdAt: Date().description, updatedAt: Date().description, bookList: bookList)
             }.disposed(by: disposeBag)
     }
 }

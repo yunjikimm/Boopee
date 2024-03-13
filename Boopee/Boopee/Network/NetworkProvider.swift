@@ -15,7 +15,7 @@ final class NetworkProvider {
     }
     
     func makeBookNetwork() -> BookNetwork {
-        let network = Netwrok<BookListModel>(endpoint: endpoint)
+        let network = Netwrok<BookApi>(endpoint: endpoint)
         return BookNetwork(network: network)
     }
 }
