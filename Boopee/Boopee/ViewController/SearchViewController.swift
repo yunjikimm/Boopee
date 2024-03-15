@@ -125,7 +125,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
             .subscribe { [weak self] indexPath in
                 let createBookMemoViewController = CreateBookMemoViewController()
                 self?.navigationController?.pushViewController(createBookMemoViewController, animated: true)
-                guard let documentItem = self?.items[indexPath.row ?? 0] else { return }
+                guard let documentItem = self?.items[indexPath.row] else { return }
                 createBookMemoViewController.config(item: documentItem)
             }.disposed(by: disposeBag)
     }
