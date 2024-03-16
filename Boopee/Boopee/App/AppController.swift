@@ -28,7 +28,7 @@ final class AppController {
         self.window = window
         window.backgroundColor = .systemBackground
         window.makeKeyAndVisible()
-
+        
         // 로그인이 완료된 경우에는 AuthStateDidChange 이벤트를 받아서 NotificationCenter에 의하여 자동 로그인
         if  Auth.auth().currentUser == nil {
             routeToLogin()
@@ -48,12 +48,12 @@ final class AppController {
     }
     
     private func setHome() {
-        let homeVC = TabBarController()
-        rootViewController = UINavigationController(rootViewController: homeVC)
+        let homeTabBarController = HomeTabBarController()
+        rootViewController = UINavigationController(rootViewController: homeTabBarController)
     }
 
     private func routeToLogin() {
-        let signVC = SignTabBarController()
-        rootViewController = UINavigationController(rootViewController: signVC)
+        let loginTabBarController = LoginTabBarController()
+        rootViewController = UINavigationController(rootViewController: loginTabBarController)
     }
 }

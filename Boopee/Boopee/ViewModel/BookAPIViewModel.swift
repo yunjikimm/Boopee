@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  BookAPIViewModel.swift
 //  Boopee
 //
 //  Created by yunjikim on 3/3/24.
@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ViewModel {
+class BookAPIViewModel {
     let disposeBag = DisposeBag()
     
     private let bookNetwork: BookNetwork

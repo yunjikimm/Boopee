@@ -1,5 +1,5 @@
 //
-//  SignInViewController.swift
+//  LoginViewController.swift
 //  Boopee
 //
 //  Created by yunjikim on 3/14/24.
@@ -9,8 +9,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-class SignInViewController: UIViewController {
-    let signInViewModel = SignInViewModel.signInViewModel
+class LoginViewController: UIViewController {
+    let loginViewModel = LoginViewModel.loginViewModel
     
     private let loginInstructionLabel: UILabel = {
         let label = UILabel()
@@ -35,7 +35,7 @@ class SignInViewController: UIViewController {
         setUpGoogleLoginUI()
         
         gidSignInButton.addAction(UIAction { _ in
-            self.signInViewModel.googleSignIn(viewController: self)
+            self.loginViewModel.googleSignIn(viewController: self)
         }, for: .touchUpInside)
     }
     

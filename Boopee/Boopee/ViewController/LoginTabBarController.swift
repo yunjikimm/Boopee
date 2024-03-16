@@ -1,5 +1,5 @@
 //
-//  SignTabBarController.swift
+//  LoginTabBarController.swift
 //  Boopee
 //
 //  Created by yunjikim on 3/16/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignTabBarController: UITabBarController {
+class LoginTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class SignTabBarController: UITabBarController {
     private func setUpTabs() {
         let home = self.createNavigationController(with: "", and: UIImage(systemName: "house"), viewController: HomeViewController())
         let search = self.createNavigationController(with: "", and: UIImage(systemName: "plus.circle"), viewController: SearchViewController())
-        let mypage = self.createNavigationController(with: "", and: UIImage(systemName: "person"), viewController: SignInViewController())
+        let mypage = self.createNavigationController(with: "", and: UIImage(systemName: "person"), viewController: LoginViewController())
         
         self.setViewControllers([home, search, mypage], animated: true)
     }

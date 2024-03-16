@@ -9,8 +9,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-final class SignInViewModel {
-    static let signInViewModel = SignInViewModel()
+final class LoginViewModel {
+    static let loginViewModel = LoginViewModel()
     let firebaseAuth = Auth.auth()
     
     func googleSignIn(viewController: UIViewController) {

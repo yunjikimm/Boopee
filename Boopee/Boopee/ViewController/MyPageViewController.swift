@@ -11,7 +11,7 @@ import GoogleSignIn
 
 class MyPageViewController: UIViewController {
     let disposeBag = DisposeBag()
-    let signInViewModel = SignInViewModel.signInViewModel
+    let loginViewModel = LoginViewModel.loginViewModel
     
     private let loginLabel: UILabel = {
         let label = UILabel()
@@ -44,13 +44,13 @@ class MyPageViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         
-        loginLabel.text = signInViewModel.firebaseAuth.currentUser?.email
+        loginLabel.text = loginViewModel.firebaseAuth.currentUser?.email
     }
     
     private func bindAuthViewModelSignOut() {
         signOutButton.rx.tap
             .bind { _ in
-                self.signInViewModel.signOut()
+                self.loginViewModel.signOut()
             }.disposed(by: disposeBag)
     }
 }

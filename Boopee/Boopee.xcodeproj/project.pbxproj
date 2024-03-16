@@ -19,9 +19,9 @@
 		DC416AC92B942ACE004230CF /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AC82B942ACE004230CF /* Network.swift */; };
 		DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ACA2B942AE9004230CF /* NetworkProvider.swift */; };
 		DC416ACD2B942B02004230CF /* BookNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ACC2B942B02004230CF /* BookNetwork.swift */; };
-		DC416AD22B942B4C004230CF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD12B942B4C004230CF /* ViewModel.swift */; };
+		DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */; };
 		DC416AD52B945E85004230CF /* BookApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD42B945E85004230CF /* BookApi.swift */; };
-		DC416AD72B945F24004230CF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD62B945F24004230CF /* TabBarController.swift */; };
+		DC416AD72B945F24004230CF /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD62B945F24004230CF /* HomeTabBarController.swift */; };
 		DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD92B948302004230CF /* SearchViewController.swift */; };
 		DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ADB2B9483AE004230CF /* MyPageViewController.swift */; };
 		DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */; };
@@ -34,10 +34,10 @@
 		DCFBBC702BA20E4700B58311 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6F2BA20E4700B58311 /* GoogleSignInSwift */; };
 		DCFBBC742BA2153000B58311 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */; };
 		DCFBBC762BA2EB2600B58311 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC752BA2EB2600B58311 /* FirebaseAuth */; };
-		DCFBBC782BA2ECCB00B58311 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC772BA2ECCB00B58311 /* SignInViewModel.swift */; };
-		DCFBBC7A2BA3431000B58311 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC792BA3431000B58311 /* SignInViewController.swift */; };
+		DCFBBC782BA2ECCB00B58311 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */; };
+		DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC792BA3431000B58311 /* LoginViewController.swift */; };
 		DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */; };
-		DCFBBC802BA5B2E800B58311 /* SignTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7F2BA5B2E800B58311 /* SignTabBarController.swift */; };
+		DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,10 +51,10 @@
 		DC416AC82B942ACE004230CF /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		DC416ACA2B942AE9004230CF /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		DC416ACC2B942B02004230CF /* BookNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookNetwork.swift; sourceTree = "<group>"; };
-		DC416AD12B942B4C004230CF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAPIViewModel.swift; sourceTree = "<group>"; };
 		DC416AD32B942D5D004230CF /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		DC416AD42B945E85004230CF /* BookApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookApi.swift; sourceTree = "<group>"; };
-		DC416AD62B945F24004230CF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		DC416AD62B945F24004230CF /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		DC416AD92B948302004230CF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC416ADB2B9483AE004230CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -63,10 +63,10 @@
 		DC416AF32BA1AC45004230CF /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
 		DCFBBC582BA1E47500B58311 /* MemoStorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStorageType.swift; sourceTree = "<group>"; };
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DCFBBC772BA2ECCB00B58311 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		DCFBBC792BA3431000B58311 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		DCFBBC792BA3431000B58311 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		DCFBBC7F2BA5B2E800B58311 /* SignTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTabBarController.swift; sourceTree = "<group>"; };
+		DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +159,9 @@
 				DC416AD92B948302004230CF /* SearchViewController.swift */,
 				DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */,
 				DC416ADB2B9483AE004230CF /* MyPageViewController.swift */,
-				DCFBBC792BA3431000B58311 /* SignInViewController.swift */,
-				DC416AD62B945F24004230CF /* TabBarController.swift */,
-				DCFBBC7F2BA5B2E800B58311 /* SignTabBarController.swift */,
+				DCFBBC792BA3431000B58311 /* LoginViewController.swift */,
+				DC416AD62B945F24004230CF /* HomeTabBarController.swift */,
+				DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */,
 				DC416ADF2B96B0A0004230CF /* Cell */,
 			);
 			path = ViewController;
@@ -170,9 +170,9 @@
 		DC416ADE2B96B089004230CF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				DC416AD12B942B4C004230CF /* ViewModel.swift */,
+				DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */,
 				DC416AF32BA1AC45004230CF /* MemoViewModel.swift */,
-				DCFBBC772BA2ECCB00B58311 /* SignInViewModel.swift */,
+				DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -293,21 +293,21 @@
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
 				DC416AC92B942ACE004230CF /* Network.swift in Sources */,
-				DC416AD72B945F24004230CF /* TabBarController.swift in Sources */,
+				DC416AD72B945F24004230CF /* HomeTabBarController.swift in Sources */,
 				DCFBBC592BA1E47500B58311 /* MemoStorageType.swift in Sources */,
 				DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */,
-				DCFBBC782BA2ECCB00B58311 /* SignInViewModel.swift in Sources */,
+				DCFBBC782BA2ECCB00B58311 /* LoginViewModel.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
 				DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
-				DCFBBC802BA5B2E800B58311 /* SignTabBarController.swift in Sources */,
+				DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
-				DC416AD22B942B4C004230CF /* ViewModel.swift in Sources */,
+				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
 				DC416AF42BA1AC45004230CF /* MemoViewModel.swift in Sources */,
 				DC416ACD2B942B02004230CF /* BookNetwork.swift in Sources */,
-				DCFBBC7A2BA3431000B58311 /* SignInViewController.swift in Sources */,
+				DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */,
 				DC416AD52B945E85004230CF /* BookApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

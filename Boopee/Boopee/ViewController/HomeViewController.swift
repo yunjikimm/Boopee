@@ -11,7 +11,7 @@ import SnapKit
 
 class HomeViewController: UIViewController {
     let disposeBag = DisposeBag()
-    let viewModel = ViewModel()
+    let bookApiviewModel = BookAPIViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

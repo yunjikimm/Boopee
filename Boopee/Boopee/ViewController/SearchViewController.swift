@@ -21,7 +21,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     
     let bookTrigger = PublishSubject<Void>()
     let disposeBag = DisposeBag()
-    let viewModel = ViewModel()
+    let bookApiviewModel = BookAPIViewModel()
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
@@ -93,8 +93,8 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - binding, snapshot, apply datasource
     private func bindViewModel(path: String) {
-        let input = ViewModel.Input(bookTrigger: bookTrigger.asObservable())
-        let output = viewModel.transform(input: input, path: path)
+        let input = BookAPIViewModel.Input(bookTrigger: bookTrigger.asObservable())
+        let output = bookApiviewModel.transform(input: input, path: path)
         
         output.bookList.bind { [weak self] bookList in
             var snapshot = NSDiffableDataSourceSnapshot<Section, BookList>()
