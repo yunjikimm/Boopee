@@ -10,20 +10,12 @@ import RxSwift
 import GoogleSignIn
 
 class MyPageViewController: UIViewController {
-    let signOutButtonTapped = PublishSubject<Void>()
     let disposeBag = DisposeBag()
     let signInViewModel = SignInViewModel.signInViewModel
-    let signOutViewModel = SignOutViewModel.signOutViewModel
     
     private let loginLabel: UILabel = {
         let label = UILabel()
         return label
-    }()
-    private let authButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("로그인하기", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        return button
     }()
     private let signOutButton: UIButton = {
         let button = UIButton()
@@ -35,17 +27,10 @@ class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if signInViewModel.firebaseAuth.currentUser != nil {
-            setUpHasCurrentUserUI()
-            bindAuthViewModelSignOut()
-        } else {
-            setUpNilCurrentUserUI()
-            tapAuthButton()
-        }
+        setUpHasCurrentUserUI()
+        bindAuthViewModelSignOut()
     }
-}
-
-extension MyPageViewController {
+    
     private func setUpHasCurrentUserUI() {
         self.view.backgroundColor = .systemBackground
         
@@ -63,32 +48,9 @@ extension MyPageViewController {
     }
     
     private func bindAuthViewModelSignOut() {
-        let input = SignOutViewModel.Input(signOutButtonTapped: signOutButton.rx.tap.asDriver())
-        let output = signOutViewModel.transform(input: input)
-        
-        output.isSignOutSuccessSignal.drive { [weak self] _ in
-            self?.viewDidLoad()
-            print("my page sign out")
-        }.disposed(by: disposeBag)
-    }
-}
-
-extension MyPageViewController {
-    private func setUpNilCurrentUserUI() {
-        self.view.backgroundColor = .systemBackground
-        
-        self.view.addSubview(authButton)
-        authButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
-    }
-    
-    private func tapAuthButton() {
-        authButton.rx.tap
-            .bind { [weak self] _ in
-                let authViewController = SignInViewController()
-                authViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen
-                self?.present(authViewController, animated: true)
+        signOutButton.rx.tap
+            .bind { _ in
+                self.signInViewModel.signOut()
             }.disposed(by: disposeBag)
     }
 }

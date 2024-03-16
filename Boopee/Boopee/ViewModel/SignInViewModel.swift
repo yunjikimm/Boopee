@@ -6,32 +6,14 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 import Firebase
 import GoogleSignIn
 
 final class SignInViewModel {
     static let signInViewModel = SignInViewModel()
-    let disposeBag = DisposeBag()
     let firebaseAuth = Auth.auth()
     
-    struct Input {
-        let googleLoginButtonTapped: Signal<Void>
-    }
-    struct Output {
-        let isLoginSuccessSignal: Signal<Void>
-    }
-    
-    func transform(input: Input, viewController: UIViewController) -> Output {
-        input.googleLoginButtonTapped.emit { [weak self] _ in
-            self?.googleSignIn(viewController: viewController)
-        }.disposed(by: disposeBag)
-        
-        return Output(isLoginSuccessSignal: input.googleLoginButtonTapped.asSignal())
-    }
-    
-    private func googleSignIn(viewController: UIViewController) {
+    func googleSignIn(viewController: UIViewController) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         
         let config = GIDConfiguration(clientID: clientID)
@@ -56,6 +38,14 @@ final class SignInViewModel {
             } else {
                 print("login successful")
             }
+        }
+    }
+    
+    func signOut() {
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
         }
     }
 }

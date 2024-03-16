@@ -36,7 +36,8 @@
 		DCFBBC762BA2EB2600B58311 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC752BA2EB2600B58311 /* FirebaseAuth */; };
 		DCFBBC782BA2ECCB00B58311 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC772BA2ECCB00B58311 /* SignInViewModel.swift */; };
 		DCFBBC7A2BA3431000B58311 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC792BA3431000B58311 /* SignInViewController.swift */; };
-		DCFBBC7C2BA480A700B58311 /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7B2BA480A700B58311 /* SignOutViewModel.swift */; };
+		DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */; };
+		DCFBBC802BA5B2E800B58311 /* SignTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7F2BA5B2E800B58311 /* SignTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +65,8 @@
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCFBBC772BA2ECCB00B58311 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		DCFBBC792BA3431000B58311 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		DCFBBC7B2BA480A700B58311 /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
+		DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		DCFBBC7F2BA5B2E800B58311 /* SignTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				DC416AA62B94299B004230CF /* AppDelegate.swift */,
 				DC416AA82B94299B004230CF /* SceneDelegate.swift */,
+				DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				DC416ADB2B9483AE004230CF /* MyPageViewController.swift */,
 				DCFBBC792BA3431000B58311 /* SignInViewController.swift */,
 				DC416AD62B945F24004230CF /* TabBarController.swift */,
+				DCFBBC7F2BA5B2E800B58311 /* SignTabBarController.swift */,
 				DC416ADF2B96B0A0004230CF /* Cell */,
 			);
 			path = ViewController;
@@ -169,7 +173,6 @@
 				DC416AD12B942B4C004230CF /* ViewModel.swift */,
 				DC416AF32BA1AC45004230CF /* MemoViewModel.swift */,
 				DCFBBC772BA2ECCB00B58311 /* SignInViewModel.swift */,
-				DCFBBC7B2BA480A700B58311 /* SignOutViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -289,7 +292,6 @@
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
-				DCFBBC7C2BA480A700B58311 /* SignOutViewModel.swift in Sources */,
 				DC416AC92B942ACE004230CF /* Network.swift in Sources */,
 				DC416AD72B945F24004230CF /* TabBarController.swift in Sources */,
 				DCFBBC592BA1E47500B58311 /* MemoStorageType.swift in Sources */,
@@ -297,7 +299,9 @@
 				DCFBBC782BA2ECCB00B58311 /* SignInViewModel.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
+				DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
+				DCFBBC802BA5B2E800B58311 /* SignTabBarController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* ViewModel.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,

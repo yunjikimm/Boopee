@@ -1,13 +1,13 @@
 //
-//  TabBarController.swift
+//  SignTabBarController.swift
 //  Boopee
 //
-//  Created by yunjikim on 3/3/24.
+//  Created by yunjikim on 3/16/24.
 //
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class SignTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class TabBarController: UITabBarController {
     private func setUpTabs() {
         let home = self.createNavigationController(with: "", and: UIImage(systemName: "house"), viewController: HomeViewController())
         let search = self.createNavigationController(with: "", and: UIImage(systemName: "plus.circle"), viewController: SearchViewController())
-        let mypage = self.createNavigationController(with: "", and: UIImage(systemName: "person"), viewController: MyPageViewController())
+        let mypage = self.createNavigationController(with: "", and: UIImage(systemName: "person"), viewController: SignInViewController())
         
         self.setViewControllers([home, search, mypage], animated: true)
     }
@@ -46,12 +46,6 @@ class TabBarController: UITabBarController {
         
         navigation.tabBarItem.title = title
         navigation.tabBarItem.image = image
-        
-//        navigation.viewControllers.first?.navigationItem.title = title
-//        navigation.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
-//        navigation.navigationBar.prefersLargeTitles = true
-        
-//        navigation.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "button", style: .plain, target: nil, action: nil)
         
         return navigation
     }
