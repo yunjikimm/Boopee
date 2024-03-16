@@ -22,6 +22,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
     let bookTrigger = PublishSubject<Void>()
     let disposeBag = DisposeBag()
     let bookApiviewModel = BookAPIViewModel()
+    let loginViewModel = LoginViewModel.loginViewModel
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
@@ -38,27 +39,74 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         
         setupSearchController()
         setupUI()
-        setCollectionViewItemSelectedRx()
+        
+        if loginViewModel.firebaseAuth.currentUser != nil {
+            setCollectionViewItemSelectedRx()
+        } else {
+            moveToLoginTab()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
-    
-    // MARK: - searchController
-    private func setupSearchController() {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.delegate = self
-        
-        searchController.searchBar.placeholder = "책 검색"
-        searchController.hidesNavigationBarDuringPresentation = false
-        
-        self.navigationItem.searchController = searchController
-        self.navigationItem.title = "책 검색"
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationItem.hidesSearchBarWhenScrolling = false
+}
+
+// MARK: - collectionview cell selected event
+extension SearchViewController {
+    // MARK: - selected collectionview item
+    private func setCollectionViewItemSelectedRx() {
+        collectionView.rx.itemSelected
+            .subscribe { [weak self] indexPath in
+                let createBookMemoViewController = CreateBookMemoViewController()
+                self?.navigationController?.pushViewController(createBookMemoViewController, animated: true)
+                guard let documentItem = self?.items[indexPath.row] else { return }
+                createBookMemoViewController.config(item: documentItem)
+            }.disposed(by: disposeBag)
     }
     
+    // MARK: - nil currentUser
+    private func moveToLoginTab() {
+        collectionView.rx.itemSelected
+            .bind { [weak self] _ in
+                self?.tabBarController?.selectedIndex = 2
+            }.disposed(by: disposeBag)
+    }
+}
+
+// MARK: - binding, datasource
+extension SearchViewController {
+    // MARK: - binding, snapshot, apply datasource
+    private func bindViewModel(path: String) {
+        let input = BookAPIViewModel.Input(bookTrigger: bookTrigger.asObservable())
+        let output = bookApiviewModel.transform(input: input, path: path)
+        
+        output.bookList.bind { [weak self] bookList in
+            var snapshot = NSDiffableDataSourceSnapshot<Section, BookList>()
+            self?.items = bookList.map { $0 }
+            let section = Section.searchResult
+            
+            snapshot.appendSections([section])
+            snapshot.appendItems(self?.items ?? [], toSection: section)
+            
+            self?.dataSource?.apply(snapshot)
+        }.disposed(by: disposeBag)
+    }
+    
+    // MARK: - dataSource
+    private func setDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, BookList>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell
+            
+            cell?.configure(item: itemIdentifier)
+            
+            return cell
+        })
+    }
+}
+
+// MARK: - ui, layout
+extension SearchViewController {
     // MARK: - ui
     private func setupUI() {
         self.view.backgroundColor = .systemBackground
@@ -90,50 +138,24 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         
         return section
     }
-    
-    // MARK: - binding, snapshot, apply datasource
-    private func bindViewModel(path: String) {
-        let input = BookAPIViewModel.Input(bookTrigger: bookTrigger.asObservable())
-        let output = bookApiviewModel.transform(input: input, path: path)
-        
-        output.bookList.bind { [weak self] bookList in
-            var snapshot = NSDiffableDataSourceSnapshot<Section, BookList>()
-            self?.items = bookList.map { $0 }
-            let section = Section.searchResult
-            
-            snapshot.appendSections([section])
-            snapshot.appendItems(self?.items ?? [], toSection: section)
-            
-            self?.dataSource?.apply(snapshot)
-        }.disposed(by: disposeBag)
-    }
-    
-    // MARK: - dataSource
-    private func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, BookList>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell
-            
-            cell?.configure(item: itemIdentifier)
-            
-            return cell
-        })
-    }
-    
-    // MARK: - selected collectionview item
-    private func setCollectionViewItemSelectedRx() {
-        collectionView.rx.itemSelected
-            .subscribe { [weak self] indexPath in
-                let createBookMemoViewController = CreateBookMemoViewController()
-                self?.navigationController?.pushViewController(createBookMemoViewController, animated: true)
-                guard let documentItem = self?.items[indexPath.row] else { return }
-                createBookMemoViewController.config(item: documentItem)
-            }.disposed(by: disposeBag)
-    }
-
 }
 
-// MARK: - extension SearchViewController
+// MARK: - searchController
 extension SearchViewController: UISearchBarDelegate {
+    // MARK: - searchController
+    private func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        
+        searchController.searchBar.placeholder = "책 검색"
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        self.navigationItem.searchController = searchController
+        self.navigationItem.title = "책 검색"
+        self.navigationItem.largeTitleDisplayMode = .automatic
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
         
