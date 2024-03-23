@@ -9,6 +9,7 @@ import Foundation
 
 struct Memo {
     let id: String = UUID().uuidString
+    let user: String
     let memoText: String
     let createdAt: String
     let updatedAt: String

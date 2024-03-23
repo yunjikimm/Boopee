@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import Firebase
 
 struct MemoConst {
     static let memoTextPlaceholder = "메모를 입력하세요"
@@ -27,7 +28,7 @@ class CreateBookMemoViewController: UIViewController {
         
         setupUI()
         bindMemoTextView()
-        bindMemoCreateButton()
+        createMemoButtonTapped()
         tapGesture()
     }
     
@@ -172,14 +173,14 @@ class CreateBookMemoViewController: UIViewController {
 
 // MARK: - extension button bind
 private extension CreateBookMemoViewController {
-    private func bindMemoCreateButton() {
+    private func createMemoButtonTapped() {
         createMemoButton.rx.tap
             .bind { _ in
-                guard let memoText = self.memoTextView.text else { return }
-                guard let bookList = self.bookList else { return }
-                
-                let memo = Memo(memoText: memoText, createdAt: Date().description, updatedAt: Date().description, bookList: bookList)
+                self.bindMemoCreateButton()
             }.disposed(by: disposeBag)
+    }
+    
+    private func bindMemoCreateButton() {
     }
 }
 
