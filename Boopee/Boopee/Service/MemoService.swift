@@ -21,14 +21,14 @@ final class MemoService {
     
     func getAllMemo() async -> Observable<[MemoDB]> {
         do {
-            memoList = try await memoCollectionRef.getDocuments().documents.map { document -> MemoDB in
+            memoList = try await memoCollectionRef
+                .order(by: "updatedAt", descending: true)
+                .getDocuments().documents.map { document -> MemoDB in
                 try document.data(as: MemoDB.self)
             }
         } catch {
             print(error.localizedDescription)
         }
-        
-//        return BehaviorRelay(value: memoList)
         
         return Observable.create { emitter in
             emitter.onNext(self.memoList)
