@@ -34,22 +34,21 @@ class HomeTabBarController: UITabBarController {
     }
     
     private func setUpTabs() {
-        let home = self.createNavigationController(with: "", and: UIImage(systemName: "house"), viewController: HomeViewController())
-        let search = self.createNavigationController(with: "", and: UIImage(systemName: "plus.circle"), viewController: SearchViewController())
-        let mypage = self.createNavigationController(with: "", and: UIImage(systemName: "person"), viewController: MyPageViewController())
+        let home = self.createNavigationController(title: "탐색", image: UIImage(systemName: "rectangle.grid.1x2"), viewController: HomeViewController())
+        let search = self.createNavigationController(title: "작성", image: UIImage(systemName: "plus.circle"), viewController: SearchViewController())
+        let mypage = self.createNavigationController(title: "마이페이지", image: UIImage(systemName: "person"), viewController: MyPageViewController())
         
         self.setViewControllers([home, search, mypage], animated: true)
     }
     
-    private func createNavigationController(with title: String, and image: UIImage?, viewController: UIViewController) -> UINavigationController {
+    private func createNavigationController(title: String, image: UIImage?, viewController: UIViewController) -> UINavigationController {
         let navigation = UINavigationController(rootViewController: viewController)
         
         navigation.tabBarItem.title = title
         navigation.tabBarItem.image = image
         
-//        navigation.viewControllers.first?.navigationItem.title = title
-//        navigation.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
-//        navigation.navigationBar.prefersLargeTitles = true
+        navigation.viewControllers.first?.navigationItem.title = title
+        navigation.navigationBar.prefersLargeTitles = true
         
 //        navigation.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "button", style: .plain, target: nil, action: nil)
         

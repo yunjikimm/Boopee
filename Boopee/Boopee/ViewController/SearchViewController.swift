@@ -144,9 +144,6 @@ extension SearchViewController: UISearchBarDelegate {
         searchController.hidesNavigationBarDuringPresentation = false
         
         self.navigationItem.searchController = searchController
-        self.navigationItem.title = "책 검색"
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

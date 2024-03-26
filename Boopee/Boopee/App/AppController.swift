@@ -48,12 +48,10 @@ final class AppController {
     }
     
     private func setHome() {
-        let homeTabBarController = HomeTabBarController()
-        rootViewController = UINavigationController(rootViewController: homeTabBarController)
+        window.rootViewController = HomeTabBarController()
     }
 
     private func routeToLogin() {
-        let loginTabBarController = LoginTabBarController()
-        rootViewController = UINavigationController(rootViewController: loginTabBarController)
+        window.rootViewController = LoginTabBarController()
     }
 }
