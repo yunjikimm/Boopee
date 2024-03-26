@@ -25,4 +25,11 @@ final class DateFormatManager {
         
         return dateFormatter.string(from: date)
     }
+    
+    func MemoDateToString(_ date: Date) -> String {
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일 HH:mm"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        
+        return dateFormatter.string(from: date)
+    }
 }
