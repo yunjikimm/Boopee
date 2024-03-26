@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct Memo {
-    let id: String = UUID().uuidString
+struct Memo: Hashable {
+    @DocumentID var id: String?
     let user: String
     let memoText: String
-    let createdAt: String
-    let updatedAt: String
-    let bookList: BookList
+    let createdAt: Date
+    let updatedAt: Date
+    let book: Book
 }

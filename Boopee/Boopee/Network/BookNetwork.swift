@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxAlamofire
 
-class BookNetwork {
+final class BookNetwork {
     private let endpoint: String
     private let queue: ConcurrentDispatchQueueScheduler
     

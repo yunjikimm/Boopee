@@ -35,6 +35,17 @@
 		DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC792BA3431000B58311 /* LoginViewController.swift */; };
 		DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */; };
 		DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */; };
+		DCFBBC882BAF0DB800B58311 /* MemoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC872BAF0DB800B58311 /* MemoService.swift */; };
+		DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */; };
+		DCFBBC8E2BAF180000B58311 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC8D2BAF180000B58311 /* FirebaseFirestore */; };
+		DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC922BAFD6C500B58311 /* DateFormatManager.swift */; };
+		DCFBBC952BB15FE100B58311 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC942BB15FE100B58311 /* Book.swift */; };
+		DCFBBC972BB1935C00B58311 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC962BB1935C00B58311 /* FirebaseFirestoreSwift */; };
+		DCFBBC9B2BB1E59200B58311 /* MemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC9A2BB1E59200B58311 /* MemoListViewModel.swift */; };
+		DCFBBC9D2BB20FCB00B58311 /* SectionItemConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */; };
+		DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */; };
+		DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA02BB210B300B58311 /* MemoDB.swift */; };
+		DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +72,15 @@
 		DCFBBC792BA3431000B58311 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTabBarController.swift; sourceTree = "<group>"; };
+		DCFBBC872BAF0DB800B58311 /* MemoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoService.swift; sourceTree = "<group>"; };
+		DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCreateViewModel.swift; sourceTree = "<group>"; };
+		DCFBBC922BAFD6C500B58311 /* DateFormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatManager.swift; sourceTree = "<group>"; };
+		DCFBBC942BB15FE100B58311 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		DCFBBC9A2BB1E59200B58311 /* MemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewModel.swift; sourceTree = "<group>"; };
+		DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItemConstant.swift; sourceTree = "<group>"; };
+		DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMemoCollectionViewCell.swift; sourceTree = "<group>"; };
+		DCFBBCA02BB210B300B58311 /* MemoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDB.swift; sourceTree = "<group>"; };
+		DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitMemoTextViewConst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +93,8 @@
 				DCFBBC702BA20E4700B58311 /* GoogleSignInSwift in Frameworks */,
 				DC416ABC2B9429C6004230CF /* Kingfisher in Frameworks */,
 				DCFBBC6B2BA2030200B58311 /* FirebaseAnalytics in Frameworks */,
+				DCFBBC972BB1935C00B58311 /* FirebaseFirestoreSwift in Frameworks */,
+				DCFBBC8E2BAF180000B58311 /* FirebaseFirestore in Frameworks */,
 				DC416ABF2B9429D2004230CF /* SnapKit in Frameworks */,
 				DCFBBC6E2BA20E4700B58311 /* GoogleSignIn in Frameworks */,
 				DCFBBC762BA2EB2600B58311 /* FirebaseAuth in Frameworks */,
@@ -107,6 +129,7 @@
 				DC416ACE2B942B11004230CF /* Model */,
 				DCFBBC572BA1D9F700B58311 /* Service */,
 				DC416AC72B942AC1004230CF /* Network */,
+				DCFBBC8F2BAFD65C00B58311 /* Util */,
 				DC416AD82B9482A0004230CF /* App */,
 				DC416AAF2B94299D004230CF /* Assets.xcassets */,
 				DC416AB12B94299D004230CF /* LaunchScreen.storyboard */,
@@ -130,6 +153,7 @@
 		DC416ACE2B942B11004230CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DCFBBC942BB15FE100B58311 /* Book.swift */,
 				DC416AF12BA1A119004230CF /* Memo.swift */,
 			);
 			path = Model;
@@ -164,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */,
+				DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */,
+				DCFBBC9A2BB1E59200B58311 /* MemoListViewModel.swift */,
 				DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
@@ -173,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */,
+				DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -187,6 +214,8 @@
 		DCFBBC572BA1D9F700B58311 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DCFBBC872BAF0DB800B58311 /* MemoService.swift */,
+				DCFBBC862BAF0BE300B58311 /* Entity */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -197,6 +226,40 @@
 				DC416AD42B945E85004230CF /* BookApi.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		DCFBBC862BAF0BE300B58311 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBBCA02BB210B300B58311 /* MemoDB.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		DCFBBC8F2BAFD65C00B58311 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBBC902BAFD67400B58311 /* Constant */,
+				DCFBBC912BAFD68100B58311 /* Service */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		DCFBBC902BAFD67400B58311 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */,
+				DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		DCFBBC912BAFD68100B58311 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBBC922BAFD6C500B58311 /* DateFormatManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +287,8 @@
 				DCFBBC6D2BA20E4700B58311 /* GoogleSignIn */,
 				DCFBBC6F2BA20E4700B58311 /* GoogleSignInSwift */,
 				DCFBBC752BA2EB2600B58311 /* FirebaseAuth */,
+				DCFBBC8D2BAF180000B58311 /* FirebaseFirestore */,
+				DCFBBC962BB1935C00B58311 /* FirebaseFirestoreSwift */,
 			);
 			productName = Boopee;
 			productReference = DC416AA32B94299B004230CF /* Boopee.app */;
@@ -288,22 +353,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */,
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
+				DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */,
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
+				DCFBBC882BAF0DB800B58311 /* MemoService.swift in Sources */,
 				DC416AC92B942ACE004230CF /* BookNetwork.swift in Sources */,
 				DC416AD72B945F24004230CF /* HomeTabBarController.swift in Sources */,
 				DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */,
+				DCFBBC9D2BB20FCB00B58311 /* SectionItemConstant.swift in Sources */,
 				DCFBBC782BA2ECCB00B58311 /* LoginViewModel.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
 				DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */,
+				DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
+				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
 				DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
+				DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */,
+				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
 				DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */,
+				DCFBBC9B2BB1E59200B58311 /* MemoListViewModel.swift in Sources */,
 				DC416AD52B945E85004230CF /* BookApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +694,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCFBBC692BA2030200B58311 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		DCFBBC8D2BAF180000B58311 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCFBBC692BA2030200B58311 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		DCFBBC962BB1935C00B58311 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCFBBC692BA2030200B58311 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

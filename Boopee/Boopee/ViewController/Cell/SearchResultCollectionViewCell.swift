@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class SearchResultCollectionViewCell: UICollectionViewCell {
+final class SearchResultCollectionViewCell: UICollectionViewCell {
     static let id = "SearchResultCollectionViewCell"
     
     private let searchResultThumbnailImageView: UIImageView = {
@@ -66,7 +66,7 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         
     }
     
-    public func configure(item: BookList) {
+    public func configure(item: Book) {
         let thumbnailURL = URL(string: item.thumbnail)
         
         searchResultThumbnailImageView.kf.setImage(with: thumbnailURL)

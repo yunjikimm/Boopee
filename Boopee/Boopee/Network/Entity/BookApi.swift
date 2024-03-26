@@ -34,6 +34,7 @@ struct Meta: Decodable {
 struct BookList: Decodable, Hashable {
     let title: String
     let url: String
+    let isbn: String
     let authors: String
     let publisher: String
     let thumbnail: String
@@ -41,6 +42,7 @@ struct BookList: Decodable, Hashable {
     private enum CodingKeys: String, CodingKey {
         case title
         case url
+        case isbn
         case authors
         case publisher
         case thumbnail
@@ -50,6 +52,7 @@ struct BookList: Decodable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.title = try container.decode(String.self, forKey: .title)
         self.url = try container.decode(String.self, forKey: .url)
+        self.isbn = try container.decode(String.self, forKey: .isbn)
         
         let authorList = try container.decode([String].self, forKey: .authors)
         let reducedAuthors = authorList.reduce("") { result, element in

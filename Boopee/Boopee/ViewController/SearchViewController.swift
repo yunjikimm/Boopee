@@ -9,15 +9,8 @@ import UIKit
 import RxSwift
 import SnapKit
 
-enum Section: Hashable {
-    case searchResult
-}
-enum Item: Hashable {
-    case bookList(BookList)
-}
-
-class SearchViewController: UIViewController, UIScrollViewDelegate {
-    private var dataSource: UICollectionViewDiffableDataSource<Section, BookList>?
+final class SearchViewController: UIViewController, UIScrollViewDelegate {
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Book>?
     
     let bookTrigger = PublishSubject<Void>()
     let disposeBag = DisposeBag()
@@ -30,7 +23,7 @@ class SearchViewController: UIViewController, UIScrollViewDelegate {
         return collectionView
     }()
     
-    var items: [BookList] = []
+    var items: [Book] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +75,7 @@ extension SearchViewController {
         let output = bookApiviewModel.transform(input: input, path: path)
         
         output.bookList.bind { [weak self] bookList in
-            var snapshot = NSDiffableDataSourceSnapshot<Section, BookList>()
+            var snapshot = NSDiffableDataSourceSnapshot<Section, Book>()
             self?.items = bookList.map { $0 }
             let section = Section.searchResult
             
@@ -95,7 +88,7 @@ extension SearchViewController {
     
     // MARK: - dataSource
     private func setDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, BookList>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Section, Book>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.id, for: indexPath) as? SearchResultCollectionViewCell
             
             cell?.configure(item: itemIdentifier)

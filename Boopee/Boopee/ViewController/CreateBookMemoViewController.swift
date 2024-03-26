@@ -9,15 +9,10 @@ import UIKit
 import RxSwift
 import Firebase
 
-struct MemoConst {
-    static let memoTextPlaceholder = "메모를 입력하세요"
-    static let memoTextMaxLength = 300
-    static let memoTextColor = UIColor.secondaryLabel
-}
-
-class CreateBookMemoViewController: UIViewController {
+final class CreateBookMemoViewController: UIViewController {
     let disposeBag = DisposeBag()
-    private var bookList: BookList?
+    let memoCreateViewModel = MemoCreateViewModel()
+    private var bookItem: Book?
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
@@ -28,7 +23,7 @@ class CreateBookMemoViewController: UIViewController {
         
         setupUI()
         bindMemoTextView()
-        createMemoButtonTapped()
+        bindMemoCreateButton()
         tapGesture()
     }
     
@@ -76,8 +71,8 @@ class CreateBookMemoViewController: UIViewController {
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)
         textView.backgroundColor = .secondarySystemBackground
         textView.layer.cornerRadius = 12
-        textView.text = MemoConst.memoTextPlaceholder
-        textView.textColor = MemoConst.memoTextColor
+        textView.text = InitMemoTextViewConst.memoTextPlaceholder
+        textView.textColor = InitMemoTextViewConst.memoTextColor
         textView.font = .systemFont(ofSize: 16, weight: .regular)
         return textView
     }()
@@ -86,7 +81,7 @@ class CreateBookMemoViewController: UIViewController {
         let label = UILabel()
         label.textColor = .tertiaryLabel
         label.font = .systemFont(ofSize: 14, weight: .light)
-        label.text = "0/\(MemoConst.memoTextMaxLength)"
+        label.text = "0/\(InitMemoTextViewConst.memoTextMaxLength)"
         return label
     }()
     
@@ -159,8 +154,8 @@ class CreateBookMemoViewController: UIViewController {
     }
     
     // MARK: - config()
-    public func config(item: BookList) {
-        bookList = item
+    public func config(item: Book) {
+        bookItem = item
         let thumbnailURL = URL(string: item.thumbnail)
         
         searchResultThumbnailImageView.kf.setImage(with: thumbnailURL)
@@ -173,14 +168,23 @@ class CreateBookMemoViewController: UIViewController {
 
 // MARK: - extension button bind
 private extension CreateBookMemoViewController {
-    private func createMemoButtonTapped() {
-        createMemoButton.rx.tap
-            .bind { _ in
-                self.bindMemoCreateButton()
-            }.disposed(by: disposeBag)
-    }
-    
     private func bindMemoCreateButton() {
+        guard let user = Auth.auth().currentUser?.uid else { return }
+//        guard let memoText = memoTextView.text else { return }
+        guard let book = bookItem else { return }
+        let memo = Memo(user: user, memoText: "", createdAt: Date(), updatedAt: Date(), book: book)
+        
+        let input = MemoCreateViewModel.Input(createButtonDidTapEvent: createMemoButton.rx.tap.asObservable(), memoText: memoTextView.rx.text.asObservable())
+        let output = memoCreateViewModel.transform(input: input, memo: memo)
+        
+        output.isSuccessCreateMemo
+            .bind { success in
+                if success {
+                    print("Success Create Memo...")
+                } else {
+                    print("Failed Create Memo...")
+                }
+            }.disposed(by: disposeBag)
     }
 }
 
@@ -198,16 +202,16 @@ private extension CreateBookMemoViewController {
                     self.createMemoButton.backgroundColor = .secondarySystemBackground
                 }
                 
-                if self.memoTextView.text.count > MemoConst.memoTextMaxLength {
-                    self.memoTextView.text = String(self.memoTextView.text.prefix(MemoConst.memoTextMaxLength))
+                if self.memoTextView.text.count > InitMemoTextViewConst.memoTextMaxLength {
+                    self.memoTextView.text = String(self.memoTextView.text.prefix(InitMemoTextViewConst.memoTextMaxLength))
                 } else {
-                    self.memoLimitLabel.text = "\(self.memoTextView.text.count)/\(MemoConst.memoTextMaxLength)"
+                    self.memoLimitLabel.text = "\(self.memoTextView.text.count)/\(InitMemoTextViewConst.memoTextMaxLength)"
                 }
             }.disposed(by: disposeBag)
         
         memoTextView.rx.didBeginEditing
             .bind {
-                if self.memoTextView.textColor == MemoConst.memoTextColor {
+                if self.memoTextView.textColor == InitMemoTextViewConst.memoTextColor {
                     self.memoTextView.text = nil
                     self.memoTextView.textColor = .label
                 }
@@ -216,7 +220,7 @@ private extension CreateBookMemoViewController {
         memoTextView.rx.didEndEditing
             .bind {
                 if self.memoTextView.text == nil {
-                    self.memoTextView.text = MemoConst.memoTextPlaceholder
+                    self.memoTextView.text = InitMemoTextViewConst.memoTextPlaceholder
                     self.memoTextView.textColor = .lightGray
                 }
             }.disposed(by: disposeBag)
@@ -255,8 +259,3 @@ extension CreateBookMemoViewController: UITextViewDelegate {
         return true
     }
 }
-
-//@available(iOS 17.0, *)
-//#Preview(traits: .defaultLayout, body: {
-//    CreateBookMemoViewController()
-//})

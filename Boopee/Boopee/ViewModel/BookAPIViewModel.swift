@@ -8,9 +8,8 @@
 import UIKit
 import RxSwift
 
-class BookAPIViewModel {
-    let disposeBag = DisposeBag()
-    
+final class BookAPIViewModel {
+    private let disposeBag = DisposeBag()
     private let bookNetwork: BookNetwork
     
     init() {
@@ -23,12 +22,16 @@ class BookAPIViewModel {
     }
     
     struct Output {
-        let bookList: Observable<[BookList]>
+        let bookList: Observable<[Book]>
     }
     
     func transform(input: Input, path: String) -> Output {
-        let bookList = input.bookTrigger.flatMapLatest { [unowned self] _ -> Observable<[BookList]> in
-            self.bookNetwork.getSearchedBookList(path: path).map { $0.documents }
+        let bookList = input.bookTrigger.flatMapLatest { [unowned self] _ -> Observable<[Book]> in
+            self.bookNetwork.getSearchedBookList(path: path).map { book in
+                book.documents.map {
+                    Book(title: $0.title, url: $0.url, isbn: $0.isbn, authors: $0.authors, publisher: $0.publisher, thumbnail: $0.thumbnail)
+                }
+            }
         }
         
         return Output(bookList: bookList)
