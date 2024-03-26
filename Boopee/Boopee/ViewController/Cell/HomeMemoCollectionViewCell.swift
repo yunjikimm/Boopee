@@ -10,6 +10,7 @@ import Kingfisher
 
 final class HomeMemoCollectionViewCell: UICollectionViewCell {
     static let id = "HomeMemoCollectionViewCell"
+    private let dataFormatManager = DateFormatManager.dataFormatManager
     
     // blur effect background
     private let bookThumbnailEffectImageView: UIImageView = {
@@ -91,7 +92,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
         bookPublisherLabel.text = item.book.publisher
         
         memoTextLabel.text = item.memoText
-//        memoDateLabel.text = "2000-01-01"
+        memoDateLabel.text = dataFormatManager.MemoDateToString(item.updatedAt)
     }
     
     required init?(coder: NSCoder) {
