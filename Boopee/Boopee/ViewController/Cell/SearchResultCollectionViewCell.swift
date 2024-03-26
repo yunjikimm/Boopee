@@ -49,7 +49,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         
         searchResultThumbnailImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(255)
+            make.height.equalTo(174)
         }
         searchResultTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(searchResultThumbnailImageView.snp.bottom).offset(4)
