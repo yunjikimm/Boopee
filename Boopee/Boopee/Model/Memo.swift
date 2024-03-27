@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Memo: Hashable {
-    @DocumentID var id: String?
+    let id: String?
     let user: String
     let memoText: String
     let createdAt: Date

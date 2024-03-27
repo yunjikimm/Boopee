@@ -172,7 +172,7 @@ private extension CreateBookMemoViewController {
         guard let user = Auth.auth().currentUser?.uid else { return }
 //        guard let memoText = memoTextView.text else { return }
         guard let book = bookItem else { return }
-        let memo = Memo(user: user, memoText: "", createdAt: Date(), updatedAt: Date(), book: book)
+        let memo = Memo(id: UUID().uuidString, user: user, memoText: "", createdAt: Date(), updatedAt: Date(), book: book)
         
         let input = MemoCreateViewModel.Input(createButtonDidTapEvent: createMemoButton.rx.tap.asObservable(), memoText: memoTextView.rx.text.asObservable())
         let output = memoCreateViewModel.transform(input: input, memo: memo)

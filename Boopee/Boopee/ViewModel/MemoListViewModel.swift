@@ -31,7 +31,7 @@ final class MemoListViewModel {
                 let createdAt = self.dataFormatManager.stringToDate(entity.createdAt)
                 let updatedAt = self.dataFormatManager.stringToDate(entity.updatedAt)
                 
-                return Memo(user: entity.user, memoText: entity.memoText, createdAt: createdAt, updatedAt: updatedAt, book: entity.book)
+                return Memo(id: entity.id, user: entity.user, memoText: entity.memoText, createdAt: createdAt, updatedAt: updatedAt, book: entity.book)
             }
         }
     }
