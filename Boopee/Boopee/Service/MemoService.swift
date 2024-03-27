@@ -7,13 +7,9 @@
 
 import UIKit
 import RxSwift
-import RxRelay
 import FirebaseCore
 import FirebaseFirestore
 
-// ServiceProvider를 이용해서 Entity를 뷰 로직에서 사용하는 모델로 바꾸어주는 역할
-// Entity에서 필요한 것만 정제한 후 변형할 수 있다.
-// Memo 관련 동작은 실제로 Service에서 일어나며 핵심 비즈니스 로직이라고 할 수 있다.
 final class MemoService {
     private let memoCollectionRef = Firestore.firestore().collection("Memos")
     
@@ -22,6 +18,26 @@ final class MemoService {
     func getAllMemo() async -> Observable<[MemoDB]> {
         do {
             memoList = try await memoCollectionRef
+                .order(by: "updatedAt", descending: true)
+                .getDocuments().documents.map { document -> MemoDB in
+                try document.data(as: MemoDB.self)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return Observable.create { emitter in
+            emitter.onNext(self.memoList)
+            emitter.onCompleted()
+            
+            return Disposables.create()
+        }
+    }
+    
+    func getUserMemo(user: String) async -> Observable<[MemoDB]> {
+        do {
+            memoList = try await memoCollectionRef
+                .whereField("user", isEqualTo: user)
                 .order(by: "updatedAt", descending: true)
                 .getDocuments().documents.map { document -> MemoDB in
                 try document.data(as: MemoDB.self)
@@ -63,6 +79,25 @@ final class MemoService {
                 
                 return Disposables.create()
             }
+        }
+    }
+    
+    func deleteMemo(uid: String) async -> Observable<Bool> {
+        var isDeleted: Bool = false
+        
+        do {
+            try await memoCollectionRef.document(uid).delete()
+            isDeleted = true
+        } catch {
+            print(error.localizedDescription)
+            isDeleted = false
+        }
+        
+        return Observable.create { emitter in
+            emitter.onNext(isDeleted)
+            emitter.onCompleted()
+            
+            return Disposables.create()
         }
     }
 }

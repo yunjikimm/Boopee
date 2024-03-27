@@ -46,6 +46,10 @@
 		DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */; };
 		DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA02BB210B300B58311 /* MemoDB.swift */; };
 		DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */; };
+		DCFBBCA52BB36F4F00B58311 /* UserMemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA42BB36F4E00B58311 /* UserMemoCollectionViewCell.swift */; };
+		DCFBBCA72BB370F800B58311 /* UserMemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */; };
+		DCFBBCA92BB4514000B58311 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */; };
+		DCFBBCAB2BB460B700B58311 /* MemoDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +85,10 @@
 		DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCFBBCA02BB210B300B58311 /* MemoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDB.swift; sourceTree = "<group>"; };
 		DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitMemoTextViewConst.swift; sourceTree = "<group>"; };
+		DCFBBCA42BB36F4E00B58311 /* UserMemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoCollectionViewCell.swift; sourceTree = "<group>"; };
+		DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoListViewModel.swift; sourceTree = "<group>"; };
+		DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
+		DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDeleteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +184,7 @@
 				DC416AD92B948302004230CF /* SearchViewController.swift */,
 				DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */,
 				DC416ADB2B9483AE004230CF /* MyPageViewController.swift */,
+				DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */,
 				DCFBBC792BA3431000B58311 /* LoginViewController.swift */,
 				DC416AD62B945F24004230CF /* HomeTabBarController.swift */,
 				DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */,
@@ -189,7 +198,9 @@
 			children = (
 				DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */,
 				DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */,
+				DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */,
 				DCFBBC9A2BB1E59200B58311 /* MemoListViewModel.swift */,
+				DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */,
 				DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
@@ -200,6 +211,7 @@
 			children = (
 				DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */,
 				DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */,
+				DCFBBCA42BB36F4E00B58311 /* UserMemoCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -353,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCFBBCA52BB36F4F00B58311 /* UserMemoCollectionViewCell.swift in Sources */,
 				DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */,
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
@@ -379,6 +392,9 @@
 				DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */,
 				DCFBBC9B2BB1E59200B58311 /* MemoListViewModel.swift in Sources */,
 				DC416AD52B945E85004230CF /* BookApi.swift in Sources */,
+				DCFBBCAB2BB460B700B58311 /* MemoDeleteViewModel.swift in Sources */,
+				DCFBBCA72BB370F800B58311 /* UserMemoListViewModel.swift in Sources */,
+				DCFBBCA92BB4514000B58311 /* MemoDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
