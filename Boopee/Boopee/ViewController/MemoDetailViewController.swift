@@ -105,7 +105,10 @@ extension MemoDetailViewController {
     }
     
     @objc private func editMemoButtonPressed() {
-        print("수정 버튼 누름")
+        let createBookMemoViewController = CreateBookMemoViewController()
+        self.navigationController?.pushViewController(createBookMemoViewController, animated: true)
+        guard let item = memoItem else { return }
+        createBookMemoViewController.memoConfig(item: item)
     }
     
     @objc private func deleteMemoButtonPressed() {
@@ -119,7 +122,7 @@ extension MemoDetailViewController {
                 if success {
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    print("메모 삭제 실패")
+                    print("Failed Delete Memo.")
                 }
             }.disposed(by: disposeBag)
         }

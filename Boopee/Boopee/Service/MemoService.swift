@@ -26,9 +26,9 @@ final class MemoService {
             print(error.localizedDescription)
         }
         
-        return Observable.create { emitter in
-            emitter.onNext(self.memoList)
-            emitter.onCompleted()
+        return Observable.create { observer in
+            observer.onNext(self.memoList)
+            observer.onCompleted()
             
             return Disposables.create()
         }
@@ -46,9 +46,9 @@ final class MemoService {
             print(error.localizedDescription)
         }
         
-        return Observable.create { emitter in
-            emitter.onNext(self.memoList)
-            emitter.onCompleted()
+        return Observable.create { observer in
+            observer.onNext(self.memoList)
+            observer.onCompleted()
             
             return Disposables.create()
         }
@@ -71,14 +71,36 @@ final class MemoService {
                 ]
             ])
             
-            return Observable.create { emitter in
+            return Observable.create { observer in
                 if ref.documentID.isEmpty {
-                    emitter.onNext(false)
+                    observer.onNext(false)
                 }
-                emitter.onNext(true)
+                observer.onNext(true)
                 
                 return Disposables.create()
             }
+        }
+    }
+    
+    func updateMemo(memo: MemoDB, uid: String) async -> Observable<Bool> {
+        var isUpdated: Bool = false
+        
+        do {
+            try await self.memoCollectionRef.document(uid).updateData([
+                "memoText": memo.memoText,
+                "updatedAt": memo.updatedAt,
+            ])
+            isUpdated = true
+        } catch {
+            print(error.localizedDescription)
+            isUpdated = false
+        }
+        
+        return Observable.create { emitter in
+            emitter.onNext(isUpdated)
+            emitter.onCompleted()
+            
+            return Disposables.create()
         }
     }
     

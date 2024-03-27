@@ -48,6 +48,7 @@ class MyPageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupUI()
         setupText()

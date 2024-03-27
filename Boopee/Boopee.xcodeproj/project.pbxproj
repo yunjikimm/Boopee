@@ -50,6 +50,7 @@
 		DCFBBCA72BB370F800B58311 /* UserMemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */; };
 		DCFBBCA92BB4514000B58311 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */; };
 		DCFBBCAB2BB460B700B58311 /* MemoDeleteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */; };
+		DCFBBCAD2BB47DE100B58311 /* MemoUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCAC2BB47DE100B58311 /* MemoUpdateViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoListViewModel.swift; sourceTree = "<group>"; };
 		DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 		DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDeleteViewModel.swift; sourceTree = "<group>"; };
+		DCFBBCAC2BB47DE100B58311 /* MemoUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoUpdateViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			children = (
 				DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */,
 				DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */,
+				DCFBBCAC2BB47DE100B58311 /* MemoUpdateViewModel.swift */,
 				DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */,
 				DCFBBC9A2BB1E59200B58311 /* MemoListViewModel.swift */,
 				DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */,
@@ -381,6 +384,7 @@
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
 				DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */,
 				DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */,
+				DCFBBCAD2BB47DE100B58311 /* MemoUpdateViewModel.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
 				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
 				DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */,
