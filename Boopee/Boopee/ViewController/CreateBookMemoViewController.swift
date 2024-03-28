@@ -10,6 +10,7 @@ import RxSwift
 import Firebase
 
 final class CreateBookMemoViewController: UIViewController {
+    let createButtonDidTapEvent = PublishSubject<Void>()
     let updateButtonDidTapEvent = PublishSubject<Void>()
     let disposeBag = DisposeBag()
     let memoCreateViewModel = MemoCreateViewModel()
@@ -208,12 +209,13 @@ private extension CreateBookMemoViewController {
     }
     
     private func bindMemoCreateButton() {
-        guard let user = Auth.auth().currentUser?.uid else { return }
-        guard let book = bookItem else { return }
+        guard let user = Auth.auth().currentUser?.uid,
+              let book = bookItem,
+              let createMemoText = memoTextView.text else { return }
         
-        let memo = Memo(id: UUID().uuidString, user: user, memoText: "", createdAt: Date(), updatedAt: Date(), book: book)
+        let memo = Memo(id: UUID().uuidString, user: user, memoText: createMemoText, createdAt: Date(), updatedAt: Date(), book: book)
         
-        let input = MemoCreateViewModel.Input(createButtonDidTapEvent: writeMemoButton.rx.tap.asObservable(), memoText: memoTextView.rx.text.asObservable())
+        let input = MemoCreateViewModel.Input(createButtonDidTapEvent: createButtonDidTapEvent.asObservable())
         let output = memoCreateViewModel.transform(input: input, memo: memo)
         
         output.isSuccessCreateMemo

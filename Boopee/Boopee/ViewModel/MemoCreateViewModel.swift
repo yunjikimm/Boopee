@@ -14,15 +14,9 @@ final class MemoCreateViewModel {
     private let dataFormatManager = DateFormatManager.dataFormatManager
     private let disposeBag = DisposeBag()
     
-    private var createMemoText: String
-    
-    init() {
-        self.createMemoText = ""
-    }
-    
     struct Input {
         let createButtonDidTapEvent: Observable<Void>
-        let memoText: Observable<String?>
+//        let memoText: Observable<String?>
     }
     
     struct Output {
@@ -30,23 +24,14 @@ final class MemoCreateViewModel {
     }
     
     func transform(input: Input, memo: Memo) -> Output {
-        input.memoText.subscribe { [weak self] in
-            guard let text = $0 else { return }
-            self?.createMemoText = text
-        }.disposed(by: disposeBag)
-        
-        let isSuccess = input.createButtonDidTapEvent.flatMapLatest { [unowned self] _ -> Observable<Bool> in
-            self.createMemo(memo: memo)
-        }
-
-        return Output(isSuccessCreateMemo: isSuccess)
+        return Output(isSuccessCreateMemo: createMemo(memo: memo))
     }
     
     private func createMemo(memo: Memo) -> Observable<Bool> {
         let createdAt = dataFormatManager.dateToString(memo.createdAt)
         let updatedAt = dataFormatManager.dateToString(memo.updatedAt)
         
-        let createMemo = MemoDB(user: memo.user, memoText: self.createMemoText, createdAt: createdAt, updatedAt: updatedAt, book: memo.book)
+        let createMemo = MemoDB(user: memo.user, memoText: memo.memoText, createdAt: createdAt, updatedAt: updatedAt, book: memo.book)
         
         return memoService.createMemo(memo: createMemo)
     }
