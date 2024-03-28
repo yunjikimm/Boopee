@@ -16,10 +16,6 @@ class MyPageViewController: UIViewController {
     let userMemoListViewModel = UserMemoListViewModel()
     let loginViewModel = LoginViewModel()
     
-    private let emailLabel: UILabel = {
-        let label = UILabel()
-        return label
-    }()
     private let collectionViewBoxView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -33,11 +29,20 @@ class MyPageViewController: UIViewController {
         label.text = "내가 작성한 메모 (0)"
         return label
     }()
+    private let nilCollectionViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "작성한 메모가 없습니다."
+        return label
+    }()
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
         collectionView.register(UserMemoCollectionViewCell.self, forCellWithReuseIdentifier: UserMemoCollectionViewCell.id)
         collectionView.showsVerticalScrollIndicator = false
         return collectionView
+    }()
+    private lazy var settingBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(settingBarButtonPressed))
+        return button
     }()
     
     var items: [Memo] = []
@@ -51,7 +56,7 @@ class MyPageViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupUI()
-        setupText()
+        setNavigationBarButtonItems()
         bindUserMemoListViewModel()
         setDataSource()
         setCollectionViewItemSelectedRx()
@@ -63,17 +68,13 @@ extension MyPageViewController {
     private func setupUI() {
         self.view.backgroundColor = .secondarySystemBackground
         
-        self.view.addSubview(emailLabel)
         self.view.addSubview(collectionViewBoxView)
         collectionViewBoxView.addSubview(myMemoCountLabel)
         collectionViewBoxView.addSubview(collectionView)
+        collectionViewBoxView.addSubview(nilCollectionViewLabel)
         
-        emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(12)
-            make.leading.equalToSuperview().offset(16)
-        }
         collectionViewBoxView.snp.makeConstraints { make in
-            make.top.equalTo(emailLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.bottom.equalToSuperview()
         }
         myMemoCountLabel.snp.makeConstraints { make in
@@ -86,10 +87,20 @@ extension MyPageViewController {
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
         }
+        nilCollectionViewLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+}
+
+extension MyPageViewController {
+    private func setNavigationBarButtonItems() {
+        self.navigationItem.rightBarButtonItem = settingBarButton
     }
     
-    private func setupText() {
-        emailLabel.text = loginViewModel.firebaseAuth.currentUser?.email
+    @objc private func settingBarButtonPressed() {
+        let settingViewController = SettingViewController()
+        self.navigationController?.pushViewController(settingViewController, animated: true)
     }
 }
 
@@ -155,9 +166,9 @@ extension MyPageViewController {
     private func createSearchLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 18, trailing: 0)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 3.8))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

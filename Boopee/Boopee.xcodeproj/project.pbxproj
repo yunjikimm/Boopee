@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC0A99092BB4F0CD0052EED9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A99082BB4F0CD0052EED9 /* SettingViewController.swift */; };
+		DC0A990B2BB50CEB0052EED9 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A990A2BB50CEB0052EED9 /* WebViewController.swift */; };
+		DC0A990D2BB50E480052EED9 /* SettingItemConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0A990C2BB50E480052EED9 /* SettingItemConstant.swift */; };
+		DC0A990F2BB514150052EED9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0A990E2BB514150052EED9 /* WebKit.framework */; };
 		DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AA62B94299B004230CF /* AppDelegate.swift */; };
 		DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AA82B94299B004230CF /* SceneDelegate.swift */; };
 		DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AAA2B94299B004230CF /* HomeViewController.swift */; };
@@ -54,6 +58,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC0A99082BB4F0CD0052EED9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		DC0A990A2BB50CEB0052EED9 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		DC0A990C2BB50E480052EED9 /* SettingItemConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemConstant.swift; sourceTree = "<group>"; };
+		DC0A990E2BB514150052EED9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		DC416AA32B94299B004230CF /* Boopee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Boopee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC416AA62B94299B004230CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC416AA82B94299B004230CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +116,7 @@
 				DC416ABF2B9429D2004230CF /* SnapKit in Frameworks */,
 				DCFBBC6E2BA20E4700B58311 /* GoogleSignIn in Frameworks */,
 				DCFBBC762BA2EB2600B58311 /* FirebaseAuth in Frameworks */,
+				DC0A990F2BB514150052EED9 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,8 +197,10 @@
 				DC416ADB2B9483AE004230CF /* MyPageViewController.swift */,
 				DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */,
 				DCFBBC792BA3431000B58311 /* LoginViewController.swift */,
+				DC0A99082BB4F0CD0052EED9 /* SettingViewController.swift */,
 				DC416AD62B945F24004230CF /* HomeTabBarController.swift */,
 				DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */,
+				DC0A990A2BB50CEB0052EED9 /* WebViewController.swift */,
 				DC416ADF2B96B0A0004230CF /* Cell */,
 			);
 			path = ViewController;
@@ -222,6 +233,7 @@
 		DC416AE62B99C129004230CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DC0A990E2BB514150052EED9 /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -265,6 +277,7 @@
 			children = (
 				DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */,
 				DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */,
+				DC0A990C2BB50E480052EED9 /* SettingItemConstant.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -369,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCFBBCA52BB36F4F00B58311 /* UserMemoCollectionViewCell.swift in Sources */,
+				DC0A990B2BB50CEB0052EED9 /* WebViewController.swift in Sources */,
 				DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */,
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
@@ -387,12 +401,14 @@
 				DCFBBCAD2BB47DE100B58311 /* MemoUpdateViewModel.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
 				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
+				DC0A99092BB4F0CD0052EED9 /* SettingViewController.swift in Sources */,
 				DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
 				DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */,
 				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
+				DC0A990D2BB50E480052EED9 /* SettingItemConstant.swift in Sources */,
 				DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */,
 				DCFBBC9B2BB1E59200B58311 /* MemoListViewModel.swift in Sources */,
 				DC416AD52B945E85004230CF /* BookApi.swift in Sources */,

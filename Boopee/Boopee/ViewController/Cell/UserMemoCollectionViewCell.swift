@@ -28,7 +28,7 @@ final class UserMemoCollectionViewCell: UICollectionViewCell {
     // memo data
     private let memoTextLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 6
+        label.numberOfLines = 4
         label.lineBreakMode = .byCharWrapping
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 14, weight: .regular)
@@ -71,7 +71,8 @@ extension UserMemoCollectionViewCell {
         
         bookThumbnailImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
-            make.width.equalTo(120)
+            make.width.equalTo(100)
+            make.height.equalTo(154)
         }
         bookTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
