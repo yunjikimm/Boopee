@@ -44,8 +44,11 @@ final class HomeViewController: UIViewController {
         
         setupUI()
         moveToSearchViewButtonPressed()
-        bindMemoListViewModel()
         setDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        bindMemoListViewModel()
     }
 }
 

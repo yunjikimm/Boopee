@@ -54,6 +54,7 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "설정"
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         
         setupUI()
         userInfoConfig()

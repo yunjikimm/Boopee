@@ -47,10 +47,16 @@ class HomeTabBarController: UITabBarController {
         navigation.tabBarItem.title = title
         navigation.tabBarItem.image = image
         
-        navigation.viewControllers.first?.navigationItem.title = title
-        navigation.navigationBar.prefersLargeTitles = true
+        let titleLabel: UILabel = {
+            let label = UILabel()
+            label.text = "boopee"
+            label.font = .systemFont(ofSize: 24, weight: .bold)
+            return label
+        }()
         
-//        navigation.viewControllers.first?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "button", style: .plain, target: nil, action: nil)
+        let titleButton = UIBarButtonItem(customView: titleLabel)
+        
+        navigation.viewControllers.first?.navigationItem.leftBarButtonItem = titleButton
         
         return navigation
     }
