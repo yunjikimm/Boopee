@@ -12,23 +12,38 @@ import SnapKit
 final class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Memo>?
     
-    let memoTrigger = PublishSubject<Void>()
-    let disposeBag = DisposeBag()
-    let bookApiviewModel = BookAPIViewModel()
-    let memoListViewModel = MemoListViewModel()
+    private let memoTrigger = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private let bookApiviewModel = BookAPIViewModel()
+    private let memoListViewModel = MemoListViewModel()
     
-    lazy var collectionView: UICollectionView = {
+    private let emptyCollectionViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "메모가 없습니다.\n책을 검색하고 메모를 작성해보세요!"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    private let moveToSearchViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("메모 작성하러 가기", for: .normal)
+        button.tintColor = .systemGray
+        button.configuration = .gray()
+        return button
+    }()
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
         collectionView.register(HomeMemoCollectionViewCell.self, forCellWithReuseIdentifier: HomeMemoCollectionViewCell.id)
         return collectionView
     }()
     
-    var items: [Memo] = []
+    private var items: [Memo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+        moveToSearchViewButtonPressed()
         bindMemoListViewModel()
         setDataSource()
     }
@@ -36,6 +51,13 @@ final class HomeViewController: UIViewController {
 
 // MARK: - binding, datasource
 extension HomeViewController {
+    // MARK: -  button binding
+    private func moveToSearchViewButtonPressed() {
+        moveToSearchViewButton.rx.tap.bind { [weak self] _ in
+            self?.tabBarController?.selectedIndex = 1
+        }.disposed(by: disposeBag)
+    }
+    
     // MARK: - binding, snapshot, apply datasource
     private func bindMemoListViewModel() {
         Task {
@@ -43,6 +65,12 @@ extension HomeViewController {
             let output = await memoListViewModel.transform(input: input)
             
             output.memoList.bind { [weak self] memoList in
+                if memoList.isEmpty {
+                    self?.setupEmptyCollectionViewUI()
+                } else {
+                    self?.setupCollectionViewUI()
+                }
+                
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Memo>()
                 self?.items = memoList.map { $0 }
                 let section = Section.home
@@ -72,12 +100,27 @@ extension HomeViewController {
     // MARK: - ui
     private func setupUI() {
         self.view.backgroundColor = .systemBackground
-        
+    }
+    
+    private func setupCollectionViewUI() {
         self.view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupEmptyCollectionViewUI() {
+        self.view.addSubview(emptyCollectionViewLabel)
+        self.view.addSubview(moveToSearchViewButton)
+        
+        emptyCollectionViewLabel.snp.makeConstraints { make in
+            make.center.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        moveToSearchViewButton.snp.makeConstraints { make in
+            make.top.equalTo(emptyCollectionViewLabel.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
         }
     }
     

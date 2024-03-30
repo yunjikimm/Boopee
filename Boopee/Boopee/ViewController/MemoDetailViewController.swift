@@ -9,9 +9,9 @@ import UIKit
 import RxSwift
 
 final class MemoDetailViewController: UIViewController {
-    let deleteMemoTrigger = PublishSubject<Void>()
-    let disposeBag = DisposeBag()
-    let memoDeleteViewModel = MemoDeleteViewModel()
+    private let deleteMemoTrigger = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private let memoDeleteViewModel = MemoDeleteViewModel()
     private let dataFormatManager = DateFormatManager.dataFormatManager
     
     private var memoItem: Memo? = nil
@@ -71,7 +71,7 @@ final class MemoDetailViewController: UIViewController {
         return button
     }()
     private lazy var deleteMemoButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(deleteMemoButtonPressed))
+        let button = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(deleteMemoAlertAction))
         return button
     }()
     
@@ -99,6 +99,23 @@ final class MemoDetailViewController: UIViewController {
     }
 }
 
+// MARK: - alert action
+extension MemoDetailViewController {
+    @objc private func deleteMemoAlertAction() {
+        let alert = UIAlertController(title: "메모 삭제", message: "메모를 삭제하시겠습니까?", preferredStyle: .alert)
+        let action = UIAlertAction(title: "삭제", style: .default) { [weak self] _ in
+            self?.deleteMemoButtonPressed()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - set navigation bar button
 extension MemoDetailViewController {
     private func setNavigationBarButtonItems() {
         self.navigationItem.rightBarButtonItems = [editMemoButton, deleteMemoButton]
@@ -111,7 +128,7 @@ extension MemoDetailViewController {
         createBookMemoViewController.memoConfig(item: item)
     }
     
-    @objc private func deleteMemoButtonPressed() {
+    private func deleteMemoButtonPressed() {
         Task {
             guard let memo = memoItem, let uid = memo.id else { return }
             
@@ -129,6 +146,7 @@ extension MemoDetailViewController {
     }
 }
 
+// MARK: - set ui
 extension MemoDetailViewController {
     private func setupUI() {
         self.view.backgroundColor = .systemBackground
