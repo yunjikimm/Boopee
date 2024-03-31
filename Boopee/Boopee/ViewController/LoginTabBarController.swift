@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginTabBarController: UITabBarController {
+final class LoginTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,10 +27,7 @@ class LoginTabBarController: UITabBarController {
     }
     
     private func setTabBarUI() {
-        self.tabBar.backgroundColor = .systemBackground
-        self.tabBar.tintColor = .label
-        self.tabBar.unselectedItemTintColor = .systemGray
-        self.tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        self.tabBar.backgroundColor = .customSystemBackground
     }
     
     private func setUpTabs() {
@@ -50,6 +47,7 @@ class LoginTabBarController: UITabBarController {
         let titleLabel: UILabel = {
             let label = UILabel()
             label.text = "boopee"
+            label.textColor = .pointGreen
             label.font = .systemFont(ofSize: 24, weight: .bold)
             return label
         }()

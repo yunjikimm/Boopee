@@ -30,6 +30,12 @@
 		DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */; };
 		DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */; };
 		DC416AF22BA1A119004230CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AF12BA1A119004230CF /* Memo.swift */; };
+		DCAE6A1F2BB88DD500E485AE /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */; };
+		DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */; };
+		DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */; };
+		DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */; };
+		DCAE6A272BB8D8B500E485AE /* SettingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */; };
+		DCCA45BA2BB8804100782135 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA45B92BB8804100782135 /* UIFont+Extension.swift */; };
 		DCFBBC6B2BA2030200B58311 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6A2BA2030200B58311 /* FirebaseAnalytics */; };
 		DCFBBC6E2BA20E4700B58311 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6D2BA20E4700B58311 /* GoogleSignIn */; };
 		DCFBBC702BA20E4700B58311 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6F2BA20E4700B58311 /* GoogleSignInSwift */; };
@@ -80,6 +86,12 @@
 		DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBookMemoViewController.swift; sourceTree = "<group>"; };
 		DC416AF12BA1A119004230CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusConstant.swift; sourceTree = "<group>"; };
+		DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoNavigationTitleConstant.swift; sourceTree = "<group>"; };
+		DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyItemMessageConstant.swift; sourceTree = "<group>"; };
+		DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemTableViewCell.swift; sourceTree = "<group>"; };
+		DCCA45B92BB8804100782135 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DCFBBC792BA3431000B58311 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +238,7 @@
 				DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */,
 				DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */,
 				DCFBBCA42BB36F4E00B58311 /* UserMemoCollectionViewCell.swift */,
+				DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -236,6 +249,15 @@
 				DC0A990E2BB514150052EED9 /* WebKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCCA45B82BB87FD700782135 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DCCA45B92BB8804100782135 /* UIFont+Extension.swift */,
+				DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		DCFBBC572BA1D9F700B58311 /* Service */ = {
@@ -267,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				DCFBBC902BAFD67400B58311 /* Constant */,
+				DCCA45B82BB87FD700782135 /* Extension */,
 				DCFBBC912BAFD68100B58311 /* Service */,
 			);
 			path = Util;
@@ -278,6 +301,9 @@
 				DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */,
 				DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */,
 				DC0A990C2BB50E480052EED9 /* SettingItemConstant.swift */,
+				DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */,
+				DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */,
+				DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -382,8 +408,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCFBBCA52BB36F4F00B58311 /* UserMemoCollectionViewCell.swift in Sources */,
+				DCAE6A272BB8D8B500E485AE /* SettingItemTableViewCell.swift in Sources */,
 				DC0A990B2BB50CEB0052EED9 /* WebViewController.swift in Sources */,
 				DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */,
+				DCAE6A1F2BB88DD500E485AE /* UIColor+Extension.swift in Sources */,
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
 				DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */,
@@ -402,13 +430,17 @@
 				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
 				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
 				DC0A99092BB4F0CD0052EED9 /* SettingViewController.swift in Sources */,
+				DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */,
 				DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
+				DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */,
 				DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */,
 				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */,
+				DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
 				DC0A990D2BB50E480052EED9 /* SettingItemConstant.swift in Sources */,
+				DCCA45BA2BB8804100782135 /* UIFont+Extension.swift in Sources */,
 				DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */,
 				DCFBBC9B2BB1E59200B58311 /* MemoListViewModel.swift in Sources */,
 				DC416AD52B945E85004230CF /* BookApi.swift in Sources */,

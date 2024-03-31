@@ -18,35 +18,40 @@ final class MyPageViewController: UIViewController {
     
     private let collectionViewBoxView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 20
+        view.backgroundColor = .customSystemBackground
+        view.layer.cornerRadius = CornerRadiusConstant.myPageCollectionView
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
         return view
     }()
     private let myMemoCountLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .memoCountLabelColor
+        label.font = .memoCountFont
         label.text = "내가 작성한 메모 (0)"
         return label
     }()
     private let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
-        label.text = "작성한 메모가 없습니다.\n책을 검색하고 메모를 작성해보세요!"
+        label.text = EmptyItemMessageConstant.mypage.rawValue
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.textColor = .emptyItemMessageLabelColor
+        label.font = .emptyItemMessageFont
         return label
     }()
     private let moveToSearchViewButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("메모 작성하러 가기", for: .normal)
-        button.tintColor = .systemGray
-        button.configuration = .gray()
+        var button = UIButton(configuration: .plain())
+        button.setTitle(EmptyItemMessageConstant.home.buttonText, for: .normal)
+        button.tintColor = .enableButtonLabelColor
+        button.backgroundColor = .pointGreen
+        button.layer.cornerRadius = CornerRadiusConstant.button
         return button
     }()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
         collectionView.register(UserMemoCollectionViewCell.self, forCellWithReuseIdentifier: UserMemoCollectionViewCell.id)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .customSystemBackground
         return collectionView
     }()
     private lazy var settingBarButton: UIBarButtonItem = {
@@ -58,7 +63,6 @@ final class MyPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupUI()
         setNavigationBarButtonItems()
@@ -76,7 +80,7 @@ final class MyPageViewController: UIViewController {
 // MARK: - setup UI
 extension MyPageViewController {
     private func setupUI() {
-        self.view.backgroundColor = .secondarySystemBackground
+        self.view.backgroundColor = .customSecondarySystemBackground
         
         self.view.addSubview(collectionViewBoxView)
         collectionViewBoxView.addSubview(myMemoCountLabel)
@@ -95,7 +99,7 @@ extension MyPageViewController {
         collectionViewBoxView.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(20)
+            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
@@ -202,12 +206,12 @@ extension MyPageViewController {
     private func createSearchLayoutSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 18, trailing: 0)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0 / 3.8))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(145))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 20
         
         return section
     }

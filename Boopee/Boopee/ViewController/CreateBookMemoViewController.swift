@@ -10,11 +10,12 @@ import RxSwift
 import Firebase
 
 final class CreateBookMemoViewController: UIViewController {
-    let createButtonDidTapEvent = PublishSubject<Void>()
-    let updateButtonDidTapEvent = PublishSubject<Void>()
-    let disposeBag = DisposeBag()
-    let memoCreateViewModel = MemoCreateViewModel()
-    let memoUpdateViewModel = MemoUpdateViewModel()
+    private let createButtonDidTapEvent = PublishSubject<Void>()
+    private let updateButtonDidTapEvent = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private let memoCreateViewModel = MemoCreateViewModel()
+    private let memoUpdateViewModel = MemoUpdateViewModel()
+    
     private var bookItem: Book?
     private var memoItem: Memo?
     
@@ -35,52 +36,55 @@ final class CreateBookMemoViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
+        label.textColor = .bookTitleLabelColor
+        label.font = .bookTitleFont
         return label
     }()
     private let bookAuthorsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .bookAuthorLabelColor
+        label.font = .bookAuthorsFont
         return label
     }()
     private let bookPublisherLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .bookPublisherLabelColor
+        label.font = .bookPublisherFont
         return label
     }()
     
-    let memoTextView: UITextView = {
+    private let memoTextView: UITextView = {
         let textView = UITextView()
         textView.returnKeyType = .done
         textView.showsVerticalScrollIndicator = false
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        textView.backgroundColor = .secondarySystemBackground
-        textView.layer.cornerRadius = 8
+        textView.backgroundColor = .customSecondarySystemBackground
+        textView.layer.cornerRadius = CornerRadiusConstant.textView
         textView.text = InitMemoTextViewConst.memoTextPlaceholder
-        textView.textColor = InitMemoTextViewConst.memoTextColor
-        textView.font = .systemFont(ofSize: 17, weight: .regular)
+        textView.textColor = .memoTextPlaceholderLabelColor
+        textView.font = .memoTextFont
         return textView
     }()
     
     private let memoLimitLabel: UILabel = {
         let label = UILabel()
         label.textColor = .tertiaryLabel
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .memoLimitLabelColor
+        label.font = .memoLimitFont
         label.text = "0/\(InitMemoTextViewConst.memoTextMaxLength)"
         return label
     }()
     
     private let writeMemoButton: UIButton = {
-        let button = UIButton()
+        var button = UIButton(configuration: .plain())
         button.setTitle("완료", for: .normal)
-        button.setTitleColor(.systemGray, for: .normal)
-        button.backgroundColor = .secondarySystemBackground
-        button.layer.cornerRadius = 8
+        button.tintColor = .disableButtonLabelColor
+        button.backgroundColor = .customSecondarySystemBackground
+        button.layer.cornerRadius = CornerRadiusConstant.button
         button.isEnabled = false
         return button
     }()
@@ -108,14 +112,13 @@ final class CreateBookMemoViewController: UIViewController {
     // MARK: - config()
     public func config(item: Book) {
         bookItem = item
-        let thumbnailURL = URL(string: item.thumbnail)
         
-        bookThumbnailImageView.kf.setImage(with: thumbnailURL)
+        bookThumbnailImageView.kf.setImage(with: URL(string: item.thumbnail))
         bookTitleLabel.text = item.title
         bookAuthorsLabel.text = item.authors
         bookPublisherLabel.text = item.publisher
         
-        self.navigationItem.title = "작성하기"
+        self.navigationItem.title = EditMemoNavigationTitleConstant.create.rawValue
     }
     
     public func memoConfig(item: Memo) {
@@ -132,7 +135,7 @@ final class CreateBookMemoViewController: UIViewController {
         
         memoLimitLabel.text = "\(memoTextView.text.count)/\(InitMemoTextViewConst.memoTextMaxLength)"
         
-        self.navigationItem.title = "수정하기"
+        self.navigationItem.title = EditMemoNavigationTitleConstant.update.rawValue
     }
 }
 
@@ -140,7 +143,7 @@ final class CreateBookMemoViewController: UIViewController {
 private extension CreateBookMemoViewController {
     // MARK: - setupUI()
     private func setupUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .customSystemBackground
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(bookThumbnailImageView)
@@ -194,7 +197,7 @@ private extension CreateBookMemoViewController {
         writeMemoButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-12)
-            make.height.equalTo(54)
+            make.height.equalTo(44)
         }
     }
     
@@ -262,11 +265,12 @@ private extension CreateBookMemoViewController {
             .bind {
                 if !self.memoTextView.text.isEmpty {
                     self.writeMemoButton.isEnabled = true
-                    self.writeMemoButton.setTitleColor(.white, for: .normal)
-                    self.writeMemoButton.backgroundColor = .black
+                    self.writeMemoButton.setTitleColor(.enableButtonLabelColor, for: .normal)
+                    self.writeMemoButton.backgroundColor = .pointGreen
                 } else {
                     self.writeMemoButton.isEnabled = false
-                    self.writeMemoButton.backgroundColor = .secondarySystemBackground
+                    self.writeMemoButton.setTitleColor(.disableButtonLabelColor, for: .disabled)
+                    self.writeMemoButton.backgroundColor = .customSecondarySystemBackground
                 }
                 
                 if self.memoTextView.text.count > InitMemoTextViewConst.memoTextMaxLength {
@@ -278,17 +282,17 @@ private extension CreateBookMemoViewController {
         
         memoTextView.rx.didBeginEditing
             .bind {
-                if self.memoTextView.textColor == InitMemoTextViewConst.memoTextColor {
+                if self.memoTextView.textColor == .memoTextPlaceholderLabelColor {
                     self.memoTextView.text = nil
-                    self.memoTextView.textColor = .label
+                    self.memoTextView.textColor = .memoTextLabelColor
                 }
             }.disposed(by: disposeBag)
         
         memoTextView.rx.didEndEditing
             .bind {
-                if self.memoTextView.text == nil {
+                if self.memoTextView.text.isEmpty {
                     self.memoTextView.text = InitMemoTextViewConst.memoTextPlaceholder
-                    self.memoTextView.textColor = .lightGray
+                    self.memoTextView.textColor = .memoTextPlaceholderLabelColor
                 }
             }.disposed(by: disposeBag)
     }

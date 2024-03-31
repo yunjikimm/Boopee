@@ -9,23 +9,29 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-class LoginViewController: UIViewController {
-    let loginViewModel = LoginViewModel.loginViewModel
+final class LoginViewController: UIViewController {
+    private let loginViewModel = LoginViewModel.loginViewModel
     
-    private let loginInstructionLabel: UILabel = {
+    private let loginWrapView = UIView()
+    private let logoLabel: UILabel = {
         let label = UILabel()
-        label.text = "서비스를 이용하시려면\n로그인을 해주시기 바랍니다."
-        label.textAlignment = .center
-        label.numberOfLines = 2
+        label.text = "로그인"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
         return label
     }()
-    private let googleLoginButton: UIButton = {
-        let button = UIButton()
-        return button
+    private let loginInstructionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "서비스를 이용하시려면\n로그인을 해주세요!"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = .emptyItemMessageLabelColor
+        label.font = .emptyItemMessageFont
+        return label
     }()
     private let gidSignInButton: GIDSignInButton = {
         let button = GIDSignInButton()
         button.style = .wide
+        button.colorScheme = .light
         return button
     }()
     
@@ -40,18 +46,30 @@ class LoginViewController: UIViewController {
     }
     
     private func setUpGoogleLoginUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .customSystemBackground
         
-        self.view.addSubview(loginInstructionLabel)
-        self.view.addSubview(gidSignInButton)
+        self.view.addSubview(loginWrapView)
+        loginWrapView.addSubview(logoLabel)
+        loginWrapView.addSubview(loginInstructionLabel)
+        loginWrapView.addSubview(gidSignInButton)
         
+        loginWrapView.snp.makeConstraints { make in
+            make.centerY.equalTo(self.view.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+        }
+        logoLabel.snp.makeConstraints { make in
+            make.top.equalTo(loginWrapView.snp.top)
+            make.centerX.equalToSuperview()
+        }
         loginInstructionLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.top.equalTo(logoLabel.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview()
         }
         gidSignInButton.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-50)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.top.equalTo(loginInstructionLabel.snp.bottom).offset(32)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(loginWrapView.snp.bottom)
         }
     }
 }

@@ -12,18 +12,20 @@ import SnapKit
 final class SearchViewController: UIViewController, UIScrollViewDelegate {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Book>?
     
-    let bookTrigger = PublishSubject<Void>()
-    let disposeBag = DisposeBag()
-    let bookApiviewModel = BookAPIViewModel()
-    let loginViewModel = LoginViewModel.loginViewModel
+    private let bookTrigger = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private let bookApiviewModel = BookAPIViewModel()
+    private let loginViewModel = LoginViewModel.loginViewModel
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
         collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.id)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
     
-    var items: [Book] = []
+    private var items: [Book] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,13 +104,15 @@ extension SearchViewController {
 extension SearchViewController {
     // MARK: - ui
     private func setupUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .customSystemBackground
         
         self.view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-12)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
     
@@ -140,7 +144,7 @@ extension SearchViewController: UISearchBarDelegate {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         
-        searchController.searchBar.placeholder = "책 검색"
+        searchController.searchBar.placeholder = "책을 검색해보세요."
         searchController.hidesNavigationBarDuringPresentation = false
         
         self.navigationItem.searchController = searchController

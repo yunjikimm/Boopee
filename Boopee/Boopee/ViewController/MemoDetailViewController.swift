@@ -28,42 +28,46 @@ final class MemoDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
+        label.textColor = .bookTitleLabelColor
+        label.font = .bookTitleFont
         return label
     }()
     private let bookAuthorsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .bookAuthorLabelColor
+        label.font = .bookAuthorsFont
         return label
     }()
     private let bookPublisherLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .bookPublisherLabelColor
+        label.font = .bookPublisherFont
         return label
     }()
     
     // memo data
     private let memoTextBoxView: UIView = {
         let view = UIView()
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = 8
+        view.backgroundColor = .customSecondarySystemBackground
+        view.layer.cornerRadius = CornerRadiusConstant.memoBoxView
         return view
     }()
     private let memoTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byCharWrapping
+        label.textColor = .memoTextLabelColor
+        label.font = .memoTextFont
         return label
     }()
     private let memoDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGray3
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .memoDateLabelColor
+        label.font = .memoDateFont
         return label
     }()
     private lazy var editMemoButton: UIBarButtonItem = {
@@ -149,7 +153,7 @@ extension MemoDetailViewController {
 // MARK: - set ui
 extension MemoDetailViewController {
     private func setupUI() {
-        self.view.backgroundColor = .systemBackground
+        self.view.backgroundColor = .customSystemBackground
         
         self.view.addSubview(bookThumbnailImageView)
         self.view.addSubview(bookTitleLabel)

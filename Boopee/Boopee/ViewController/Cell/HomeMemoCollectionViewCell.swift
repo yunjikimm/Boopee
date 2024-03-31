@@ -12,67 +12,64 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     static let id = "HomeMemoCollectionViewCell"
     private let dataFormatManager = DateFormatManager.dataFormatManager
     
-    // blur effect background
-    private let bookThumbnailEffectImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    private let bookThumbnailEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-        let visualEffectView = UIVisualEffectView(effect: blurEffect)
-        return visualEffectView
-    }()
-    
     // book data
+    private let bookInfoWrapStackViewView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.alignment = .top
+        stackView.distribution = .fill
+        return stackView
+    }()
+    private let bookInfoTextBoxView: UIView = {
+        let view = UIView()
+        return view
+    }()
     private let bookThumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     private let bookTitleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.numberOfLines = 2
+        label.textColor = .bookTitleLabelColor
+        label.font = .bookTitleFont
         return label
     }()
     private let bookAuthorsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textAlignment = .center
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .bookAuthorLabelColor
+        label.font = .bookAuthorsFont
         return label
     }()
     private let bookPublisherLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textAlignment = .center
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .bookPublisherLabelColor
+        label.font = .bookPublisherFont
         return label
     }()
     
     // memo data
     private let memoTextBoxView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .customSecondarySystemBackground
+        view.layer.cornerRadius = CornerRadiusConstant.textView
         return view
     }()
     private let memoTextLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byCharWrapping
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .memoTextLabelColor
+        label.font = .memoTextFont
         return label
     }()
     private let memoDateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .lightGray
-        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textColor = .memoDateLabelColor
+        label.font = .memoDateFont
         return label
     }()
     
@@ -83,10 +80,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     }
     
     public func configure(item: Memo) {
-        let thumbnailURL = URL(string: item.book.thumbnail)
-        
-        bookThumbnailEffectImageView.kf.setImage(with: thumbnailURL)
-        bookThumbnailImageView.kf.setImage(with: thumbnailURL)
+        bookThumbnailImageView.kf.setImage(with: URL(string: item.book.thumbnail))
         bookTitleLabel.text = item.book.title
         bookAuthorsLabel.text = item.book.authors
         bookPublisherLabel.text = item.book.publisher
@@ -102,63 +96,71 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
 
 extension HomeMemoCollectionViewCell {
     private func setupUI() {
-        addSubview(bookThumbnailEffectImageView)
-        bookThumbnailEffectImageView.addSubview(bookThumbnailEffectView)
+        contentView.backgroundColor = .customSystemBackground
+        contentView.layer.cornerRadius = CornerRadiusConstant.memoBoxView
         
-        bookThumbnailEffectImageView.addSubview(bookThumbnailImageView)
-        bookThumbnailEffectImageView.addSubview(bookTitleLabel)
-        bookThumbnailEffectImageView.addSubview(bookAuthorsLabel)
-        bookThumbnailEffectImageView.addSubview(bookPublisherLabel)
+        addSubview(bookInfoWrapStackViewView)
+        bookInfoWrapStackViewView.addArrangedSubview(bookInfoTextBoxView)
+        bookInfoWrapStackViewView.addArrangedSubview(bookThumbnailImageView)
         
-        bookThumbnailEffectImageView.addSubview(memoTextBoxView)
+        bookInfoTextBoxView.addSubview(bookTitleLabel)
+        bookInfoTextBoxView.addSubview(bookAuthorsLabel)
+        bookInfoTextBoxView.addSubview(bookPublisherLabel)
+        
+        addSubview(memoTextBoxView)
         memoTextBoxView.addSubview(memoTextLabel)
+        memoTextBoxView.addSubview(memoDateLabel)
         
-        bookThumbnailEffectImageView.addSubview(memoDateLabel)
-        
-        bookThumbnailEffectImageView.snp.makeConstraints { make in
+        contentView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-        }
-        bookThumbnailEffectView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
-        bookThumbnailImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(36)
-            make.centerX.equalToSuperview()
+        bookInfoWrapStackViewView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+        }
+        bookInfoTextBoxView.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview()
+            make.trailing.equalTo(bookThumbnailImageView.snp.leading).offset(-4)
         }
         bookTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(bookThumbnailImageView.snp.bottom).offset(16)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.top.leading.trailing.equalToSuperview()
         }
         bookAuthorsLabel.snp.makeConstraints { make in
             make.top.equalTo(bookTitleLabel.snp.bottom).offset(4)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.leading.trailing.equalToSuperview()
         }
         bookPublisherLabel.snp.makeConstraints { make in
             make.top.equalTo(bookAuthorsLabel.snp.bottom)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        bookThumbnailImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.width.equalTo(76)
+            make.height.equalTo(100)
         }
         
         memoTextBoxView.snp.makeConstraints { make in
-            make.top.equalTo(bookPublisherLabel.snp.bottom).offset(24)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
-            make.bottom.equalTo(memoDateLabel.snp.top).offset(-18)
+            make.top.equalTo(bookInfoWrapStackViewView.snp.bottom).offset(12)
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-30)
         }
         memoTextLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(14)
-            make.leading.equalToSuperview().offset(12)
-            make.trailing.equalToSuperview().offset(-12)
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
         
         memoDateLabel.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-12)
-            make.bottom.equalToSuperview().offset(-12)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-16)
         }
+        
     }
 }

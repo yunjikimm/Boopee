@@ -11,27 +11,31 @@ import Kingfisher
 final class SearchResultCollectionViewCell: UICollectionViewCell {
     static let id = "SearchResultCollectionViewCell"
     
-    private let searchResultThumbnailImageView: UIImageView = {
+    private lazy var searchResultThumbnailImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     private let searchResultTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
+        label.textColor = .bookTitleLabelColor
+        label.font = .bookTitleFont
         return label
     }()
     private let searchResultAuthorsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .bookAuthorLabelColor
+        label.font = .bookAuthorsFont
         return label
     }()
     private let searchResultPublisherLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .bookPublisherLabelColor
+        label.font = .bookPublisherFont
         return label
     }()
     
@@ -49,7 +53,6 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         
         searchResultThumbnailImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(174)
         }
         searchResultTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(searchResultThumbnailImageView.snp.bottom).offset(4)
