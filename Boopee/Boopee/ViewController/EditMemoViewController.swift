@@ -1,5 +1,5 @@
 //
-//  CreateBookMemoViewController.swift
+//  EditMemoViewController.swift
 //  Boopee
 //
 //  Created by yunjikim on 3/9/24.
@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import Firebase
 
-final class CreateBookMemoViewController: UIViewController {
+final class EditMemoViewController: UIViewController {
     private let createButtonDidTapEvent = PublishSubject<Void>()
     private let updateButtonDidTapEvent = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
@@ -140,7 +140,7 @@ final class CreateBookMemoViewController: UIViewController {
 }
 
 // MARK: - setup ui
-private extension CreateBookMemoViewController {
+private extension EditMemoViewController {
     // MARK: - setupUI()
     private func setupUI() {
         self.view.backgroundColor = .customSystemBackground
@@ -204,7 +204,7 @@ private extension CreateBookMemoViewController {
 }
 
 // MARK: - extension button bind
-private extension CreateBookMemoViewController {
+private extension EditMemoViewController {
     private func createMemoButtonPressed() {
         writeMemoButton.rx.tap.bind {
             self.bindMemoCreateButton()
@@ -259,7 +259,7 @@ private extension CreateBookMemoViewController {
 }
 
 // MARK: - extension textView bind
-private extension CreateBookMemoViewController {
+private extension EditMemoViewController {
     private func bindMemoTextView() {
         memoTextView.rx.didChange
             .bind {
@@ -299,7 +299,7 @@ private extension CreateBookMemoViewController {
 }
 
 // MARK: - extension keyboard
-private extension CreateBookMemoViewController {
+private extension EditMemoViewController {
     func tapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
         self.view.addGestureRecognizer(tapGesture)
@@ -321,7 +321,7 @@ private extension CreateBookMemoViewController {
 }
 
 // MARK: - extension UITextViewDelegate
-extension CreateBookMemoViewController: UITextViewDelegate {
+extension EditMemoViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             view.endEditing(true)

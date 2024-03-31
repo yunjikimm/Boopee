@@ -126,10 +126,10 @@ extension MemoDetailViewController {
     }
     
     @objc private func editMemoButtonPressed() {
-        let createBookMemoViewController = CreateBookMemoViewController()
-        self.navigationController?.pushViewController(createBookMemoViewController, animated: true)
+        let editMemoViewController = EditMemoViewController()
+        self.navigationController?.pushViewController(editMemoViewController, animated: true)
         guard let item = memoItem else { return }
-        createBookMemoViewController.memoConfig(item: item)
+        editMemoViewController.memoConfig(item: item)
     }
     
     private func deleteMemoButtonPressed() {

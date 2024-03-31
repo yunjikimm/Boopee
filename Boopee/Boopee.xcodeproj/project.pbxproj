@@ -28,7 +28,7 @@
 		DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD92B948302004230CF /* SearchViewController.swift */; };
 		DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ADB2B9483AE004230CF /* MyPageViewController.swift */; };
 		DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */; };
-		DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */; };
+		DC416AEE2B9C40A6004230CF /* EditMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AED2B9C40A6004230CF /* EditMemoViewController.swift */; };
 		DC416AF22BA1A119004230CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AF12BA1A119004230CF /* Memo.swift */; };
 		DCAE6A1F2BB88DD500E485AE /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */; };
 		DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */; };
@@ -84,7 +84,7 @@
 		DC416AD92B948302004230CF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC416ADB2B9483AE004230CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
-		DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBookMemoViewController.swift; sourceTree = "<group>"; };
+		DC416AED2B9C40A6004230CF /* EditMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoViewController.swift; sourceTree = "<group>"; };
 		DC416AF12BA1A119004230CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusConstant.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 			children = (
 				DC416AAA2B94299B004230CF /* HomeViewController.swift */,
 				DC416AD92B948302004230CF /* SearchViewController.swift */,
-				DC416AED2B9C40A6004230CF /* CreateBookMemoViewController.swift */,
+				DC416AED2B9C40A6004230CF /* EditMemoViewController.swift */,
 				DC416ADB2B9483AE004230CF /* MyPageViewController.swift */,
 				DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */,
 				DCFBBC792BA3431000B58311 /* LoginViewController.swift */,
@@ -427,7 +427,7 @@
 				DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */,
 				DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */,
 				DCFBBCAD2BB47DE100B58311 /* MemoUpdateViewModel.swift in Sources */,
-				DC416AEE2B9C40A6004230CF /* CreateBookMemoViewController.swift in Sources */,
+				DC416AEE2B9C40A6004230CF /* EditMemoViewController.swift in Sources */,
 				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
 				DC0A99092BB4F0CD0052EED9 /* SettingViewController.swift in Sources */,
 				DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */,

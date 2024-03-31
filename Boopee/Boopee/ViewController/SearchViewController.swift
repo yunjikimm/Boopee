@@ -53,10 +53,10 @@ extension SearchViewController {
     private func setCollectionViewItemSelectedRx() {
         collectionView.rx.itemSelected
             .subscribe { [weak self] indexPath in
-                let createBookMemoViewController = CreateBookMemoViewController()
-                self?.navigationController?.pushViewController(createBookMemoViewController, animated: true)
+                let editMemoViewController = EditMemoViewController()
+                self?.navigationController?.pushViewController(editMemoViewController, animated: true)
                 guard let documentItem = self?.items[indexPath.row] else { return }
-                createBookMemoViewController.config(item: documentItem)
+                editMemoViewController.config(item: documentItem)
             }.disposed(by: disposeBag)
     }
     
