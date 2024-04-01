@@ -10,42 +10,43 @@ import Firebase
 import GoogleSignIn
 
 final class LoginViewModel {
-    static let loginViewModel = LoginViewModel()
     let firebaseAuth = Auth.auth()
     
-    func googleSignIn(viewController: UIViewController) {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
-        
-        GIDSignIn.sharedInstance.signIn(withPresenting: viewController.self) { [unowned self] result, error in
-            guard error == nil else { return }
+    var loginUser: User?
+    
+    func googleSignIn(viewController: UIViewController) async throws {
+        do {
+            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
             
-            guard let user = result?.user,
-                  let idToken = user.idToken?.tokenString else { return }
+            let config = GIDConfiguration(clientID: clientID)
+            GIDSignIn.sharedInstance.configuration = config
             
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+            let gidSignIn = try await GIDSignIn.sharedInstance.signIn(withPresenting: viewController.self)
+            guard let idToken = gidSignIn.user.idToken?.tokenString else { return }
             
-            googleSignInWithFirebaseAuth(credential: credential)
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: gidSignIn.user.accessToken.tokenString)
+            try await googleSignInWithFirebaseAuth(credential: credential)
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
-    private func googleSignInWithFirebaseAuth(credential: AuthCredential) {
-        firebaseAuth.signIn(with: credential) { result, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("login successful")
-            }
+    private func googleSignInWithFirebaseAuth(credential: AuthCredential) async throws {
+        do {
+            let signIn = try await firebaseAuth.signIn(with: credential)
+            loginUser = signIn.user
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
-    func signOut() {
+    func signOut() async throws -> Bool {
         do {
             try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
         }
     }
 }

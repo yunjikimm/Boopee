@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Firebase
 import GoogleSignIn
 
 final class LoginViewController: UIViewController {
-    private let loginViewModel = LoginViewModel.loginViewModel
+    private let loginViewModel = LoginViewModel()
     
     private let loginWrapView = UIView()
     private let logoLabel: UILabel = {
@@ -22,7 +21,6 @@ final class LoginViewController: UIViewController {
     private let loginInstructionLabel: UILabel = {
         let label = UILabel()
         label.text = "서비스를 이용하시려면\n로그인을 해주세요!"
-        label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .emptyItemMessageLabelColor
         label.font = .emptyItemMessageFont
@@ -34,33 +32,54 @@ final class LoginViewController: UIViewController {
         button.colorScheme = .light
         return button
     }()
+    private lazy var dismissBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(dismissLoginView))
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = dismissBarButton
         
-        setUpGoogleLoginUI()
+        setupUI()
         
         gidSignInButton.addAction(UIAction { _ in
-            self.loginViewModel.googleSignIn(viewController: self)
+            Task {
+                try await self.loginViewModel.googleSignIn(viewController: self)
+                
+                if self.loginViewModel.loginUser != nil {
+                    self.dismissLoginView()
+                }
+            }
         }, for: .touchUpInside)
     }
-    
-    private func setUpGoogleLoginUI() {
+}
+
+// MARK: - dismiss button
+extension LoginViewController {
+    @objc private func dismissLoginView() {
+        self.dismiss(animated: true)
+    }
+}
+
+// MARK: - setupUI
+extension LoginViewController {
+    private func setupUI() {
         self.view.backgroundColor = .customSystemBackground
         
+        self.view.addSubview(logoLabel)
         self.view.addSubview(loginWrapView)
-        loginWrapView.addSubview(logoLabel)
         loginWrapView.addSubview(loginInstructionLabel)
         loginWrapView.addSubview(gidSignInButton)
         
-        loginWrapView.snp.makeConstraints { make in
-            make.centerY.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-        }
         logoLabel.snp.makeConstraints { make in
-            make.top.equalTo(loginWrapView.snp.top)
-            make.centerX.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(32)
+            make.leading.equalToSuperview().offset(20)
+        }
+        loginWrapView.snp.makeConstraints { make in
+            make.top.equalTo(logoLabel).offset(12)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
         loginInstructionLabel.snp.makeConstraints { make in
             make.top.equalTo(logoLabel.snp.bottom).offset(8)

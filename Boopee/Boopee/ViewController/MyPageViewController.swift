@@ -16,7 +16,7 @@ final class MyPageViewController: UIViewController {
     private let userMemoListViewModel = UserMemoListViewModel()
     private let loginViewModel = LoginViewModel()
     
-    private let collectionViewBoxView: UIView = {
+    private let collectionViewWrapView: UIView = {
         let view = UIView()
         view.backgroundColor = .customSystemBackground
         view.layer.cornerRadius = CornerRadiusConstant.myPageCollectionView
@@ -30,6 +30,16 @@ final class MyPageViewController: UIViewController {
         label.text = "내가 작성한 메모 (0)"
         return label
     }()
+    private let emptyCollectionViewWrapView: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .systemBlue
+        return view
+    }()
+    private let loginWrapView: UIView = {
+        let view = UIView()
+//        view.backgroundColor = .systemOrange
+        return view
+    }()
     private let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
         label.text = EmptyItemMessageConstant.mypage.rawValue
@@ -42,6 +52,23 @@ final class MyPageViewController: UIViewController {
     private let moveToSearchViewButton: UIButton = {
         var button = UIButton(configuration: .plain())
         button.setTitle(EmptyItemMessageConstant.home.buttonText, for: .normal)
+        button.tintColor = .enableButtonLabelColor
+        button.backgroundColor = .pointGreen
+        button.layer.cornerRadius = CornerRadiusConstant.button
+        return button
+    }()
+    private let loginLabel: UILabel = {
+        let label = UILabel()
+        label.text = "서비스를 이용하시려면\n로그인을 해주세요!"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = .emptyItemMessageLabelColor
+        label.font = .emptyItemMessageFont
+        return label
+    }()
+    private let loginButton: UIButton = {
+        var button = UIButton(configuration: .plain())
+        button.setTitle("로그인", for: .normal)
         button.tintColor = .enableButtonLabelColor
         button.backgroundColor = .pointGreen
         button.layer.cornerRadius = CornerRadiusConstant.button
@@ -64,16 +91,30 @@ final class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
         setNavigationBarButtonItems()
         moveToSearchViewButtonPressed()
-        setDataSource()
         setCollectionViewItemSelectedRx()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-        bindUserMemoListViewModel()
+        
+        setupUI()
+        setDataSource()
+        checkLogin()
+    }
+}
+
+// MARK: - check login
+extension MyPageViewController {
+    private func checkLogin() {
+        if let user = loginViewModel.firebaseAuth.currentUser?.uid {
+            self.bindUserMemoListViewModel(user: user)
+        } else {
+            self.setupLoginUI()
+            self.loginButtonPressed()
+            myMemoCountLabel.text = "내가 작성한 메모 (0)"
+        }
     }
 }
 
@@ -82,12 +123,13 @@ extension MyPageViewController {
     private func setupUI() {
         self.view.backgroundColor = .customSecondarySystemBackground
         
-        self.view.addSubview(collectionViewBoxView)
-        collectionViewBoxView.addSubview(myMemoCountLabel)
+        self.view.addSubview(collectionViewWrapView)
+        collectionViewWrapView.addSubview(myMemoCountLabel)
         
-        collectionViewBoxView.snp.makeConstraints { make in
+        collectionViewWrapView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         myMemoCountLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -96,25 +138,52 @@ extension MyPageViewController {
     }
     
     private func setupCollectionViewUI() {
-        collectionViewBoxView.addSubview(collectionView)
+        collectionViewWrapView.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
     
     private func setupEmptyCollectionViewUI() {
-        collectionViewBoxView.addSubview(emptyCollectionViewLabel)
-        collectionViewBoxView.addSubview(moveToSearchViewButton)
+        collectionViewWrapView.addSubview(emptyCollectionViewWrapView)
+        emptyCollectionViewWrapView.addSubview(emptyCollectionViewLabel)
+        emptyCollectionViewWrapView.addSubview(moveToSearchViewButton)
         
+        emptyCollectionViewWrapView.snp.makeConstraints { make in
+            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
         emptyCollectionViewLabel.snp.makeConstraints { make in
-            make.center.equalTo(self.view.safeAreaLayoutGuide)
+            make.center.equalTo(emptyCollectionViewWrapView)
         }
         moveToSearchViewButton.snp.makeConstraints { make in
             make.top.equalTo(emptyCollectionViewLabel.snp.bottom).offset(12)
+            make.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupLoginUI() {
+        collectionViewWrapView.addSubview(loginWrapView)
+        loginWrapView.addSubview(loginLabel)
+        loginWrapView.addSubview(loginButton)
+        
+        loginWrapView.snp.makeConstraints { make in
+            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+        }
+        loginLabel.snp.makeConstraints { make in
+            make.center.equalTo(loginWrapView)
+        }
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(loginLabel.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
         }
     }
@@ -137,7 +206,7 @@ extension MyPageViewController {
     // MARK: - selected collectionview item
     private func setCollectionViewItemSelectedRx() {
         collectionView.rx.itemSelected
-            .subscribe { [weak self] indexPath in
+            .bind { [weak self] indexPath in
                 let memoDetailViewController = MemoDetailViewController()
                 self?.navigationController?.pushViewController(memoDetailViewController, animated: true)
                 guard let item = self?.items[indexPath.row] else { return }
@@ -155,11 +224,17 @@ extension MyPageViewController {
         }.disposed(by: disposeBag)
     }
     
+    private func loginButtonPressed() {
+        loginButton.rx.tap.bind { [weak self] _ in
+            let navigationController = UINavigationController(rootViewController: LoginViewController())
+            navigationController.modalPresentationStyle = .fullScreen
+            self?.present(navigationController, animated: true)
+        }.disposed(by: disposeBag)
+    }
+    
     // MARK: - binding, snapshot, apply datasource
-    private func bindUserMemoListViewModel() {
+    private func bindUserMemoListViewModel(user: String) {
         Task {
-            guard let user = loginViewModel.firebaseAuth.currentUser?.uid else { return }
-            
             let input = UserMemoListViewModel.Input(userMemoTrigger: userMemoTrigger.asObservable())
             let output = await userMemoListViewModel.transform(input: input, user: user)
             
@@ -168,8 +243,8 @@ extension MyPageViewController {
                     self?.setupEmptyCollectionViewUI()
                 } else {
                     self?.setupCollectionViewUI()
-                    self?.myMemoCountLabel.text = "내가 작성한 메모 (\(userMemoList.count))"
                 }
+                self?.myMemoCountLabel.text = "내가 작성한 메모 (\(userMemoList.count))"
                 
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Memo>()
                 self?.items = userMemoList.map { $0 }

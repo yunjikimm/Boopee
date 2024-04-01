@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        AppController.appController.show(in: window)
+        window.backgroundColor = .customSystemBackground
+        window.makeKeyAndVisible()
+        window.rootViewController = HomeTabBarController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

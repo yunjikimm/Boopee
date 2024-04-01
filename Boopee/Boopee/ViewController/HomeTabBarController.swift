@@ -19,7 +19,7 @@ final class HomeTabBarController: UITabBarController {
         super.viewDidLayoutSubviews()
         
         var tabFrame = self.tabBar.frame
-        let heightTabBar: CGFloat = tabFrame.size.height + 8
+        let heightTabBar: CGFloat = tabFrame.size.height + 5
         
         tabFrame.size.height = heightTabBar
         tabFrame.origin.y = self.view.frame.size.height - heightTabBar

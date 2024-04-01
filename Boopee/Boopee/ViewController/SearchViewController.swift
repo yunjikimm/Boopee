@@ -15,7 +15,7 @@ final class SearchViewController: UIViewController, UIScrollViewDelegate {
     private let bookTrigger = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     private let bookApiviewModel = BookAPIViewModel()
-    private let loginViewModel = LoginViewModel.loginViewModel
+    private let loginViewModel = LoginViewModel()
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
@@ -34,12 +34,7 @@ final class SearchViewController: UIViewController, UIScrollViewDelegate {
         
         setupSearchController()
         setupUI()
-        
-        if loginViewModel.firebaseAuth.currentUser != nil {
-            setCollectionViewItemSelectedRx()
-        } else {
-            moveToLoginTab()
-        }
+        setCollectionViewItemSelectedRx()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,11 +47,17 @@ extension SearchViewController {
     // MARK: - selected collectionview item
     private func setCollectionViewItemSelectedRx() {
         collectionView.rx.itemSelected
-            .subscribe { [weak self] indexPath in
-                let editMemoViewController = EditMemoViewController()
-                self?.navigationController?.pushViewController(editMemoViewController, animated: true)
-                guard let documentItem = self?.items[indexPath.row] else { return }
-                editMemoViewController.config(item: documentItem)
+            .bind { [weak self] indexPath in
+                if self?.loginViewModel.firebaseAuth.currentUser != nil {
+                    let editMemoViewController = EditMemoViewController()
+                    self?.navigationController?.pushViewController(editMemoViewController, animated: true)
+                    guard let documentItem = self?.items[indexPath.row] else { return }
+                    editMemoViewController.config(item: documentItem)
+                } else {
+                    let navigationController = UINavigationController(rootViewController: LoginViewController())
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true)
+                }
             }.disposed(by: disposeBag)
     }
     

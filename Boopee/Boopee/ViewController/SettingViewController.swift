@@ -18,9 +18,6 @@ final class SettingViewController: UIViewController {
         tableView.isScrollEnabled = false
         tableView.showsVerticalScrollIndicator = false
         tableView.sectionHeaderTopPadding = 0
-//        tableView.sectionHeaderHeight = 0
-//        tableView.sectionFooterHeight = 4
-//        tableView.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = .clear
         return tableView
     }()
@@ -34,7 +31,7 @@ final class SettingViewController: UIViewController {
     }()
     
     private lazy var settingItemList = [
-        [loginViewModel.firebaseAuth.currentUser?.email],
+        [loginViewModel.firebaseAuth.currentUser?.email ?? "계정 없음"],
         [SettingItemConstant.serviceUsageGuide.rawValue, SettingItemConstant.privacyPolicy.rawValue],
     ]
     
@@ -51,32 +48,64 @@ final class SettingViewController: UIViewController {
     }
 }
 
+// MARK: - sign out button action
 extension SettingViewController {
     private func bindSignOutButton() {
         signOutButton.rx.tap.bind { [weak self] in
-            self?.loginViewModel.signOut()
+            self?.deleteMemoAlertAction()
         }.disposed(by: disposeBag)
+    }
+    
+    private func signOutAction() {
+        Task {
+            let signOut = try await self.loginViewModel.signOut()
+            
+            if signOut {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }
 
+// MARK: - alert action
+extension SettingViewController {
+    private func deleteMemoAlertAction() {
+        let alert = UIAlertController(title: "로그아웃", message: "로그아웃하시겠습니까?", preferredStyle: .alert)
+        let action = UIAlertAction(title: "로그아웃", style: .default) { [weak self] _ in
+            self?.signOutAction()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - setupUI
 extension SettingViewController {
     private func setupUI() {
         self.view.backgroundColor = .customSystemBackground
         
         self.view.addSubview(tableView)
-        self.view.addSubview(signOutButton)
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(signOutButton.snp.top)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
-        signOutButton.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-12)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(44)
+        
+        if loginViewModel.firebaseAuth.currentUser != nil {
+            self.view.addSubview(signOutButton)
+            
+            signOutButton.snp.makeConstraints { make in
+                make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-12)
+                make.leading.equalToSuperview().offset(20)
+                make.trailing.equalToSuperview().offset(-20)
+                make.height.equalTo(44)
+            }
         }
     }
 }
