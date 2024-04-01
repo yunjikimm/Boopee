@@ -24,7 +24,7 @@
 		DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ACA2B942AE9004230CF /* NetworkProvider.swift */; };
 		DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */; };
 		DC416AD52B945E85004230CF /* BookApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD42B945E85004230CF /* BookApi.swift */; };
-		DC416AD72B945F24004230CF /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD62B945F24004230CF /* HomeTabBarController.swift */; };
+		DC416AD72B945F24004230CF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD62B945F24004230CF /* TabBarController.swift */; };
 		DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AD92B948302004230CF /* SearchViewController.swift */; };
 		DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416ADB2B9483AE004230CF /* MyPageViewController.swift */; };
 		DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */; };
@@ -43,8 +43,6 @@
 		DCFBBC762BA2EB2600B58311 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC752BA2EB2600B58311 /* FirebaseAuth */; };
 		DCFBBC782BA2ECCB00B58311 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */; };
 		DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC792BA3431000B58311 /* LoginViewController.swift */; };
-		DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */; };
-		DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */; };
 		DCFBBC882BAF0DB800B58311 /* MemoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC872BAF0DB800B58311 /* MemoService.swift */; };
 		DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */; };
 		DCFBBC8E2BAF180000B58311 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC8D2BAF180000B58311 /* FirebaseFirestore */; };
@@ -80,7 +78,7 @@
 		DC416AD12B942B4C004230CF /* BookAPIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAPIViewModel.swift; sourceTree = "<group>"; };
 		DC416AD32B942D5D004230CF /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		DC416AD42B945E85004230CF /* BookApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookApi.swift; sourceTree = "<group>"; };
-		DC416AD62B945F24004230CF /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		DC416AD62B945F24004230CF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DC416AD92B948302004230CF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC416ADB2B9483AE004230CF /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		DC416AE02B96B100004230CF /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -95,8 +93,6 @@
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DCFBBC792BA3431000B58311 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTabBarController.swift; sourceTree = "<group>"; };
 		DCFBBC872BAF0DB800B58311 /* MemoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoService.swift; sourceTree = "<group>"; };
 		DCFBBC8B2BAF0EA400B58311 /* MemoCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCreateViewModel.swift; sourceTree = "<group>"; };
 		DCFBBC922BAFD6C500B58311 /* DateFormatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatManager.swift; sourceTree = "<group>"; };
@@ -195,7 +191,6 @@
 			children = (
 				DC416AA62B94299B004230CF /* AppDelegate.swift */,
 				DC416AA82B94299B004230CF /* SceneDelegate.swift */,
-				DCFBBC7D2BA5B1BA00B58311 /* AppController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -210,8 +205,7 @@
 				DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */,
 				DCFBBC792BA3431000B58311 /* LoginViewController.swift */,
 				DC0A99082BB4F0CD0052EED9 /* SettingViewController.swift */,
-				DC416AD62B945F24004230CF /* HomeTabBarController.swift */,
-				DCFBBC7F2BA5B2E800B58311 /* LoginTabBarController.swift */,
+				DC416AD62B945F24004230CF /* TabBarController.swift */,
 				DC0A990A2BB50CEB0052EED9 /* WebViewController.swift */,
 				DC416ADF2B96B0A0004230CF /* Cell */,
 			);
@@ -418,20 +412,18 @@
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
 				DCFBBC882BAF0DB800B58311 /* MemoService.swift in Sources */,
 				DC416AC92B942ACE004230CF /* BookNetwork.swift in Sources */,
-				DC416AD72B945F24004230CF /* HomeTabBarController.swift in Sources */,
+				DC416AD72B945F24004230CF /* TabBarController.swift in Sources */,
 				DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */,
 				DCFBBC9D2BB20FCB00B58311 /* SectionItemConstant.swift in Sources */,
 				DCFBBC782BA2ECCB00B58311 /* LoginViewModel.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
-				DCFBBC7E2BA5B1BA00B58311 /* AppController.swift in Sources */,
 				DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */,
 				DCFBBCAD2BB47DE100B58311 /* MemoUpdateViewModel.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* EditMemoViewController.swift in Sources */,
 				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
 				DC0A99092BB4F0CD0052EED9 /* SettingViewController.swift in Sources */,
 				DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */,
-				DCFBBC802BA5B2E800B58311 /* LoginTabBarController.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
 				DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */,
