@@ -19,11 +19,14 @@ final class EditMemoViewController: UIViewController {
     private var bookItem: Book?
     private var memoItem: Memo?
     
-    private let scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.isScrollEnabled = true
         return scrollView
     }()
+    
+    private let scrollContentView = UIView()
     
     private let bookThumbnailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -60,6 +63,7 @@ final class EditMemoViewController: UIViewController {
     private let memoTextView: UITextView = {
         let textView = UITextView()
         textView.returnKeyType = .done
+        textView.isScrollEnabled = false
         textView.showsVerticalScrollIndicator = false
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         textView.backgroundColor = .customSecondarySystemBackground
@@ -72,6 +76,7 @@ final class EditMemoViewController: UIViewController {
     
     private let memoLimitLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .right
         label.textColor = .tertiaryLabel
         label.textColor = .memoLimitLabelColor
         label.font = .memoLimitFont
@@ -95,6 +100,8 @@ final class EditMemoViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.prefersLargeTitles = false
         memoTextView.delegate = self
+        
+        registerKeyboardNotification()
         
         if bookItem != nil && memoItem == nil {
             createMemoButtonPressed()
@@ -144,59 +151,66 @@ private extension EditMemoViewController {
     // MARK: - setupUI()
     private func setupUI() {
         self.view.backgroundColor = .customSystemBackground
+        self.view.clipsToBounds = true
         
         self.view.addSubview(scrollView)
-        scrollView.addSubview(bookThumbnailImageView)
+        scrollView.addSubview(scrollContentView)
+        scrollContentView.addSubview(bookThumbnailImageView)
         
-        scrollView.addSubview(bookTitleLabel)
-        scrollView.addSubview(bookAuthorsLabel)
-        scrollView.addSubview(bookPublisherLabel)
+        scrollContentView.addSubview(bookTitleLabel)
+        scrollContentView.addSubview(bookAuthorsLabel)
+        scrollContentView.addSubview(bookPublisherLabel)
         
-        scrollView.addSubview(memoTextView)
-        scrollView.addSubview(memoLimitLabel)
-        scrollView.addSubview(writeMemoButton)
+        scrollContentView.addSubview(memoTextView)
+        scrollContentView.addSubview(memoLimitLabel)
+        
+        scrollContentView.addSubview(writeMemoButton)
         
         scrollView.snp.makeConstraints { make in
             make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
         }
+        scrollContentView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView.snp.top)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(scrollView.snp.bottom)
+            make.width.equalTo(scrollView.snp.width)
+            make.height.equalTo(scrollView.snp.height)
+        }
         
         bookThumbnailImageView.snp.makeConstraints { make in
-            make.top.equalTo(scrollView.snp.top)
+            make.top.equalTo(scrollContentView.snp.top)
             make.centerX.equalToSuperview()
-            make.height.equalTo(80)
+            make.width.equalTo(76)
+            make.height.equalTo(100)
         }
         
         bookTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(bookThumbnailImageView.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.leading.trailing.centerX.equalToSuperview()
         }
         bookAuthorsLabel.snp.makeConstraints { make in
             make.top.equalTo(bookTitleLabel.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.leading.trailing.centerX.equalToSuperview()
         }
         bookPublisherLabel.snp.makeConstraints { make in
             make.top.equalTo(bookAuthorsLabel.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.leading.trailing.centerX.equalToSuperview()
         }
         
         memoTextView.snp.makeConstraints { make in
             make.top.equalTo(bookPublisherLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(275)
         }
         memoLimitLabel.snp.makeConstraints { make in
             make.top.equalTo(memoTextView.snp.bottom).offset(12)
-            make.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
         
         writeMemoButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-12)
+            make.leading.trailing.centerX.equalToSuperview()
+            make.bottom.equalTo(scrollContentView.snp.bottom).offset(-12)
             make.height.equalTo(44)
         }
     }
@@ -263,6 +277,15 @@ private extension EditMemoViewController {
     private func bindMemoTextView() {
         memoTextView.rx.didChange
             .bind {
+                let size = CGSize(width: self.view.frame.width, height: .infinity)
+                let estimatedSize = self.memoTextView.sizeThatFits(size)
+                
+                self.memoTextView.constraints.forEach { constraint in
+                    if constraint.firstAttribute == .height {
+                        constraint.constant = estimatedSize.height
+                    }
+                }
+                
                 if !self.memoTextView.text.isEmpty {
                     self.writeMemoButton.isEnabled = true
                     self.writeMemoButton.setTitleColor(.enableButtonLabelColor, for: .normal)
@@ -300,22 +323,31 @@ private extension EditMemoViewController {
 
 // MARK: - extension keyboard
 private extension EditMemoViewController {
-    func tapGesture() {
+    private func tapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(endEditing))
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    func registerKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillShowNotification, object: nil)
+    private func registerKeyboardNotification() {
+        let keyboardWillShow = NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+        let keyboardWillHide = NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+        
+        keyboardWillShow.bind { [weak self] notification in
+            guard let userInfo = notification.userInfo,
+                  let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.height, right: 0)
+            self?.scrollView.contentInset = contentInset
+        }.disposed(by: disposeBag)
+        
+        keyboardWillHide.bind { [weak self] _ in
+            let contentInset = UIEdgeInsets.zero
+            self?.scrollView.contentInset = contentInset
+            self?.scrollView.setContentOffset(.zero, animated: true)
+        }.disposed(by: disposeBag)
     }
     
-    @objc func keyboardWillHide() {
-        let contentInset = UIEdgeInsets.zero
-        scrollView.contentInset = contentInset
-        scrollView.setContentOffset(.zero, animated: true)
-    }
-    
-    @objc func endEditing() {
+    @objc private func endEditing() {
         self.view.endEditing(true)
     }
 }
