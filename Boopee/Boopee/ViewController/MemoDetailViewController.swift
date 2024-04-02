@@ -168,7 +168,8 @@ extension MemoDetailViewController {
         bookThumbnailImageView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.centerX.equalToSuperview()
-            make.height.equalTo(80)
+            make.width.equalTo(76)
+            make.height.equalTo(100)
         }
         bookTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(bookThumbnailImageView.snp.bottom).offset(4)

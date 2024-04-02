@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import SnapKit
 
-final class SearchViewController: UIViewController, UIScrollViewDelegate {
+final class SearchViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Book>?
     
     private let bookTrigger = PublishSubject<Void>()
@@ -29,8 +29,6 @@ final class SearchViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.rx.setDelegate(self).disposed(by: disposeBag)
         
         setupSearchController()
         setupUI()
@@ -58,14 +56,6 @@ extension SearchViewController {
                     navigationController.modalPresentationStyle = .fullScreen
                     self?.present(navigationController, animated: true)
                 }
-            }.disposed(by: disposeBag)
-    }
-    
-    // MARK: - nil currentUser
-    private func moveToLoginTab() {
-        collectionView.rx.itemSelected
-            .bind { [weak self] _ in
-                self?.tabBarController?.selectedIndex = 2
             }.disposed(by: disposeBag)
     }
 }

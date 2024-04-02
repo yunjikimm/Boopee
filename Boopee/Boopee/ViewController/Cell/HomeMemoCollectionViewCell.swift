@@ -17,6 +17,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.alignment = .top
         stackView.distribution = .fill
+        stackView.spacing = 4
         return stackView
     }()
     private let bookInfoTextBoxView: UIView = {
@@ -124,7 +125,6 @@ extension HomeMemoCollectionViewCell {
         }
         bookInfoTextBoxView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
-            make.trailing.equalTo(bookThumbnailImageView.snp.leading).offset(-4)
         }
         bookTitleLabel.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
