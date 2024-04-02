@@ -35,11 +35,16 @@ final class HomeViewController: UIViewController {
         button.layer.cornerRadius = CornerRadiusConstant.button
         return button
     }()
+    private let collectionWrapView = UIView()
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
         collectionView.register(HomeMemoCollectionViewCell.self, forCellWithReuseIdentifier: HomeMemoCollectionViewCell.id)
-        collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
+        collectionView.decelerationRate = .fast
+        collectionView.isPagingEnabled = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        
         return collectionView
     }()
     
@@ -49,6 +54,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        bindCollectionViewCellScrollPaging()
         moveToSearchViewButtonPressed()
         setDataSource()
     }
@@ -60,6 +66,28 @@ final class HomeViewController: UIViewController {
 
 // MARK: - binding, datasource
 extension HomeViewController {
+    private func bindCollectionViewCellScrollPaging() {
+        collectionView.rx.willEndDragging.bind { [weak self] velocity, targetContentOffset in
+            guard let self = self else { return }
+            guard let cellFrameHeight = self.collectionView.visibleCells.first?.frame.size.height else { return }
+            let cellHeight = cellFrameHeight + 10
+            let estimatedIndex = (self.collectionView.contentOffset.y - self.collectionView.contentInset.top) / cellHeight
+            
+            var index: Int
+            
+            if velocity.y > 0 {
+                index = Int(ceil(estimatedIndex))
+            } else if velocity.y < 0 {
+                index = Int(floor(estimatedIndex))
+            } else {
+                index = Int(round(estimatedIndex))
+            }
+            
+            index = max(min(self.collectionView.numberOfItems(inSection: 0) - 1, index), 0)
+            targetContentOffset.pointee = CGPoint(x: 0, y: CGFloat(index) * cellHeight)
+        }.disposed(by: disposeBag)
+    }
+    
     // MARK: -  button binding
     private func moveToSearchViewButtonPressed() {
         moveToSearchViewButton.rx.tap.bind { [weak self] _ in
@@ -116,8 +144,8 @@ extension HomeViewController {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-5)
+            make.leading.trailing.equalToSuperview()
         }
     }
     
@@ -149,10 +177,11 @@ extension HomeViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.8))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.9))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 10, trailing: 0)
         section.interGroupSpacing = 10
         
         return section
