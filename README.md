@@ -28,11 +28,15 @@
 
 |`책 검색`|`메모 작성`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/e5ea5eb2-0905-4096-b333-4c23760ad295" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/92f77d06-ea33-4d51-8501-fd14bfb35030" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/e5ea5eb2-0905-4096-b333-4c23760ad295" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/92ff9f67-f523-48b5-8174-088585c24b6c" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8e662cfa-7903-4cb8-ad02-d1617147c959" width="200"> |
 
-|`마이페이지`|`메모 디테일`|`메모 삭제`|
-|:----:|:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/5f655987-c542-4590-a915-2c5534944229" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/38ed595c-b976-4565-8a8a-66dc1e9e3812" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/20632bab-e531-44ff-924e-b6b75109697f" width="200"> |
+|`마이페이지 - 로그인 없음`|`마이페이지 - 로그인`|
+|:----:|:----:|
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8e54371c-9c05-49df-bcac-10fe2e687c81" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8c6ede4d-dce7-47b8-88f9-c0075607572d" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/5f655987-c542-4590-a915-2c5534944229" width="200"> |
+
+|`메모 디테일`|`메모 삭제`|
+|:----:|:----:|
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/38ed595c-b976-4565-8a8a-66dc1e9e3812" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/20632bab-e531-44ff-924e-b6b75109697f" width="200"> |
 
 |`설정`|`웹뷰`|
 |:----:|:----:|
