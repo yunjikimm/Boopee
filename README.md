@@ -10,6 +10,7 @@
 ## 개발 환경 및 기술
 - 개발 환경
     - Swift 5, xcode 15.0
+    - 라이트/다크모드 지원, 가로모드 미지원
 - Deployment Target
     - iOS 15.0
 - 라이브러리
@@ -24,20 +25,20 @@
 
 |`탐색`|
 |:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/f69db103-0766-4f11-925b-cf538f07ee06" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d9428f2e-8c1d-4c1d-8e00-d204dd707c56" width="200"> |
 
 |`책 검색`|`메모 작성`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/e5ea5eb2-0905-4096-b333-4c23760ad295" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/92ff9f67-f523-48b5-8174-088585c24b6c" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8e662cfa-7903-4cb8-ad02-d1617147c959" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/f24500ad-82d4-4a8f-92c5-9a97b4fd5f1f" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/558493d7-e333-45bf-b66b-e64b4bd15f56" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8523fbfd-207b-40e0-96a8-83bd1e3df98d" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/2794aa0d-3493-4ff7-a9fc-50493d18d8d2" width="200"> |
 
 |`마이페이지 - 로그인 없음`|`마이페이지 - 로그인`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8e54371c-9c05-49df-bcac-10fe2e687c81" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8c6ede4d-dce7-47b8-88f9-c0075607572d" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/5f655987-c542-4590-a915-2c5534944229" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/cd9a3dac-a5db-4f5d-b498-284e04c91011" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/836ba044-d508-487c-b181-8d3185176592" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/aea496d8-5eef-46b8-83fe-89c6c1511935" width="200"> |
 
 |`메모 디테일`|`메모 삭제`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/38ed595c-b976-4565-8a8a-66dc1e9e3812" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/20632bab-e531-44ff-924e-b6b75109697f" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d20966ff-0b24-4df9-85fc-892c1bcbdd48" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/9ce07a71-6bd8-4c2c-8941-f3e11580dc18" width="200"> |
 
 |`설정`|`웹뷰`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/6db42dbb-9405-4f3d-ad6d-315d6b671f6c" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d96c4867-ab36-4454-9546-26fb9cfab795" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/1e55b7ea-2aa9-4893-a9cb-dc8dc3fd6588" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/5cdc810a-ad0c-4909-88fa-bccac9f22ea6" width="200"> |
