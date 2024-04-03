@@ -29,7 +29,7 @@
 
 |`책 검색`|`메모 작성`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/f24500ad-82d4-4a8f-92c5-9a97b4fd5f1f" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/558493d7-e333-45bf-b66b-e64b4bd15f56" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8523fbfd-207b-40e0-96a8-83bd1e3df98d" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/2794aa0d-3493-4ff7-a9fc-50493d18d8d2" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/558493d7-e333-45bf-b66b-e64b4bd15f56" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8523fbfd-207b-40e0-96a8-83bd1e3df98d" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/2794aa0d-3493-4ff7-a9fc-50493d18d8d2" width="200"> |
 
 |`마이페이지 - 로그인 없음`|`마이페이지 - 로그인`|
 |:----:|:----:|
