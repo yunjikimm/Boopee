@@ -44,17 +44,18 @@ final class TabBarController: UITabBarController {
         navigation.tabBarItem.title = title
         navigation.tabBarItem.image = image
         
-        let titleLabel: UILabel = {
-            let label = UILabel()
-            label.text = "boopee"
-            label.textColor = .pointGreen
-            label.font = .systemFont(ofSize: 24, weight: .bold)
-            return label
+        let navigationImageBarButton: UIBarButtonItem = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "Logo")
+            imageView.contentMode = .scaleAspectFit
+            
+            imageView.snp.makeConstraints { $0.width.equalTo(24) }
+            
+            let button = UIBarButtonItem(customView: imageView)
+            return button
         }()
         
-        let titleButton = UIBarButtonItem(customView: titleLabel)
-        
-        navigation.viewControllers.first?.navigationItem.leftBarButtonItem = titleButton
+        navigation.viewControllers.first?.navigationItem.leftBarButtonItem = navigationImageBarButton
         
         return navigation
     }
