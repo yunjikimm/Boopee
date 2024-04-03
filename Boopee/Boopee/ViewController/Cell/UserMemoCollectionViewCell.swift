@@ -16,6 +16,8 @@ final class UserMemoCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.alignment = .top
         stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.spacing = 8
         return stackView
     }()
     private let memoInfoBoxView = UIView()
@@ -78,13 +80,10 @@ extension UserMemoCollectionViewCell {
         memoInfoBoxView.addSubview(memoDateLabel)
         
         memoWrapStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
         }
         bookThumbnailImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
-            make.trailing.equalTo(memoInfoBoxView.snp.leading).offset(-8)
             make.width.equalTo(100)
             make.height.equalTo(144)
         }
