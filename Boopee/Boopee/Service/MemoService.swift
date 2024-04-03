@@ -22,15 +22,20 @@ final class MemoService {
                 .getDocuments().documents.map { document -> MemoDB in
                 try document.data(as: MemoDB.self)
             }
+            
+            return Observable.create { observer in
+                observer.onNext(self.memoList)
+                observer.onCompleted()
+                
+                return Disposables.create()
+            }
         } catch {
             print(error.localizedDescription)
-        }
-        
-        return Observable.create { observer in
-            observer.onNext(self.memoList)
-            observer.onCompleted()
             
-            return Disposables.create()
+            return Observable.create { observer in
+                observer.onError(error)
+                return Disposables.create()
+            }
         }
     }
     
@@ -42,15 +47,20 @@ final class MemoService {
                 .getDocuments().documents.map { document -> MemoDB in
                 try document.data(as: MemoDB.self)
             }
+            
+            return Observable.create { observer in
+                observer.onNext(self.memoList)
+                observer.onCompleted()
+                
+                return Disposables.create()
+            }
         } catch {
             print(error.localizedDescription)
-        }
-        
-        return Observable.create { observer in
-            observer.onNext(self.memoList)
-            observer.onCompleted()
             
-            return Disposables.create()
+            return Observable.create { observer in
+                observer.onError(error)
+                return Disposables.create()
+            }
         }
     }
     
@@ -77,49 +87,53 @@ final class MemoService {
                 }
                 observer.onNext(true)
                 
+                observer.onCompleted()
+                
                 return Disposables.create()
             }
         }
     }
     
     func updateMemo(memo: MemoDB, uid: String) async -> Observable<Bool> {
-        var isUpdated: Bool = false
-        
         do {
             try await self.memoCollectionRef.document(uid).updateData([
                 "memoText": memo.memoText,
                 "updatedAt": memo.updatedAt,
             ])
-            isUpdated = true
+            
+            return Observable.create { observer in
+                observer.onNext(true)
+                observer.onCompleted()
+                
+                return Disposables.create()
+            }
         } catch {
             print(error.localizedDescription)
-            isUpdated = false
-        }
-        
-        return Observable.create { emitter in
-            emitter.onNext(isUpdated)
-            emitter.onCompleted()
             
-            return Disposables.create()
+            return Observable.create { observer in
+                observer.onError(error)
+                return Disposables.create()
+            }
         }
     }
     
     func deleteMemo(uid: String) async -> Observable<Bool> {
-        var isDeleted: Bool = false
-        
         do {
             try await memoCollectionRef.document(uid).delete()
-            isDeleted = true
+            
+            return Observable.create { observer in
+                observer.onNext(true)
+                observer.onCompleted()
+                
+                return Disposables.create()
+            }
         } catch {
             print(error.localizedDescription)
-            isDeleted = false
-        }
-        
-        return Observable.create { emitter in
-            emitter.onNext(isDeleted)
-            emitter.onCompleted()
             
-            return Disposables.create()
+            return Observable.create { observer in
+                observer.onError(error)
+                return Disposables.create()
+            }
         }
     }
 }
