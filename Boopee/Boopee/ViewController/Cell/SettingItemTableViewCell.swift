@@ -19,8 +19,12 @@ class SettingItemTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .customSecondarySystemBackground
+        self.backgroundColor = .customSystemBackground
         self.selectionStyle = .none
+    }
+    
+    public func config(user: UserInfo) {
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

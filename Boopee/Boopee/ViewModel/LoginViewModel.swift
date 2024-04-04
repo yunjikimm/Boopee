@@ -7,12 +7,17 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 import GoogleSignIn
 
 final class LoginViewModel {
     let firebaseAuth = Auth.auth()
+    private let userCollectionRef = Firestore.firestore().collection("UserInfo")
+    
+    private let dataFormatManager = DateFormatManager.dataFormatManager
     
     var loginUser: User?
+    var userInfo: UserInfo?
     
     func googleSignIn(viewController: UIViewController) async throws {
         do {
@@ -35,6 +40,13 @@ final class LoginViewModel {
         do {
             let signIn = try await firebaseAuth.signIn(with: credential)
             loginUser = signIn.user
+            
+            try await userCollectionRef.document(signIn.user.uid).setData([
+                "displayName": signIn.user.displayName ?? "",
+                "nikName": signIn.user.displayName ?? "",
+                "email": signIn.user.email ?? "",
+                "creationDate": dataFormatManager.dateToString(signIn.user.metadata.creationDate ?? Date())
+            ])
         } catch {
             print(error.localizedDescription)
         }

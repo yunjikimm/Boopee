@@ -9,8 +9,37 @@ import UIKit
 import RxSwift
 
 final class SettingViewController: UIViewController {
+    private let userInfoTrigger = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
+    private let userInfoViewModel = UserInfoViewModel()
     private let loginViewModel = LoginViewModel()
+    
+    private let userInfoStackView: UIStackView = {
+        let view = UIStackView()
+        view.backgroundColor = .customSystemBackground
+        view.layer.cornerRadius = CornerRadiusConstant.textView
+        view.axis = .horizontal
+        return view
+    }()
+    private let userInfoView = UIView()
+    private let userInfoNickNameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .largeBold
+        return label
+    }()
+    private let userInfoEmailLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .mediumRegular
+        return label
+    }()
+    private let editUserInfoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "pencil.line"), for: .normal)
+        button.tintColor = .grayOne
+        return button
+    }()
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -21,6 +50,7 @@ final class SettingViewController: UIViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
     private let signOutButton: UIButton = {
         var button = UIButton(configuration: .plain())
         button.setTitle("로그아웃", for: .normal)
@@ -30,10 +60,7 @@ final class SettingViewController: UIViewController {
         return button
     }()
     
-    private lazy var settingItemList = [
-        [loginViewModel.firebaseAuth.currentUser?.email ?? "계정 없음"],
-        [SettingItemConstant.serviceUsageGuide.rawValue, SettingItemConstant.privacyPolicy.rawValue],
-    ]
+    private lazy var settingItemList = [SettingItemConstant.serviceUsageGuide.rawValue, SettingItemConstant.privacyPolicy.rawValue]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +72,15 @@ final class SettingViewController: UIViewController {
         
         setupUI()
         bindSignOutButton()
+        bindEditUserInfoButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getUserInfo()
     }
 }
 
-// MARK: - sign out button action
+// MARK: - button action
 extension SettingViewController {
     private func bindSignOutButton() {
         signOutButton.rx.tap.bind { [weak self] in
@@ -63,6 +95,35 @@ extension SettingViewController {
             if signOut {
                 self.navigationController?.popViewController(animated: true)
             }
+        }
+    }
+    
+    private func bindEditUserInfoButton() {
+        editUserInfoButton.rx.tap.bind { [weak self] in
+            guard let userNickName = self?.userInfoNickNameLabel.text else { return }
+            let editUserNickNameViewController = EditUserNickNameViewController()
+            
+            editUserNickNameViewController.config(userNickName: userNickName)
+            
+            let navigationController = UINavigationController(rootViewController: editUserNickNameViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            
+            self?.present(navigationController, animated: true)
+        }.disposed(by: disposeBag)
+    }
+}
+
+// MARK: - bind user info
+extension SettingViewController {
+    private func getUserInfo() {
+        Task {
+            let input = UserInfoViewModel.Input(userInfoTrigger: userInfoTrigger.asObserver())
+            let output = await userInfoViewModel.transform(input: input)
+            
+            output.userInfo.bind { [weak self] user in
+                self?.userInfoNickNameLabel.text = user.nikName
+                self?.userInfoEmailLabel.text = user.email
+            }.disposed(by: disposeBag)
         }
     }
 }
@@ -86,14 +147,44 @@ extension SettingViewController {
 // MARK: - setupUI
 extension SettingViewController {
     private func setupUI() {
-        self.view.backgroundColor = .customSystemBackground
+        self.view.backgroundColor = .customSecondarySystemBackground
+        
+        self.view.addSubview(userInfoStackView)
+        
+        userInfoStackView.addSubview(userInfoView)
+        userInfoView.addSubview(userInfoNickNameLabel)
+        userInfoView.addSubview(userInfoEmailLabel)
+        
+        userInfoStackView.addSubview(editUserInfoButton)
+        
+        userInfoStackView.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            
+        }
+        userInfoView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(20)
+        }
+        userInfoNickNameLabel.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
+        userInfoEmailLabel.snp.makeConstraints { make in
+            make.top.equalTo(userInfoNickNameLabel.snp.bottom).offset(4)
+            make.leading.trailing.equalToSuperview()
+        }
+        editUserInfoButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-30)
+        }
         
         self.view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+            make.top.equalTo(userInfoStackView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
@@ -112,16 +203,14 @@ extension SettingViewController {
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingItemList[section].count
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
         return settingItemList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingItemTableViewCell.id, for: indexPath)
-        cell.textLabel?.text = settingItemList[indexPath.section][indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingItemTableViewCell.id, for: indexPath) as? SettingItemTableViewCell else { return UITableViewCell() }
+        cell.textLabel?.text = settingItemList[indexPath.row]
+        cell.textLabel?.numberOfLines = 0
+        
         return cell
     }
     
@@ -134,7 +223,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         let webViewController = WebViewController()
         
-        switch settingItemList[indexPath.section][indexPath.row] {
+        switch settingItemList[indexPath.row] {
         case SettingItemConstant.serviceUsageGuide.rawValue:
             webViewController.url = URL(string: SettingItemConstant.serviceUsageGuide.url)
         case SettingItemConstant.privacyPolicy.rawValue:
@@ -144,16 +233,5 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         self.present(webViewController, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "내 계정"
-        case 1:
-            return "앱 정보"
-        default:
-            return ""
-        }
     }
 }

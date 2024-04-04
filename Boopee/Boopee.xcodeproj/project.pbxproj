@@ -35,6 +35,10 @@
 		DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */; };
 		DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */; };
 		DCAE6A272BB8D8B500E485AE /* SettingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */; };
+		DCAE6A292BBD563000E485AE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A282BBD563000E485AE /* UserInfo.swift */; };
+		DCAE6A2B2BBD6BAE00E485AE /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A2A2BBD6BAE00E485AE /* UserInfoViewModel.swift */; };
+		DCAE6A2D2BBE2B6900E485AE /* EditUserNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A2C2BBE2B6900E485AE /* EditUserNickNameViewController.swift */; };
+		DCAE6A2F2BBE338400E485AE /* UserNickNameUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A2E2BBE338400E485AE /* UserNickNameUpdateViewModel.swift */; };
 		DCCA45BA2BB8804100782135 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA45B92BB8804100782135 /* UIFont+Extension.swift */; };
 		DCFBBC6B2BA2030200B58311 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6A2BA2030200B58311 /* FirebaseAnalytics */; };
 		DCFBBC6E2BA20E4700B58311 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6D2BA20E4700B58311 /* GoogleSignIn */; };
@@ -89,6 +93,10 @@
 		DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoNavigationTitleConstant.swift; sourceTree = "<group>"; };
 		DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyItemMessageConstant.swift; sourceTree = "<group>"; };
 		DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemTableViewCell.swift; sourceTree = "<group>"; };
+		DCAE6A282BBD563000E485AE /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		DCAE6A2A2BBD6BAE00E485AE /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		DCAE6A2C2BBE2B6900E485AE /* EditUserNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserNickNameViewController.swift; sourceTree = "<group>"; };
+		DCAE6A2E2BBE338400E485AE /* UserNickNameUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNickNameUpdateViewModel.swift; sourceTree = "<group>"; };
 		DCCA45B92BB8804100782135 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -182,6 +190,7 @@
 			children = (
 				DCFBBC942BB15FE100B58311 /* Book.swift */,
 				DC416AF12BA1A119004230CF /* Memo.swift */,
+				DCAE6A282BBD563000E485AE /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -205,6 +214,7 @@
 				DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */,
 				DCFBBC792BA3431000B58311 /* LoginViewController.swift */,
 				DC0A99082BB4F0CD0052EED9 /* SettingViewController.swift */,
+				DCAE6A2C2BBE2B6900E485AE /* EditUserNickNameViewController.swift */,
 				DC416AD62B945F24004230CF /* TabBarController.swift */,
 				DC0A990A2BB50CEB0052EED9 /* WebViewController.swift */,
 				DC416ADF2B96B0A0004230CF /* Cell */,
@@ -221,6 +231,8 @@
 				DCFBBCAA2BB460B700B58311 /* MemoDeleteViewModel.swift */,
 				DCFBBC9A2BB1E59200B58311 /* MemoListViewModel.swift */,
 				DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */,
+				DCAE6A2A2BBD6BAE00E485AE /* UserInfoViewModel.swift */,
+				DCAE6A2E2BBE338400E485AE /* UserNickNameUpdateViewModel.swift */,
 				DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
@@ -409,6 +421,7 @@
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
 				DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */,
+				DCAE6A2F2BBE338400E485AE /* UserNickNameUpdateViewModel.swift in Sources */,
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
 				DCFBBC882BAF0DB800B58311 /* MemoService.swift in Sources */,
 				DC416AC92B942ACE004230CF /* BookNetwork.swift in Sources */,
@@ -418,8 +431,10 @@
 				DCFBBC782BA2ECCB00B58311 /* LoginViewModel.swift in Sources */,
 				DC416ADC2B9483AE004230CF /* MyPageViewController.swift in Sources */,
 				DC416AE12B96B100004230CF /* SearchResultCollectionViewCell.swift in Sources */,
+				DCAE6A2B2BBD6BAE00E485AE /* UserInfoViewModel.swift in Sources */,
 				DCFBBC8C2BAF0EA400B58311 /* MemoCreateViewModel.swift in Sources */,
 				DCFBBCAD2BB47DE100B58311 /* MemoUpdateViewModel.swift in Sources */,
+				DCAE6A2D2BBE2B6900E485AE /* EditUserNickNameViewController.swift in Sources */,
 				DC416AEE2B9C40A6004230CF /* EditMemoViewController.swift in Sources */,
 				DCFBBC952BB15FE100B58311 /* Book.swift in Sources */,
 				DC0A99092BB4F0CD0052EED9 /* SettingViewController.swift in Sources */,
@@ -427,6 +442,7 @@
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
 				DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */,
+				DCAE6A292BBD563000E485AE /* UserInfo.swift in Sources */,
 				DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */,
 				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */,
 				DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */,
