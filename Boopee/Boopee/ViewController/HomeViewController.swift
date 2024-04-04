@@ -13,10 +13,12 @@ final class HomeViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Memo>?
     
     private let memoTrigger = PublishSubject<Void>()
+    private let userInfoTrigger = PublishSubject<Void>()
     private let disposeBag = DisposeBag()
     private let bookApiviewModel = BookAPIViewModel()
     private let memoListViewModel = MemoListViewModel()
     private let loginViewModel = LoginViewModel()
+    private let userInfoViewModel = UserInfoViewModel()
     
     private let emptyCollectionViewLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +51,7 @@ final class HomeViewController: UIViewController {
     }()
     
     private var items: [Memo] = []
+    private var userInfo: UserInfo = UserInfo(id: "", displayName: "", nikName: "", email: "", creationDate: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +64,21 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         bindMemoListViewModel()
+        getUserInfo()
+    }
+}
+
+// MARK: - bind user info
+extension HomeViewController {
+    private func getUserInfo() {
+        Task {
+            let input = UserInfoViewModel.Input(userInfoTrigger: userInfoTrigger.asObserver())
+            let output = await userInfoViewModel.transform(input: input)
+            
+            output.userInfo.bind { [weak self] user in
+                self?.userInfo = user
+            }.disposed(by: disposeBag)
+        }
     }
 }
 
@@ -69,6 +87,8 @@ extension HomeViewController {
     private func bindCollectionViewCellScrollPaging() {
         collectionView.rx.willEndDragging.bind { [weak self] velocity, targetContentOffset in
             guard let self = self else { return }
+            self.bindMemoListViewModel()
+            
             guard let cellFrameHeight = self.collectionView.visibleCells.first?.frame.size.height else { return }
             let cellHeight = cellFrameHeight + 10
             let estimatedIndex = (self.collectionView.contentOffset.y - self.collectionView.contentInset.top) / cellHeight
@@ -125,7 +145,7 @@ extension HomeViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, Memo>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeMemoCollectionViewCell.id, for: indexPath) as? HomeMemoCollectionViewCell
             
-            cell?.configure(item: itemIdentifier)
+            cell?.configure(memo: itemIdentifier, user: self.userInfo)
             
             return cell
         })
@@ -177,7 +197,7 @@ extension HomeViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.9))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.91))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

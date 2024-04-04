@@ -67,6 +67,18 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
         label.font = .memoTextFont
         return label
     }()
+    private let underLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .grayThree
+        return view
+    }()
+    private let userNickNameLabel: UILabel = {
+        let label = UILabel()
+//        label.text = "가나다라마바사아자차"
+        label.textColor = .label
+        label.font = .mediumBold
+        return label
+    }()
     private let memoDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .memoDateLabelColor
@@ -80,14 +92,16 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
         setupUI()
     }
     
-    public func configure(item: Memo) {
-        bookThumbnailImageView.kf.setImage(with: URL(string: item.book.thumbnail))
-        bookTitleLabel.text = item.book.title
-        bookAuthorsLabel.text = item.book.authors
-        bookPublisherLabel.text = item.book.publisher
+    public func configure(memo: Memo, user: UserInfo) {
+        bookThumbnailImageView.kf.setImage(with: URL(string: memo.book.thumbnail))
+        bookTitleLabel.text = memo.book.title
+        bookAuthorsLabel.text = memo.book.authors
+        bookPublisherLabel.text = memo.book.publisher
         
-        memoTextLabel.text = item.memoText
-        memoDateLabel.text = dataFormatManager.MemoDateToString(item.updatedAt)
+        memoTextLabel.text = memo.memoText
+        memoDateLabel.text = dataFormatManager.MemoDateToString(memo.updatedAt)
+        
+        userNickNameLabel.text = user.nikName
     }
     
     required init?(coder: NSCoder) {
@@ -110,6 +124,9 @@ extension HomeMemoCollectionViewCell {
         
         addSubview(memoTextBoxView)
         memoTextBoxView.addSubview(memoTextLabel)
+        
+        memoTextBoxView.addSubview(underLineView)
+        memoTextBoxView.addSubview(userNickNameLabel)
         memoTextBoxView.addSubview(memoDateLabel)
         
         contentView.snp.makeConstraints { make in
@@ -157,10 +174,20 @@ extension HomeMemoCollectionViewCell {
             make.trailing.equalToSuperview().offset(-20)
         }
         
-        memoDateLabel.snp.makeConstraints { make in
+        underLineView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(userNickNameLabel.snp.top).offset(-12)
+            make.height.equalTo(1)
+        }
+        userNickNameLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(17)
             make.bottom.equalToSuperview().offset(-16)
         }
-        
+        memoDateLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-17)
+            make.bottom.equalToSuperview().offset(-16)
+        }
     }
 }
+

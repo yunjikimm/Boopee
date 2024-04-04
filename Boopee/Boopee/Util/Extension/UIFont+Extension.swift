@@ -27,6 +27,7 @@ extension UIFont {
     // custom font size, weigth
     static let largeBold: UIFont = .systemFont(ofSize: 16, weight: .bold)
     static let largeRegular: UIFont = .systemFont(ofSize: 16, weight: .regular)
+    static let mediumBold: UIFont = .systemFont(ofSize: 14, weight: .bold)
     static let mediumRegular: UIFont = .systemFont(ofSize: 14, weight: .regular)
     static let smallRegular: UIFont = .systemFont(ofSize: 12, weight: .regular)
     static let smallLight: UIFont = .systemFont(ofSize: 12, weight: .light)
