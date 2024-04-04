@@ -10,21 +10,10 @@ import UIKit
 class SettingItemTableViewCell: UITableViewCell {
     static let id = "SettingItemTableViewCell"
     
-    private let itemTextLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.font = .largeRegular
-        return label
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .customSystemBackground
         self.selectionStyle = .none
-    }
-    
-    public func config(user: UserInfo) {
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
