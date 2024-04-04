@@ -25,20 +25,20 @@
 
 |`탐색`|
 |:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d9428f2e-8c1d-4c1d-8e00-d204dd707c56" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/51f54260-250a-468b-b0be-96caf15f6ffd" width="200"> |
 
 |`책 검색`|`메모 작성`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/558493d7-e333-45bf-b66b-e64b4bd15f56" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/8523fbfd-207b-40e0-96a8-83bd1e3df98d" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/2794aa0d-3493-4ff7-a9fc-50493d18d8d2" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/45898e88-894c-4305-9857-8a86eb80f2c5" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/2654160b-e2cd-4d3a-9c56-44610adc605d" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/5c95355c-7a6e-4c58-ac91-fde99db4293b" width="200"> |
 
 |`마이페이지 - 로그인 없음`|`마이페이지 - 로그인`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/cd9a3dac-a5db-4f5d-b498-284e04c91011" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/836ba044-d508-487c-b181-8d3185176592" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/aea496d8-5eef-46b8-83fe-89c6c1511935" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/cd9a3dac-a5db-4f5d-b498-284e04c91011" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/836ba044-d508-487c-b181-8d3185176592" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/62edd8f0-5a5d-42e2-99d1-ec32cd4f586b" width="200"> |
 
 |`메모 디테일`|`메모 삭제`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d20966ff-0b24-4df9-85fc-892c1bcbdd48" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/9ce07a71-6bd8-4c2c-8941-f3e11580dc18" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/c709d6cc-3274-4b71-873b-b7c1cf8a7063" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/2796f824-c1f4-4327-bb83-e73f99695fca" width="200"> |
 
 |`설정`|`웹뷰`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/1e55b7ea-2aa9-4893-a9cb-dc8dc3fd6588" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/5cdc810a-ad0c-4909-88fa-bccac9f22ea6" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/9a6801a2-f689-4bcb-9d01-fa580440706f" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/6a0fbeff-e930-4f8d-b473-2ebda5813db5" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/a26879d4-6c00-48ba-ae57-0dedee17eadf" width="200"> |
