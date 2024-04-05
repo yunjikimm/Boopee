@@ -61,7 +61,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     private let memoTextBoxView: UIView = {
         let view = UIView()
         view.backgroundColor = .customSystemBackground
-        view.layer.cornerRadius = CornerRadiusConstant.textView
+        view.layer.cornerRadius = CornerRadiusConstant.homeMemoBoxView
         return view
     }()
     private let memoTextLabel: UILabel = {
@@ -132,7 +132,6 @@ extension HomeMemoCollectionViewCell {
 extension HomeMemoCollectionViewCell {
     private func setupUI() {
         contentView.backgroundColor = .clear
-        contentView.layer.cornerRadius = CornerRadiusConstant.memoBoxView
         
         addSubview(bookInfoWrapStackViewView)
         bookInfoWrapStackViewView.addArrangedSubview(bookInfoTextBoxView)

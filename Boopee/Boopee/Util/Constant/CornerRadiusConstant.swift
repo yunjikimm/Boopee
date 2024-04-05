@@ -8,8 +8,9 @@
 import Foundation
 
 struct CornerRadiusConstant {
-    static let button: CGFloat = 10
-    static let textView: CGFloat = 10
-    static let memoBoxView: CGFloat = 8
-    static let myPageCollectionView: CGFloat = 20
+    static let button: CGFloat = 12
+    static let textView: CGFloat = 12
+    static let homeMemoBoxView: CGFloat = 16
+    static let myPageCollectionView: CGFloat = 24
+    static let wrapView: CGFloat = 10
 }

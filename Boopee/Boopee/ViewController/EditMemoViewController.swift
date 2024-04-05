@@ -97,8 +97,8 @@ final class EditMemoViewController: UIViewController {
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.prefersLargeTitles = false
+        
         memoTextView.delegate = self
         
         registerKeyboardNotification()
@@ -111,6 +111,8 @@ final class EditMemoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        
         setupUI()
         bindMemoTextView()
         tapGesture()
@@ -209,7 +211,6 @@ private extension EditMemoViewController {
         }
         
         writeMemoButton.snp.makeConstraints { make in
-            make.top.equalTo(memoLimitLabel.snp.bottom).offset(4)
             make.leading.trailing.centerX.equalToSuperview()
             make.bottom.equalTo(scrollContentView.snp.bottom).offset(-12)
             make.height.equalTo(44)

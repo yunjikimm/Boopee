@@ -17,7 +17,7 @@ final class SettingViewController: UIViewController {
     private let userInfoStackView: UIStackView = {
         let view = UIStackView()
         view.backgroundColor = .customSystemBackground
-        view.layer.cornerRadius = CornerRadiusConstant.textView
+        view.layer.cornerRadius = CornerRadiusConstant.wrapView
         view.axis = .horizontal
         return view
     }()
@@ -74,7 +74,6 @@ final class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "설정"
-        self.tabBarController?.tabBar.isHidden = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,6 +84,8 @@ final class SettingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        
         getUserInfo()
     }
 }

@@ -84,6 +84,7 @@ extension LoginViewController {
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset((self.view.frame.size.height / 2) / 2)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         logoImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()

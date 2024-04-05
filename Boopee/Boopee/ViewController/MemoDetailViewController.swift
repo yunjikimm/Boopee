@@ -53,7 +53,7 @@ final class MemoDetailViewController: UIViewController {
     private let memoTextBoxView: UIView = {
         let view = UIView()
         view.backgroundColor = .customSecondarySystemBackground
-        view.layer.cornerRadius = CornerRadiusConstant.memoBoxView
+        view.layer.cornerRadius = CornerRadiusConstant.textView
         return view
     }()
     private let memoTextLabel: UILabel = {
