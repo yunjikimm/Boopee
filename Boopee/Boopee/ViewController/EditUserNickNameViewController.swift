@@ -44,7 +44,7 @@ class EditUserNickNameViewController: UIViewController {
         return button
     }()
     private lazy var dismissBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(dismissLoginView))
+        let button = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(dismissView))
         return button
     }()
     
@@ -96,7 +96,7 @@ extension EditUserNickNameViewController {
 
 // MARK: - dismiss button
 extension EditUserNickNameViewController {
-    @objc private func dismissLoginView() {
+    @objc private func dismissView() {
         self.dismiss(animated: true)
     }
 }

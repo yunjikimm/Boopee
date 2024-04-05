@@ -12,9 +12,15 @@ final class LoginViewController: UIViewController {
     private let loginViewModel = LoginViewModel()
     
     private let loginWrapView = UIView()
-    private let logoLabel: UILabel = {
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Logo"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    private let loginLabel: UILabel = {
         let label = UILabel()
         label.text = "로그인"
+        label.textAlignment = .center
         label.font = .systemFont(ofSize: 24, weight: .bold)
         return label
     }()
@@ -22,6 +28,7 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "서비스를 이용하시려면\n로그인을 해주세요!"
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.textColor = .emptyItemMessageLabelColor
         label.font = .emptyItemMessageFont
         return label
@@ -33,7 +40,7 @@ final class LoginViewController: UIViewController {
         return button
     }()
     private lazy var dismissBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(dismissLoginView))
+        let button = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(dismissView))
         return button
     }()
     
@@ -48,7 +55,7 @@ final class LoginViewController: UIViewController {
                 try await self.loginViewModel.googleSignIn(viewController: self)
                 
                 if self.loginViewModel.loginUser != nil {
-                    self.dismissLoginView()
+                    self.dismissView()
                 }
             }
         }, for: .touchUpInside)
@@ -57,7 +64,7 @@ final class LoginViewController: UIViewController {
 
 // MARK: - dismiss button
 extension LoginViewController {
-    @objc private func dismissLoginView() {
+    @objc private func dismissView() {
         self.dismiss(animated: true)
     }
 }
@@ -67,28 +74,33 @@ extension LoginViewController {
     private func setupUI() {
         self.view.backgroundColor = .customSystemBackground
         
-        self.view.addSubview(logoLabel)
         self.view.addSubview(loginWrapView)
+        loginWrapView.addSubview(logoImageView)
+        loginWrapView.addSubview(loginLabel)
         loginWrapView.addSubview(loginInstructionLabel)
         loginWrapView.addSubview(gidSignInButton)
         
-        logoLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(32)
-            make.leading.equalToSuperview().offset(20)
-        }
         loginWrapView.snp.makeConstraints { make in
-            make.top.equalTo(logoLabel).offset(12)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset((self.view.frame.size.height / 2) / 2)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
+        logoImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        loginLabel.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview()
+        }
         loginInstructionLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoLabel.snp.bottom).offset(8)
+            make.top.equalTo(loginLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview()
         }
         gidSignInButton.snp.makeConstraints { make in
-            make.top.equalTo(loginInstructionLabel.snp.bottom).offset(32)
+            make.top.equalTo(loginInstructionLabel.snp.bottom).offset(50)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(loginWrapView.snp.bottom)
         }
     }
 }

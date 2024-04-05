@@ -30,7 +30,11 @@ final class MyPageViewController: UIViewController {
         label.text = "내가 작성한 메모 (0)"
         return label
     }()
-    private let emptyCollectionViewWrapView = UIView()
+    private let emptyCollectionViewWrapView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .customSystemBackground
+        return view
+    }()
     private let loginWrapView: UIView = {
         let view = UIView()
         view.backgroundColor = .customSystemBackground

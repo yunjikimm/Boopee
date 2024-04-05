@@ -17,16 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LanchImage" translatesAutoresizingMaskIntoConstraints="NO" id="fhP-8y-lzq">
-                                <rect key="frame" x="110" y="362" width="173" height="128"/>
+                                <rect key="frame" x="136" y="381" width="122" height="90"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.16862745098039217" green="0.16470588235294117" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fhP-8y-lzq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="303" id="2E6-A6-wJV"/>
-                            <constraint firstItem="fhP-8y-lzq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="Hfk-5c-GcA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhP-8y-lzq" secondAttribute="trailing" constant="110" id="fmx-PS-fAI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fhP-8y-lzq" secondAttribute="bottom" constant="328" id="qy1-cz-xbZ"/>
+                            <constraint firstItem="fhP-8y-lzq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="322" id="8Rk-ef-ffU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fhP-8y-lzq" secondAttribute="trailing" constant="135" id="L9q-XT-Img"/>
+                            <constraint firstItem="fhP-8y-lzq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="136" id="dcc-ou-htC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fhP-8y-lzq" secondAttribute="bottom" constant="347" id="oGe-BV-mUC"/>
                         </constraints>
                     </view>
                 </viewController>
