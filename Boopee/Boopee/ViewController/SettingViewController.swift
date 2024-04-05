@@ -24,20 +24,29 @@ final class SettingViewController: UIViewController {
     private let userInfoView = UIView()
     private let userInfoNickNameLabel: UILabel = {
         let label = UILabel()
+        label.text = "닉네임 없음"
         label.numberOfLines = 0
         label.font = .largeBold
         return label
     }()
     private let userInfoEmailLabel: UILabel = {
         let label = UILabel()
+        label.text = "서비스를 이용하시려면 로그인을 해주세요!"
         label.numberOfLines = 0
         label.font = .mediumRegular
         return label
     }()
-    private let editUserInfoButton: UIButton = {
+    private lazy var editUserInfoButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "pencil.line"), for: .normal)
         button.tintColor = .grayOne
+        
+        if self.loginViewModel.firebaseAuth.currentUser != nil {
+            button.isEnabled = true
+        } else {
+            button.isEnabled = false
+        }
+        
         return button
     }()
     
@@ -46,7 +55,7 @@ final class SettingViewController: UIViewController {
         tableView.register(SettingItemTableViewCell.self, forCellReuseIdentifier: SettingItemTableViewCell.id)
         tableView.isScrollEnabled = false
         tableView.showsVerticalScrollIndicator = false
-        tableView.sectionHeaderTopPadding = 0
+        tableView.layoutMargins = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         tableView.backgroundColor = .clear
         return tableView
     }()
@@ -159,8 +168,8 @@ extension SettingViewController {
         
         userInfoStackView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
             
         }
         userInfoView.snp.makeConstraints { make in
@@ -184,7 +193,8 @@ extension SettingViewController {
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(userInfoStackView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
