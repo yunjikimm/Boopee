@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import RxSwift
 import Kingfisher
 
 final class HomeMemoCollectionViewCell: UICollectionViewCell {
     static let id = "HomeMemoCollectionViewCell"
+    
+    private let getUserNickNameTrigger = PublishSubject<Void>()
+    private let disposeBag = DisposeBag()
+    private let userNickNameGetViewModel = UserNickNameGetViewModel()
     private let dataFormatManager = DateFormatManager.dataFormatManager
     
     // book data
@@ -74,7 +79,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     }()
     private let userNickNameLabel: UILabel = {
         let label = UILabel()
-//        label.text = "가나다라마바사아자차"
+        label.text = "닉네임 없음"
         label.textColor = .label
         label.font = .mediumBold
         return label
@@ -92,7 +97,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
         setupUI()
     }
     
-    public func configure(memo: Memo, user: UserInfo) {
+    public func configure(memo: Memo) {
         bookThumbnailImageView.kf.setImage(with: URL(string: memo.book.thumbnail))
         bookTitleLabel.text = memo.book.title
         bookAuthorsLabel.text = memo.book.authors
@@ -101,7 +106,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
         memoTextLabel.text = memo.memoText
         memoDateLabel.text = dataFormatManager.MemoDateToString(memo.updatedAt)
         
-        userNickNameLabel.text = user.nikName
+        getUserInfo(userUid: memo.user)
     }
     
     required init?(coder: NSCoder) {
@@ -109,6 +114,21 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: - bind user info
+extension HomeMemoCollectionViewCell {
+    private func getUserInfo(userUid: String) {
+        Task {
+            let input = UserNickNameGetViewModel.Input(getUserNickNameTrigger: self.getUserNickNameTrigger.asObserver())
+            let output = await self.userNickNameGetViewModel.transform(input: input, userUid: userUid)
+            
+            output.userNickName.bind { [weak self] nickName in
+                self?.userNickNameLabel.text = nickName
+            }.disposed(by: disposeBag)
+        }
+    }
+}
+
+// MARK: - setupUI
 extension HomeMemoCollectionViewCell {
     private func setupUI() {
         contentView.backgroundColor = .customSystemBackground
