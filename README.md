@@ -33,7 +33,7 @@
 
 |`마이페이지 - 로그인 없음`|`마이페이지 - 로그인`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/cd9a3dac-a5db-4f5d-b498-284e04c91011" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/836ba044-d508-487c-b181-8d3185176592" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/62edd8f0-5a5d-42e2-99d1-ec32cd4f586b" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/cd9a3dac-a5db-4f5d-b498-284e04c91011" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/4ea9ed3a-0a4b-455e-974a-e6f1e031c514" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/62edd8f0-5a5d-42e2-99d1-ec32cd4f586b" width="200"> |
 
 |`메모 디테일`|`메모 삭제`|
 |:----:|:----:|
