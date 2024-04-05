@@ -209,6 +209,7 @@ private extension EditMemoViewController {
         }
         
         writeMemoButton.snp.makeConstraints { make in
+            make.top.equalTo(memoLimitLabel.snp.bottom).offset(4)
             make.leading.trailing.centerX.equalToSuperview()
             make.bottom.equalTo(scrollContentView.snp.bottom).offset(-12)
             make.height.equalTo(44)

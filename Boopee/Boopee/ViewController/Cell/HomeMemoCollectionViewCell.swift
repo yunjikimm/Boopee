@@ -60,7 +60,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     // memo data
     private let memoTextBoxView: UIView = {
         let view = UIView()
-        view.backgroundColor = .customSecondarySystemBackground
+        view.backgroundColor = .customSystemBackground
         view.layer.cornerRadius = CornerRadiusConstant.textView
         return view
     }()
@@ -131,7 +131,7 @@ extension HomeMemoCollectionViewCell {
 // MARK: - setupUI
 extension HomeMemoCollectionViewCell {
     private func setupUI() {
-        contentView.backgroundColor = .customSystemBackground
+        contentView.backgroundColor = .clear
         contentView.layer.cornerRadius = CornerRadiusConstant.memoBoxView
         
         addSubview(bookInfoWrapStackViewView)
@@ -156,9 +156,9 @@ extension HomeMemoCollectionViewCell {
         }
         
         bookInfoWrapStackViewView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(30)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
+            make.top.equalToSuperview().offset(8)
+            make.leading.equalTo(contentView.snp.leading).offset(4)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-2)
         }
         bookInfoTextBoxView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview()
@@ -184,9 +184,9 @@ extension HomeMemoCollectionViewCell {
         
         memoTextBoxView.snp.makeConstraints { make in
             make.top.equalTo(bookInfoWrapStackViewView.snp.bottom).offset(12)
-            make.leading.equalTo(contentView.snp.leading).offset(16)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-16)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-30)
+            make.leading.equalTo(contentView.snp.leading)
+            make.trailing.equalTo(contentView.snp.trailing)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-4)
         }
         memoTextLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
