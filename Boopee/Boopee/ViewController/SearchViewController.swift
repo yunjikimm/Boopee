@@ -33,6 +33,7 @@ final class SearchViewController: UIViewController {
         setupSearchController()
         setupUI()
         setCollectionViewItemSelectedRx()
+        bindCollectionViewCellScrollPaging()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +61,23 @@ extension SearchViewController {
     }
 }
 
+// MARK: -  collectionview pagination
+extension SearchViewController {
+    private func bindCollectionViewCellScrollPaging() {
+        collectionView.rx.willEndDragging.bind { [weak self] velocity, targetContentOffset in
+            guard let self = self else { return }
+            
+            let contentHeight = collectionView.contentSize.height
+            let offsetY = collectionView.contentOffset.y
+            let collectionViewHeight = collectionView.bounds.size.height
+            
+            if offsetY + collectionViewHeight >= contentHeight {
+                self.bookTrigger.onNext(Void())
+            }
+        }.disposed(by: disposeBag)
+    }
+}
+
 // MARK: - binding, datasource
 extension SearchViewController {
     // MARK: - binding, snapshot, apply datasource
@@ -68,14 +86,18 @@ extension SearchViewController {
         let output = bookApiviewModel.transform(input: input, path: path)
         
         output.bookList.bind { [weak self] bookList in
+            guard let self = self else { return }
+            
             var snapshot = NSDiffableDataSourceSnapshot<Section, Book>()
-            self?.items = bookList.map { $0 }
+            self.items.append(contentsOf: bookList.map { $0 })
+            print("👾👾👾 items count: \(self.items.count) 👾👾👾")
+            
             let section = Section.searchResult
             
             snapshot.appendSections([section])
-            snapshot.appendItems(self?.items ?? [], toSection: section)
+            snapshot.appendItems(self.items, toSection: section)
             
-            self?.dataSource?.apply(snapshot)
+            self.dataSource?.apply(snapshot)
         }.disposed(by: disposeBag)
     }
     
