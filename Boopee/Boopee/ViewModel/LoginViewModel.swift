@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestore
 import GoogleSignIn
 
+@MainActor
 final class LoginViewModel {
     let firebaseAuth = Auth.auth()
     private let userCollectionRef = Firestore.firestore().collection("UserInfo")
