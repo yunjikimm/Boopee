@@ -90,7 +90,6 @@ extension SearchViewController {
             
             var snapshot = NSDiffableDataSourceSnapshot<Section, Book>()
             self.items.append(contentsOf: bookList.map { $0 })
-            print("👾👾👾 items count: \(self.items.count) 👾👾👾")
             
             let section = Section.searchResult
             
