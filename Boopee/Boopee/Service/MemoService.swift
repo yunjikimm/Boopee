@@ -12,24 +12,34 @@ import FirebaseFirestore
 
 final class MemoService {
     private let memoCollectionRef = Firestore.firestore().collection("Memos")
-    
     private var memoList: [MemoDB] = []
     
-    func getAllMemo() async -> Observable<[MemoDB]> {
+    func getAllMemo(lastDocument: DocumentSnapshot?) async -> Observable<([MemoDB], DocumentSnapshot?)> {
         do {
-            memoList = try await memoCollectionRef
-                .order(by: "updatedAt", descending: true)
-                .getDocuments().documents.map { document -> MemoDB in
-                try document.data(as: MemoDB.self)
+            let pageSize: Int = 2
+            var query: ([MemoDB], DocumentSnapshot?)? = nil
+            
+            if let lastDocument {
+                query = try await memoCollectionRef
+                    .order(by: "updatedAt", descending: true)
+                    .limit(to: 1)
+                    .start(afterDocument: lastDocument)
+                    .getDocumentsWithSnapshot(as: MemoDB.self)
+            } else {
+                query = try await memoCollectionRef
+                    .order(by: "updatedAt", descending: true)
+                    .limit(to: pageSize)
+                    .getDocumentsWithSnapshot(as: MemoDB.self)
             }
             
             return Observable.create { observer in
-                observer.onNext(self.memoList)
+                observer.onNext(query ?? ([], lastDocument))
                 observer.onCompleted()
                 
                 return Disposables.create()
             }
-        } catch {
+        } 
+        catch {
             print(error.localizedDescription)
             
             return Observable.create { observer in
@@ -39,17 +49,33 @@ final class MemoService {
         }
     }
     
-    func getUserMemo(user: String) async -> Observable<[MemoDB]> {
+    func getUserMemo(user: String, lastDocument: DocumentSnapshot?, isFirst: Bool) async -> Observable<([MemoDB], DocumentSnapshot?)> {
         do {
-            memoList = try await memoCollectionRef
-                .whereField("user", isEqualTo: user)
-                .order(by: "updatedAt", descending: true)
-                .getDocuments().documents.map { document -> MemoDB in
-                try document.data(as: MemoDB.self)
+            let pageSize: Int = 5
+            var query: ([MemoDB], DocumentSnapshot?)? = nil
+            var lastDocumentSnapshot = lastDocument
+            
+            if isFirst {
+                lastDocumentSnapshot = nil
+            }
+            
+            if let lastDocumentSnapshot {
+                query = try await memoCollectionRef
+                    .whereField("user", isEqualTo: user)
+                    .order(by: "updatedAt", descending: true)
+                    .limit(to: pageSize)
+                    .start(afterDocument: lastDocumentSnapshot)
+                    .getDocumentsWithSnapshot(as: MemoDB.self)
+            } else {
+                query = try await memoCollectionRef
+                    .whereField("user", isEqualTo: user)
+                    .order(by: "updatedAt", descending: true)
+                    .limit(to: pageSize)
+                    .getDocumentsWithSnapshot(as: MemoDB.self)
             }
             
             return Observable.create { observer in
-                observer.onNext(self.memoList)
+                observer.onNext(query ?? ([], lastDocumentSnapshot))
                 observer.onCompleted()
                 
                 return Disposables.create()
@@ -135,5 +161,22 @@ final class MemoService {
                 return Disposables.create()
             }
         }
+    }
+}
+
+extension Query {
+    func getDocuments<T>(as type: T.Type) async throws -> [T] where T: Decodable {
+        let (results, _) = try await getDocumentsWithSnapshot(as: type)
+        return results
+    }
+    
+    func getDocumentsWithSnapshot<T>(as type: T.Type) async throws -> ([T], DocumentSnapshot?) where T: Decodable {
+        let snapshot = try await self.getDocuments()
+        
+        let results = try snapshot.documents.map { document in
+            try document.data(as: T.self)
+        }
+        
+        return (results, snapshot.documents.last)
     }
 }

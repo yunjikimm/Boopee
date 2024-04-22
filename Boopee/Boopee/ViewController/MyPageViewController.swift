@@ -11,7 +11,7 @@ import RxSwift
 final class MyPageViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Memo>?
     
-    private let userMemoTrigger = PublishSubject<Void>()
+    private let firstFetchUserMemoTrigger = BehaviorSubject<Bool>(value: true)
     private let disposeBag = DisposeBag()
     private let userMemoListViewModel = UserMemoListViewModel()
     private let loginViewModel = LoginViewModel()
@@ -22,13 +22,6 @@ final class MyPageViewController: UIViewController {
         view.layer.cornerRadius = CornerRadiusConstant.myPageCollectionView
         view.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner)
         return view
-    }()
-    private let myMemoCountLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .memoCountLabelColor
-        label.font = .memoCountFont
-        label.text = "내가 작성한 메모 (0)"
-        return label
     }()
     private let emptyCollectionViewWrapView: UIView = {
         let view = UIView()
@@ -77,7 +70,7 @@ final class MyPageViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setupLayout())
         collectionView.register(UserMemoCollectionViewCell.self, forCellWithReuseIdentifier: UserMemoCollectionViewCell.id)
-        collectionView.showsVerticalScrollIndicator = false
+//        collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .customSystemBackground
         return collectionView
     }()
@@ -91,16 +84,17 @@ final class MyPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupUI()
+        setDataSource()
         setNavigationBarButtonItems()
         moveToSearchViewButtonPressed()
         setCollectionViewItemSelectedRx()
+        bindCollectionViewCellScrollPaging()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         
-        setupUI()
-        setDataSource()
         checkLogin()
     }
 }
@@ -109,11 +103,12 @@ final class MyPageViewController: UIViewController {
 extension MyPageViewController {
     private func checkLogin() {
         if let user = loginViewModel.firebaseAuth.currentUser?.uid {
+            self.items.removeAll()
+            self.firstFetchUserMemoTrigger.onNext(true)
             self.bindUserMemoListViewModel(user: user)
         } else {
             self.setupLoginUI()
             self.loginButtonPressed()
-            myMemoCountLabel.text = "내가 작성한 메모 (0)"
         }
     }
 }
@@ -124,16 +119,11 @@ extension MyPageViewController {
         self.view.backgroundColor = .customSecondarySystemBackground
         
         self.view.addSubview(collectionViewWrapView)
-        collectionViewWrapView.addSubview(myMemoCountLabel)
         
         collectionViewWrapView.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
-        }
-        myMemoCountLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(16)
         }
     }
     
@@ -141,7 +131,7 @@ extension MyPageViewController {
         collectionViewWrapView.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -154,7 +144,7 @@ extension MyPageViewController {
         emptyCollectionViewWrapView.addSubview(moveToSearchViewButton)
         
         emptyCollectionViewWrapView.snp.makeConstraints { make in
-            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -174,7 +164,7 @@ extension MyPageViewController {
         loginWrapView.addSubview(loginButton)
         
         loginWrapView.snp.makeConstraints { make in
-            make.top.equalTo(myMemoCountLabel.snp.bottom).offset(16)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -215,6 +205,25 @@ extension MyPageViewController {
     }
 }
 
+// MARK: -  collectionview pagination
+extension MyPageViewController {
+    private func bindCollectionViewCellScrollPaging() {
+        collectionView.rx.willEndDragging.bind { [weak self] velocity, targetContentOffset in
+            guard let self = self else { return }
+            guard let user = loginViewModel.firebaseAuth.currentUser?.uid else { return }
+            
+            let contentHeight = collectionView.contentSize.height
+            let offsetY = collectionView.contentOffset.y
+            let collectionViewHeight = collectionView.bounds.size.height
+            
+            if offsetY + collectionViewHeight >= contentHeight {
+                self.firstFetchUserMemoTrigger.onNext(false)
+                self.bindUserMemoListViewModel(user: user)
+            }
+        }.disposed(by: disposeBag)
+    }
+}
+
 // MARK: - binding, datasource
 extension MyPageViewController {
     // MARK: -  button binding
@@ -235,25 +244,28 @@ extension MyPageViewController {
     // MARK: - binding, snapshot, apply datasource
     private func bindUserMemoListViewModel(user: String) {
         Task {
-            let input = UserMemoListViewModel.Input(userMemoTrigger: userMemoTrigger.asObservable())
+            let input = UserMemoListViewModel.Input(firstFetchUserMemoTrigger: firstFetchUserMemoTrigger.asObserver())
             let output = await userMemoListViewModel.transform(input: input, user: user)
             
             output.userMemoList.bind { [weak self] userMemoList in
-                if userMemoList.isEmpty {
-                    self?.setupEmptyCollectionViewUI()
-                } else {
-                    self?.setupCollectionViewUI()
-                }
-                self?.myMemoCountLabel.text = "내가 작성한 메모 (\(userMemoList.count))"
+                guard let self = self else { return }
                 
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Memo>()
-                self?.items = userMemoList.map { $0 }
+                
+                self.items.append(contentsOf: userMemoList.map { $0 })
+                
+                if self.items.isEmpty {
+                    self.setupEmptyCollectionViewUI()
+                } else {
+                    self.setupCollectionViewUI()
+                }
+                
                 let section = Section.searchResult
                 
                 snapshot.appendSections([section])
-                snapshot.appendItems(self?.items ?? [], toSection: section)
+                snapshot.appendItems(self.items, toSection: section)
                 
-                self?.dataSource?.apply(snapshot)
+                self.dataSource?.apply(snapshot)
             }.disposed(by: disposeBag)
         }
     }
