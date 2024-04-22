@@ -47,6 +47,10 @@ final class HomeViewController: UIViewController {
         
         return collectionView
     }()
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        return refreshControl
+    }()
     
     private var items: [Memo] = []
     private var userNickName: String = ""
@@ -55,13 +59,10 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setDataSource()
+        bindMemoListViewModel()
         bindCollectionViewCellScrollPaging()
         moveToSearchViewButtonPressed()
-        setDataSource()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        bindMemoListViewModel()
     }
 }
 
@@ -70,8 +71,8 @@ extension HomeViewController {
     private func bindCollectionViewCellScrollPaging() {
         collectionView.rx.willEndDragging.bind { [weak self] velocity, targetContentOffset in
             guard let self = self else { return }
-            self.bindMemoListViewModel()
             
+            // cell paging
             guard let cellFrameHeight = self.collectionView.visibleCells.first?.frame.size.height else { return }
             let cellHeight = cellFrameHeight + 10
             let estimatedIndex = (self.collectionView.contentOffset.y - self.collectionView.contentInset.top) / cellHeight
@@ -86,8 +87,17 @@ extension HomeViewController {
                 index = Int(round(estimatedIndex))
             }
             
-            index = max(min(self.collectionView.numberOfItems(inSection: 0) - 1, index), 0)
-            targetContentOffset.pointee = CGPoint(x: 0, y: CGFloat(index) * cellHeight)
+            // pagination
+            let reuseindex = max(min(self.collectionView.numberOfItems(inSection: 0) - 1, index), 0)
+            targetContentOffset.pointee = CGPoint(x: 0, y: CGFloat(reuseindex) * cellHeight)
+            
+            let contentHeight = collectionView.contentSize.height
+            let offsetY = collectionView.contentOffset.y
+            let collectionViewHeight = collectionView.bounds.size.height
+            
+            if offsetY + collectionViewHeight >= contentHeight {
+                self.bindMemoListViewModel()
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -105,20 +115,24 @@ extension HomeViewController {
             let output = await memoListViewModel.transform(input: input)
             
             output.memoList.bind { [weak self] memoList in
-                if memoList.isEmpty {
-                    self?.setupEmptyCollectionViewUI()
-                } else {
-                    self?.setupCollectionViewUI()
-                }
+                guard let self = self else { return }
                 
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Memo>()
-                self?.items = memoList.map { $0 }
+                
+                self.items.append(contentsOf: memoList.map { $0 })
+                
+                if self.items.isEmpty {
+                    self.setupEmptyCollectionViewUI()
+                } else {
+                    self.setupCollectionViewUI()
+                }
+                
                 let section = Section.home
                 
                 snapshot.appendSections([section])
-                snapshot.appendItems(self?.items ?? [], toSection: section)
+                snapshot.appendItems(self.items, toSection: section)
                 
-                self?.dataSource?.apply(snapshot)
+                self.dataSource?.apply(snapshot)
             }.disposed(by: disposeBag)
         }
     }

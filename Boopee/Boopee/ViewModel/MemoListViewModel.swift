@@ -7,10 +7,11 @@
 
 import UIKit
 import RxSwift
-import RxRelay
+import FirebaseFirestore
 
 final class MemoListViewModel {
     private let memoService = MemoService()
+    private var lastDocument: DocumentSnapshot? = nil
     private let dataFormatManager = DateFormatManager.dataFormatManager
     
     struct Input {
@@ -26,12 +27,19 @@ final class MemoListViewModel {
     }
     
     private func getAllMemo() async -> Observable<[Memo]> {
-        return await memoService.getAllMemo().map { memoDB in
-            memoDB.map { entity in
-                let createdAt = self.dataFormatManager.stringToDate(entity.createdAt)
-                let updatedAt = self.dataFormatManager.stringToDate(entity.updatedAt)
+        return await memoService.getAllMemo(lastDocument: lastDocument).map { memoList, lastDocument in
+            guard let lastDocument = lastDocument else { return [] }
+            
+            if lastDocument.exists {
+                self.lastDocument = lastDocument
                 
-                return Memo(id: entity.id, user: entity.user, memoText: entity.memoText, createdAt: createdAt, updatedAt: updatedAt, book: entity.book)
+                return memoList.map { entity in
+                    let createdAt = self.dataFormatManager.stringToDate(entity.createdAt)
+                    let updatedAt = self.dataFormatManager.stringToDate(entity.updatedAt)
+                    return Memo(id: entity.id, user: entity.user, memoText: entity.memoText, createdAt: createdAt, updatedAt: updatedAt, book: entity.book)
+                }
+            } else {
+                return []
             }
         }
     }
