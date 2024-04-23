@@ -12,5 +12,5 @@ struct UserInfo: Decodable, Hashable {
     let displayName: String
     let nikName: String
     let email: String
-    let creationDate: String
+    let creationDate: Date
 }

@@ -77,9 +77,9 @@ extension EditUserNickNameViewController {
     }
     
     private func bindEditUserNickNameButton() {
-        guard let nickName = nickNameTextView.text else { return }
-        
         Task {
+            guard let nickName = nickNameTextView.text else { return }
+            
             let input = UserNickNameUpdateViewModel.Input(updateButtonDidTapEvent: updateButtonDidTapEvent.asObserver())
             let output = await userNickNameUpdateViewModel.transform(input: input, nickName: nickName)
             

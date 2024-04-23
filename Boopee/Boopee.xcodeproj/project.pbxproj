@@ -41,6 +41,8 @@
 		DCAE6A312BBFDE3B00E485AE /* UserNickNameGetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A302BBFDE3B00E485AE /* UserNickNameGetViewModel.swift */; };
 		DCAE6A372BC3F3DB00E485AE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0A990E2BB514150052EED9 /* WebKit.framework */; };
 		DCAE6A5B2BD7D94F00E485AE /* LoginInstructionConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A5A2BD7D94F00E485AE /* LoginInstructionConst.swift */; };
+		DCAE6A5E2BD7E42C00E485AE /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A5D2BD7E42C00E485AE /* UserInfoService.swift */; };
+		DCAE6A602BD7E6F700E485AE /* UserInfoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A5F2BD7E6F700E485AE /* UserInfoDB.swift */; };
 		DCCA45BA2BB8804100782135 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA45B92BB8804100782135 /* UIFont+Extension.swift */; };
 		DCFBBC6B2BA2030200B58311 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6A2BA2030200B58311 /* FirebaseAnalytics */; };
 		DCFBBC6E2BA20E4700B58311 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6D2BA20E4700B58311 /* GoogleSignIn */; };
@@ -101,6 +103,8 @@
 		DCAE6A2E2BBE338400E485AE /* UserNickNameUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNickNameUpdateViewModel.swift; sourceTree = "<group>"; };
 		DCAE6A302BBFDE3B00E485AE /* UserNickNameGetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNickNameGetViewModel.swift; sourceTree = "<group>"; };
 		DCAE6A5A2BD7D94F00E485AE /* LoginInstructionConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInstructionConst.swift; sourceTree = "<group>"; };
+		DCAE6A5D2BD7E42C00E485AE /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
+		DCAE6A5F2BD7E6F700E485AE /* UserInfoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDB.swift; sourceTree = "<group>"; };
 		DCCA45B92BB8804100782135 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				DCFBBC872BAF0DB800B58311 /* MemoService.swift */,
+				DCAE6A5D2BD7E42C00E485AE /* UserInfoService.swift */,
 				DCFBBC862BAF0BE300B58311 /* Entity */,
 			);
 			path = Service;
@@ -300,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				DCFBBCA02BB210B300B58311 /* MemoDB.swift */,
+				DCAE6A5F2BD7E6F700E485AE /* UserInfoDB.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -457,12 +463,14 @@
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
 				DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */,
+				DCAE6A602BD7E6F700E485AE /* UserInfoDB.swift in Sources */,
 				DCAE6A292BBD563000E485AE /* UserInfo.swift in Sources */,
 				DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */,
 				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */,
 				DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
 				DC0A990D2BB50E480052EED9 /* SettingItemConstant.swift in Sources */,
+				DCAE6A5E2BD7E42C00E485AE /* UserInfoService.swift in Sources */,
 				DCAE6A5B2BD7D94F00E485AE /* LoginInstructionConst.swift in Sources */,
 				DCCA45BA2BB8804100782135 /* UIFont+Extension.swift in Sources */,
 				DCFBBC7A2BA3431000B58311 /* LoginViewController.swift in Sources */,

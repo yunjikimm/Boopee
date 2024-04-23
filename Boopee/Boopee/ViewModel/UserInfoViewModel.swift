@@ -6,13 +6,10 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseFirestore
 import RxSwift
 
 final class UserInfoViewModel {
-    private let firebaseAuth = Auth.auth()
-    private let userCollectionRef = Firestore.firestore().collection("UserInfo")
+    private let userInfoService = UserInfoService()
     private let dataFormatManager = DateFormatManager.dataFormatManager
     
     struct Input {
@@ -24,34 +21,14 @@ final class UserInfoViewModel {
     }
     
     func transform(input: Input) async -> Output {
-        return Output(userInfo: await self.getUserInfo())
+        return Output(userInfo: await getUserInfo())
     }
     
     private func getUserInfo() async -> Observable<UserInfo> {
-        do {
-            guard let userUid = firebaseAuth.currentUser?.uid else {
-                return Observable.create { observer in
-                    observer.onCompleted()
-                    return Disposables.create()
-                }
-            }
+        return await userInfoService.getUserInfo().map { entity in
+            let creationDate = self.dataFormatManager.stringToDate(entity.creationDate)
             
-            let userDocumentRef = userCollectionRef.document(userUid)
-            let userInfo = try await userDocumentRef.getDocument(as: UserInfo.self)
-            
-            return Observable.create { observer in
-                observer.onNext(userInfo)
-                observer.onCompleted()
-                
-                return Disposables.create()
-            }
-        } catch {
-            print(error.localizedDescription)
-            
-            return Observable.create { observer in
-                observer.onError(error)
-                return Disposables.create()
-            }
+            return UserInfo(id: entity.id, displayName: entity.displayName, nikName: entity.nikName, email: entity.email, creationDate: creationDate)
         }
     }
 }
