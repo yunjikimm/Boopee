@@ -1,10 +1,11 @@
-# Boopee
+## Boopee
 읽은 책에 대한 메모를 남기고 사람들과 공유하는 iOS 앱
 
 - 팀원
     - 1인 개발
 - 진행 기간
     - 개발: 2024.03.03 ~ 2024.04.22
+<br/>
 
 ## 개발 환경 및 기술
 - 개발 환경
@@ -16,6 +17,16 @@
     - RxSwift, RxAlamofire, Kingfisher, SnapKit
 - API
     - Kakao REST API
+<br/>
+
+## 아키텍처
+![아키텍처 구조도](https://github.com/yunjikimm/Boopee/assets/68881093/c3e78a6c-2743-4a64-834e-0814eec9db91)
+- MVVM 패턴
+    - API 서버, DB의 서비스 로직과 UI 서비스 로직을 구분하기 위한 가독성 높은 MVVM 아키텍처 도입
+- Input/Output
+    - Input을 통해 ViewController로부터 전달받은 이벤트를 Binding
+    - Output을 통해 ViewController에 데이터를 전달하도록 Binding
+<br/>
 
 ## 주요 화면 및 기능
 - `탐색`: 사람들이 남긴 메모를 탐색할 수 있습니다.
@@ -32,12 +43,12 @@
 
 |`마이페이지 - 로그인 없음`|`마이페이지 - 로그인`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/cd8fef55-7326-4e91-8d6f-79e808a8da48" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/dcea15fa-9035-48bb-b982-e76c87247388" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/bb03bd3a-9a25-4f2e-a2a0-ed77e44674bc" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/fe353bab-df3a-48f0-8218-ae4e68010dc3" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/dcea15fa-9035-48bb-b982-e76c87247388" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/47f5557e-c0b8-419b-bada-184bf3d7ad50" width="200"> |
 
 |`메모 디테일`|`메모 삭제`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/051872f1-d607-4666-8ac4-7f2b999cdf36" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/ac9a66d6-0d01-4d60-8921-48c26541b670" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/def09836-fd04-41e9-8cd0-4e4d2a2cbfa7" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/e45c3c43-aefd-49d3-bb96-797182535a11" width="200"> |
 
 |`설정`|`웹뷰`|
 |:----:|:----:|
-| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/4bb9a681-74aa-4323-8f1c-b033400dda08" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d09adbdc-29e0-45a3-b49a-805479fd112c" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/88978891-9d07-4cb1-8a85-79d10c1b9f88" width="200"> |
+| <img src="https://github.com/yunjikimm/Boopee/assets/68881093/d3ece224-da35-4f99-a1e6-f584d0f9d1f2" width="200"> <img src="https://github.com/yunjikimm/Boopee/assets/68881093/eb1c472c-3c06-47c2-97a9-8da32748de13" width="200"> | <img src="https://github.com/yunjikimm/Boopee/assets/68881093/60a3c939-bf31-4fe5-be08-4056b8ea0556" width="200"> |
