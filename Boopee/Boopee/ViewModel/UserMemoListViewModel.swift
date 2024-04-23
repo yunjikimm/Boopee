@@ -14,8 +14,7 @@ final class UserMemoListViewModel {
     private var lastDocument: DocumentSnapshot? = nil
     private let dataFormatManager = DateFormatManager.dataFormatManager
     
-    private var initPageSize: Int = 5
-    private var firstFlag: Bool = true
+    private var firstFetchDataFlag: Bool = true
     
     struct Input {
         let firstFetchUserMemoTrigger: Observable<Bool>
@@ -26,16 +25,16 @@ final class UserMemoListViewModel {
     }
     
     func transform(input: Input, user: String) async -> Output {
-        input.firstFetchUserMemoTrigger.subscribe { [weak self] isFirst in
-            guard let isFirst = isFirst.element else { return }
-            self?.firstFlag = isFirst
+        input.firstFetchUserMemoTrigger.subscribe { [weak self] isFirstFetchData in
+            guard let isFirstFetchData = isFirstFetchData.element else { return }
+            self?.firstFetchDataFlag = isFirstFetchData
         }.disposed(by: DisposeBag())
         
-        return Output(userMemoList: await getUserMemo(user: user, isFirst: firstFlag))
+        return Output(userMemoList: await getUserMemo(user: user, isFirstFetchData: firstFetchDataFlag))
     }
     
-    private func getUserMemo(user: String, isFirst: Bool) async -> Observable<[Memo]> {
-        return await memoService.getUserMemo(user: user, lastDocument: lastDocument, isFirst: isFirst).map { memoList, lastDocument in
+    private func getUserMemo(user: String, isFirstFetchData: Bool) async -> Observable<[Memo]> {
+        return await memoService.getUserMemo(user: user, lastDocument: lastDocument, isFirstFetchData: isFirstFetchData).map { memoList, lastDocument in
             guard let lastDocument = lastDocument else { return [] }
             
             if lastDocument.exists {

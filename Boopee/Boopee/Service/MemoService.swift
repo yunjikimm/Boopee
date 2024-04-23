@@ -49,13 +49,13 @@ final class MemoService {
         }
     }
     
-    func getUserMemo(user: String, lastDocument: DocumentSnapshot?, isFirst: Bool) async -> Observable<([MemoDB], DocumentSnapshot?)> {
+    func getUserMemo(user: String, lastDocument: DocumentSnapshot?, isFirstFetchData: Bool) async -> Observable<([MemoDB], DocumentSnapshot?)> {
         do {
             let pageSize: Int = 5
             var query: ([MemoDB], DocumentSnapshot?)? = nil
             var lastDocumentSnapshot = lastDocument
             
-            if isFirst {
+            if isFirstFetchData {
                 lastDocumentSnapshot = nil
             }
             

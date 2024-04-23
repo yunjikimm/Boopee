@@ -127,7 +127,7 @@ final class EditMemoViewController: UIViewController {
         bookAuthorsLabel.text = item.authors
         bookPublisherLabel.text = item.publisher
         
-        self.navigationItem.title = EditMemoNavigationTitleConstant.create.rawValue
+        self.navigationItem.title = EditMemoNavigationTitleConstant.create
     }
     
     public func memoConfig(item: Memo) {
@@ -144,7 +144,7 @@ final class EditMemoViewController: UIViewController {
         
         memoLimitLabel.text = "\(memoTextView.text.count)/\(InitMemoTextViewConst.memoTextMaxLength)"
         
-        self.navigationItem.title = EditMemoNavigationTitleConstant.update.rawValue
+        self.navigationItem.title = EditMemoNavigationTitleConstant.update
     }
 }
 

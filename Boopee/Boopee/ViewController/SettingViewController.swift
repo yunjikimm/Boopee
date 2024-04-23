@@ -204,14 +204,15 @@ extension SettingViewController {
             
             signOutButton.snp.makeConstraints { make in
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-12)
-                make.leading.equalToSuperview().offset(20)
-                make.trailing.equalToSuperview().offset(-20)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
                 make.height.equalTo(44)
             }
         }
     }
 }
 
+// MARK: - tableView Delegate, DataSource
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingItemList.count

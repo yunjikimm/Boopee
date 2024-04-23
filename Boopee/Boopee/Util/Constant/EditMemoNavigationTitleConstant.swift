@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum EditMemoNavigationTitleConstant: String {
-    case create = "메모 작성하기"
-    case update = "메모 수정하기"
+struct EditMemoNavigationTitleConstant {
+    static let create = "메모 작성하기"
+    static let update = "메모 수정하기"
 }

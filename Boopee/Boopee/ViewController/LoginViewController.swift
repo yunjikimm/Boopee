@@ -26,7 +26,7 @@ final class LoginViewController: UIViewController {
     }()
     private let loginInstructionLabel: UILabel = {
         let label = UILabel()
-        label.text = "서비스를 이용하시려면\n로그인을 해주세요!"
+        label.text = LoginInstructionConst.labelText
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = .emptyItemMessageLabelColor

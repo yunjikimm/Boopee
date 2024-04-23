@@ -16,7 +16,6 @@ final class MemoCreateViewModel {
     
     struct Input {
         let createButtonDidTapEvent: Observable<Void>
-//        let memoText: Observable<String?>
     }
     
     struct Output {

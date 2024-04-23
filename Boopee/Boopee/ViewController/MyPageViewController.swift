@@ -52,7 +52,7 @@ final class MyPageViewController: UIViewController {
     }()
     private let loginLabel: UILabel = {
         let label = UILabel()
-        label.text = "서비스를 이용하시려면\n로그인을 해주세요!"
+        label.text = LoginInstructionConst.labelText
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .emptyItemMessageLabelColor
@@ -144,10 +144,10 @@ extension MyPageViewController {
         emptyCollectionViewWrapView.addSubview(moveToSearchViewButton)
         
         emptyCollectionViewWrapView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(22)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.equalToSuperview()
         }
         emptyCollectionViewLabel.snp.makeConstraints { make in
             make.center.equalTo(emptyCollectionViewWrapView)
