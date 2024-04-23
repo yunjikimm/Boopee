@@ -71,11 +71,11 @@ final class MemoDetailViewController: UIViewController {
         return label
     }()
     private lazy var editMemoButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(editMemoButtonPressed))
+        let button = UIBarButtonItem(title: ButtonConstant.edit, style: .plain, target: self, action: #selector(editMemoButtonPressed))
         return button
     }()
     private lazy var deleteMemoButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(deleteMemoAlertAction))
+        let button = UIBarButtonItem(title: ButtonConstant.delete, style: .plain, target: self, action: #selector(deleteMemoAlertAction))
         return button
     }()
     
@@ -106,11 +106,11 @@ final class MemoDetailViewController: UIViewController {
 // MARK: - alert action
 extension MemoDetailViewController {
     @objc private func deleteMemoAlertAction() {
-        let alert = UIAlertController(title: "메모 삭제", message: "메모를 삭제하시겠습니까?", preferredStyle: .alert)
-        let action = UIAlertAction(title: "삭제", style: .default) { [weak self] _ in
+        let alert = UIAlertController(title: AlertMessageConstant.deleteMemo.rawValue, message: AlertMessageConstant.deleteMemo.alertText, preferredStyle: .alert)
+        let action = UIAlertAction(title: ButtonConstant.delete, style: .default) { [weak self] _ in
             self?.deleteMemoButtonPressed()
         }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let cancel = UIAlertAction(title: ButtonConstant.cancel, style: .cancel)
         
         alert.addAction(action)
         alert.addAction(cancel)

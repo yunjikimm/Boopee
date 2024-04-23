@@ -19,14 +19,14 @@ final class LoginViewController: UIViewController {
     }()
     private let loginLabel: UILabel = {
         let label = UILabel()
-        label.text = "로그인"
+        label.text = LoginInstructionConst.loginText
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     private let loginInstructionLabel: UILabel = {
         let label = UILabel()
-        label.text = LoginInstructionConst.labelText
+        label.text = LoginInstructionConst.labelTextLineTwo
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = .emptyItemMessageLabelColor

@@ -31,9 +31,9 @@ final class TabBarController: UITabBarController {
     }
     
     private func setUpTabs() {
-        let home = self.createNavigationController(title: "탐색", image: UIImage(systemName: "rectangle.grid.1x2"), viewController: HomeViewController())
-        let search = self.createNavigationController(title: "작성", image: UIImage(systemName: "plus.circle"), viewController: SearchViewController())
-        let mypage = self.createNavigationController(title: "마이페이지", image: UIImage(systemName: "person"), viewController: MyPageViewController())
+        let home = self.createNavigationController(title: TabBarConstant.explore, image: UIImage(systemName: "rectangle.grid.1x2"), viewController: HomeViewController())
+        let search = self.createNavigationController(title: TabBarConstant.create, image: UIImage(systemName: "plus.circle"), viewController: SearchViewController())
+        let mypage = self.createNavigationController(title: TabBarConstant.mypage, image: UIImage(systemName: "person"), viewController: MyPageViewController())
         
         self.setViewControllers([home, search, mypage], animated: true)
     }

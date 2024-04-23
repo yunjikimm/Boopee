@@ -24,14 +24,14 @@ final class SettingViewController: UIViewController {
     private let userInfoView = UIView()
     private let userInfoNickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임 없음"
+        label.text = NicknameConstant.empty
         label.numberOfLines = 0
         label.font = .largeBold
         return label
     }()
     private let userInfoEmailLabel: UILabel = {
         let label = UILabel()
-        label.text = "서비스를 이용하시려면 로그인을 해주세요!"
+        label.text = LoginInstructionConst.labelTextLineOne
         label.numberOfLines = 0
         label.font = .mediumRegular
         return label
@@ -62,7 +62,7 @@ final class SettingViewController: UIViewController {
     
     private let signOutButton: UIButton = {
         var button = UIButton(configuration: .plain())
-        button.setTitle("로그아웃", for: .normal)
+        button.setTitle(ButtonConstant.logout, for: .normal)
         button.tintColor = .white
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = CornerRadiusConstant.button
@@ -73,7 +73,7 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "설정"
+        self.navigationItem.title = NavigationTitleConstant.setting
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -141,11 +141,11 @@ extension SettingViewController {
 // MARK: - alert action
 extension SettingViewController {
     private func deleteMemoAlertAction() {
-        let alert = UIAlertController(title: "로그아웃", message: "로그아웃하시겠습니까?", preferredStyle: .alert)
-        let action = UIAlertAction(title: "로그아웃", style: .default) { [weak self] _ in
+        let alert = UIAlertController(title: AlertMessageConstant.logout.rawValue, message: AlertMessageConstant.logout.alertText, preferredStyle: .alert)
+        let action = UIAlertAction(title: ButtonConstant.logout, style: .default) { [weak self] _ in
             self?.signOutAction()
         }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let cancel = UIAlertAction(title: ButtonConstant.cancel, style: .cancel)
         
         alert.addAction(action)
         alert.addAction(cancel)

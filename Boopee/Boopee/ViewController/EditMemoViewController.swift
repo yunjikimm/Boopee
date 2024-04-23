@@ -68,7 +68,7 @@ final class EditMemoViewController: UIViewController {
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         textView.backgroundColor = .customSecondarySystemBackground
         textView.layer.cornerRadius = CornerRadiusConstant.textView
-        textView.text = InitMemoTextViewConst.memoTextPlaceholder
+        textView.text = InitMemoTextViewConstant.memoTextPlaceholder
         textView.textColor = .memoTextPlaceholderLabelColor
         textView.font = .memoTextFont
         return textView
@@ -80,13 +80,13 @@ final class EditMemoViewController: UIViewController {
         label.textColor = .tertiaryLabel
         label.textColor = .memoLimitLabelColor
         label.font = .memoLimitFont
-        label.text = "0/\(InitMemoTextViewConst.memoTextMaxLength)"
+        label.text = "0/\(InitMemoTextViewConstant.memoTextMaxLength)"
         return label
     }()
     
     private let writeMemoButton: UIButton = {
         var button = UIButton(configuration: .plain())
-        button.setTitle("완료", for: .normal)
+        button.setTitle(ButtonConstant.done, for: .normal)
         button.tintColor = .disableButtonLabelColor
         button.backgroundColor = .customSecondarySystemBackground
         button.layer.cornerRadius = CornerRadiusConstant.button
@@ -127,7 +127,7 @@ final class EditMemoViewController: UIViewController {
         bookAuthorsLabel.text = item.authors
         bookPublisherLabel.text = item.publisher
         
-        self.navigationItem.title = EditMemoNavigationTitleConstant.create
+        self.navigationItem.title = NavigationTitleConstant.createMemo
     }
     
     public func memoConfig(item: Memo) {
@@ -142,9 +142,9 @@ final class EditMemoViewController: UIViewController {
         memoTextView.text = item.memoText
         memoTextView.textColor = .label
         
-        memoLimitLabel.text = "\(memoTextView.text.count)/\(InitMemoTextViewConst.memoTextMaxLength)"
+        memoLimitLabel.text = "\(memoTextView.text.count)/\(InitMemoTextViewConstant.memoTextMaxLength)"
         
-        self.navigationItem.title = EditMemoNavigationTitleConstant.update
+        self.navigationItem.title = NavigationTitleConstant.updateMemo
     }
 }
 
@@ -298,10 +298,10 @@ private extension EditMemoViewController {
                     self.writeMemoButton.backgroundColor = .customSecondarySystemBackground
                 }
                 
-                if self.memoTextView.text.count > InitMemoTextViewConst.memoTextMaxLength {
-                    self.memoTextView.text = String(self.memoTextView.text.prefix(InitMemoTextViewConst.memoTextMaxLength))
+                if self.memoTextView.text.count > InitMemoTextViewConstant.memoTextMaxLength {
+                    self.memoTextView.text = String(self.memoTextView.text.prefix(InitMemoTextViewConstant.memoTextMaxLength))
                 } else {
-                    self.memoLimitLabel.text = "\(self.memoTextView.text.count)/\(InitMemoTextViewConst.memoTextMaxLength)"
+                    self.memoLimitLabel.text = "\(self.memoTextView.text.count)/\(InitMemoTextViewConstant.memoTextMaxLength)"
                 }
             }.disposed(by: disposeBag)
         
@@ -316,7 +316,7 @@ private extension EditMemoViewController {
         memoTextView.rx.didEndEditing
             .bind {
                 if self.memoTextView.text.isEmpty {
-                    self.memoTextView.text = InitMemoTextViewConst.memoTextPlaceholder
+                    self.memoTextView.text = InitMemoTextViewConstant.memoTextPlaceholder
                     self.memoTextView.textColor = .memoTextPlaceholderLabelColor
                 }
             }.disposed(by: disposeBag)

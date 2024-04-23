@@ -36,7 +36,7 @@ class EditUserNickNameViewController: UIViewController {
     
     private let editUserNickNameButton: UIButton = {
         var button = UIButton(configuration: .plain())
-        button.setTitle("완료", for: .normal)
+        button.setTitle(ButtonConstant.done, for: .normal)
         button.tintColor = .disableButtonLabelColor
         button.backgroundColor = .customSecondarySystemBackground
         button.layer.cornerRadius = CornerRadiusConstant.button
@@ -51,7 +51,7 @@ class EditUserNickNameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.navigationItem.title = "닉네임 변경하기"
+        self.navigationItem.title = NavigationTitleConstant.updateNickname
         self.navigationItem.leftBarButtonItem = dismissBarButton
         
         nickNameTextView.delegate = self

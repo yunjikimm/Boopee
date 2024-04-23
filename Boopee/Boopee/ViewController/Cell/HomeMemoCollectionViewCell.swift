@@ -79,7 +79,7 @@ final class HomeMemoCollectionViewCell: UICollectionViewCell {
     }()
     private let userNickNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "닉네임 없음"
+        label.text = NicknameConstant.empty
         label.textColor = .label
         label.font = .mediumBold
         return label

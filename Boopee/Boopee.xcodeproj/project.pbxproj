@@ -31,7 +31,7 @@
 		DC416AF22BA1A119004230CF /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC416AF12BA1A119004230CF /* Memo.swift */; };
 		DCAE6A1F2BB88DD500E485AE /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */; };
 		DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */; };
-		DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */; };
+		DCAE6A232BB8B2E500E485AE /* NavigationTitleConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A222BB8B2E500E485AE /* NavigationTitleConstant.swift */; };
 		DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */; };
 		DCAE6A272BB8D8B500E485AE /* SettingItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */; };
 		DCAE6A292BBD563000E485AE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A282BBD563000E485AE /* UserInfo.swift */; };
@@ -43,6 +43,10 @@
 		DCAE6A5B2BD7D94F00E485AE /* LoginInstructionConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A5A2BD7D94F00E485AE /* LoginInstructionConst.swift */; };
 		DCAE6A5E2BD7E42C00E485AE /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A5D2BD7E42C00E485AE /* UserInfoService.swift */; };
 		DCAE6A602BD7E6F700E485AE /* UserInfoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A5F2BD7E6F700E485AE /* UserInfoDB.swift */; };
+		DCAE6A622BD7EC8200E485AE /* ButtonConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A612BD7EC8200E485AE /* ButtonConstant.swift */; };
+		DCAE6A642BD7EDAE00E485AE /* AlertMessageConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A632BD7EDAE00E485AE /* AlertMessageConstant.swift */; };
+		DCAE6A662BD7F00500E485AE /* NicknameConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A652BD7F00500E485AE /* NicknameConstant.swift */; };
+		DCAE6A682BD7F08900E485AE /* TabBarConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE6A672BD7F08900E485AE /* TabBarConstant.swift */; };
 		DCCA45BA2BB8804100782135 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA45B92BB8804100782135 /* UIFont+Extension.swift */; };
 		DCFBBC6B2BA2030200B58311 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6A2BA2030200B58311 /* FirebaseAnalytics */; };
 		DCFBBC6E2BA20E4700B58311 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = DCFBBC6D2BA20E4700B58311 /* GoogleSignIn */; };
@@ -61,7 +65,7 @@
 		DCFBBC9D2BB20FCB00B58311 /* SectionItemConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */; };
 		DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */; };
 		DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA02BB210B300B58311 /* MemoDB.swift */; };
-		DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */; };
+		DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConstant.swift */; };
 		DCFBBCA52BB36F4F00B58311 /* UserMemoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA42BB36F4E00B58311 /* UserMemoCollectionViewCell.swift */; };
 		DCFBBCA72BB370F800B58311 /* UserMemoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */; };
 		DCFBBCA92BB4514000B58311 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */; };
@@ -94,7 +98,7 @@
 		DC416AF12BA1A119004230CF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		DCAE6A1E2BB88DD500E485AE /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusConstant.swift; sourceTree = "<group>"; };
-		DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoNavigationTitleConstant.swift; sourceTree = "<group>"; };
+		DCAE6A222BB8B2E500E485AE /* NavigationTitleConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTitleConstant.swift; sourceTree = "<group>"; };
 		DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyItemMessageConstant.swift; sourceTree = "<group>"; };
 		DCAE6A262BB8D8B500E485AE /* SettingItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingItemTableViewCell.swift; sourceTree = "<group>"; };
 		DCAE6A282BBD563000E485AE /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -105,6 +109,10 @@
 		DCAE6A5A2BD7D94F00E485AE /* LoginInstructionConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInstructionConst.swift; sourceTree = "<group>"; };
 		DCAE6A5D2BD7E42C00E485AE /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
 		DCAE6A5F2BD7E6F700E485AE /* UserInfoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDB.swift; sourceTree = "<group>"; };
+		DCAE6A612BD7EC8200E485AE /* ButtonConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConstant.swift; sourceTree = "<group>"; };
+		DCAE6A632BD7EDAE00E485AE /* AlertMessageConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageConstant.swift; sourceTree = "<group>"; };
+		DCAE6A652BD7F00500E485AE /* NicknameConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameConstant.swift; sourceTree = "<group>"; };
+		DCAE6A672BD7F08900E485AE /* TabBarConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarConstant.swift; sourceTree = "<group>"; };
 		DCCA45B92BB8804100782135 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		DCFBBC732BA2153000B58311 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DCFBBC772BA2ECCB00B58311 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -117,7 +125,7 @@
 		DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionItemConstant.swift; sourceTree = "<group>"; };
 		DCFBBC9E2BB2106800B58311 /* HomeMemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCFBBCA02BB210B300B58311 /* MemoDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDB.swift; sourceTree = "<group>"; };
-		DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitMemoTextViewConst.swift; sourceTree = "<group>"; };
+		DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitMemoTextViewConstant.swift; sourceTree = "<group>"; };
 		DCFBBCA42BB36F4E00B58311 /* UserMemoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DCFBBCA62BB370F800B58311 /* UserMemoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMemoListViewModel.swift; sourceTree = "<group>"; };
 		DCFBBCA82BB4514000B58311 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
@@ -325,11 +333,15 @@
 			children = (
 				DCFBBC9C2BB20FCB00B58311 /* SectionItemConstant.swift */,
 				DCAE6A5A2BD7D94F00E485AE /* LoginInstructionConst.swift */,
-				DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConst.swift */,
+				DCFBBCA22BB2157D00B58311 /* InitMemoTextViewConstant.swift */,
 				DC0A990C2BB50E480052EED9 /* SettingItemConstant.swift */,
 				DCAE6A202BB8A1AB00E485AE /* CornerRadiusConstant.swift */,
-				DCAE6A222BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift */,
+				DCAE6A222BB8B2E500E485AE /* NavigationTitleConstant.swift */,
 				DCAE6A242BB8C47F00E485AE /* EmptyItemMessageConstant.swift */,
+				DCAE6A612BD7EC8200E485AE /* ButtonConstant.swift */,
+				DCAE6A632BD7EDAE00E485AE /* AlertMessageConstant.swift */,
+				DCAE6A652BD7F00500E485AE /* NicknameConstant.swift */,
+				DCAE6A672BD7F08900E485AE /* TabBarConstant.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -433,17 +445,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCAE6A662BD7F00500E485AE /* NicknameConstant.swift in Sources */,
 				DCFBBCA52BB36F4F00B58311 /* UserMemoCollectionViewCell.swift in Sources */,
 				DCAE6A272BB8D8B500E485AE /* SettingItemTableViewCell.swift in Sources */,
 				DC0A990B2BB50CEB0052EED9 /* WebViewController.swift in Sources */,
 				DCFBBCA12BB210B300B58311 /* MemoDB.swift in Sources */,
 				DCAE6A1F2BB88DD500E485AE /* UIColor+Extension.swift in Sources */,
+				DCAE6A622BD7EC8200E485AE /* ButtonConstant.swift in Sources */,
 				DC416ADA2B948302004230CF /* SearchViewController.swift in Sources */,
 				DC416AAB2B94299B004230CF /* HomeViewController.swift in Sources */,
 				DCFBBC9F2BB2106800B58311 /* HomeMemoCollectionViewCell.swift in Sources */,
 				DCAE6A2F2BBE338400E485AE /* UserNickNameUpdateViewModel.swift in Sources */,
 				DC416AA72B94299B004230CF /* AppDelegate.swift in Sources */,
 				DCFBBC882BAF0DB800B58311 /* MemoService.swift in Sources */,
+				DCAE6A642BD7EDAE00E485AE /* AlertMessageConstant.swift in Sources */,
 				DC416AC92B942ACE004230CF /* BookNetwork.swift in Sources */,
 				DC416AD72B945F24004230CF /* TabBarController.swift in Sources */,
 				DC416AA92B94299B004230CF /* SceneDelegate.swift in Sources */,
@@ -462,11 +477,12 @@
 				DCAE6A252BB8C47F00E485AE /* EmptyItemMessageConstant.swift in Sources */,
 				DC416ACB2B942AE9004230CF /* NetworkProvider.swift in Sources */,
 				DC416AD22B942B4C004230CF /* BookAPIViewModel.swift in Sources */,
-				DCAE6A232BB8B2E500E485AE /* EditMemoNavigationTitleConstant.swift in Sources */,
+				DCAE6A232BB8B2E500E485AE /* NavigationTitleConstant.swift in Sources */,
 				DCAE6A602BD7E6F700E485AE /* UserInfoDB.swift in Sources */,
 				DCAE6A292BBD563000E485AE /* UserInfo.swift in Sources */,
 				DCFBBC932BAFD6C500B58311 /* DateFormatManager.swift in Sources */,
-				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConst.swift in Sources */,
+				DCFBBCA32BB2157D00B58311 /* InitMemoTextViewConstant.swift in Sources */,
+				DCAE6A682BD7F08900E485AE /* TabBarConstant.swift in Sources */,
 				DCAE6A212BB8A1AB00E485AE /* CornerRadiusConstant.swift in Sources */,
 				DC416AF22BA1A119004230CF /* Memo.swift in Sources */,
 				DC0A990D2BB50E480052EED9 /* SettingItemConstant.swift in Sources */,

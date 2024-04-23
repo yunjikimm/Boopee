@@ -52,7 +52,7 @@ final class MyPageViewController: UIViewController {
     }()
     private let loginLabel: UILabel = {
         let label = UILabel()
-        label.text = LoginInstructionConst.labelText
+        label.text = LoginInstructionConst.labelTextLineTwo
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = .emptyItemMessageLabelColor
@@ -61,7 +61,7 @@ final class MyPageViewController: UIViewController {
     }()
     private let loginButton: UIButton = {
         var button = UIButton(configuration: .plain())
-        button.setTitle("로그인", for: .normal)
+        button.setTitle(LoginInstructionConst.loginText, for: .normal)
         button.tintColor = .enableButtonLabelColor
         button.backgroundColor = .pointGreen
         button.layer.cornerRadius = CornerRadiusConstant.button
