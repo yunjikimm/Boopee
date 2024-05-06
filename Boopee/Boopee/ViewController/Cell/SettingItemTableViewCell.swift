@@ -10,10 +10,24 @@ import UIKit
 class SettingItemTableViewCell: UITableViewCell {
     static let id = "SettingItemTableViewCell"
     
+    private let icon: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "chevron.right"))
+        imageView.tintColor = .grayOne
+        return imageView
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         self.backgroundColor = .customSystemBackground
         self.selectionStyle = .none
+        
+        self.addSubview(icon)
+        
+        icon.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -62,4 +62,14 @@ final class LoginViewModel {
             return false
         }
     }
+    
+    func leaveMembership() {
+        guard let user = firebaseAuth.currentUser else { return }
+        
+        user.delete { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

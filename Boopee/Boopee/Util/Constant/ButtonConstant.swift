@@ -13,4 +13,5 @@ struct ButtonConstant {
     static let delete = "삭제"
     static let cancel = "취소"
     static let logout = "로그아웃"
+    static let leaveMembership = "회원탈퇴"
 }

@@ -31,4 +31,5 @@ extension UIColor {
     // gray color
     static let grayOne: UIColor = .systemGray
     static let grayThree: UIColor = .systemGray3
+    static let grayFour: UIColor = .systemGray4
 }

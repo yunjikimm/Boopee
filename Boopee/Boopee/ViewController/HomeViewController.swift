@@ -64,6 +64,10 @@ final class HomeViewController: UIViewController {
         bindCollectionViewCellScrollPaging()
         moveToSearchViewButtonPressed()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
 }
 
 // MARK: - binding, datasource

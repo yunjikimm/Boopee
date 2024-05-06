@@ -69,6 +69,15 @@ final class SettingViewController: UIViewController {
         return button
     }()
     
+    private let leaveMembershipButton: UIButton = {
+        var button = UIButton(configuration: .plain())
+        button.setTitle(ButtonConstant.leaveMembership, for: .normal)
+        button.tintColor = .grayOne
+        button.backgroundColor = .grayFour
+        button.layer.cornerRadius = CornerRadiusConstant.button
+        return button
+    }()
+    
     private lazy var settingItemList = [SettingItemConstant.serviceUsageGuide.rawValue, SettingItemConstant.privacyPolicy.rawValue]
     
     override func viewDidLoad() {
@@ -79,8 +88,9 @@ final class SettingViewController: UIViewController {
         tableView.dataSource = self
         
         setupUI()
-        bindSignOutButton()
         bindEditUserInfoButton()
+        bindSignOutButton()
+        bindleaveMembershipButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +104,13 @@ final class SettingViewController: UIViewController {
 extension SettingViewController {
     private func bindSignOutButton() {
         signOutButton.rx.tap.bind { [weak self] in
-            self?.deleteMemoAlertAction()
+            self?.signOutAlertAction()
+        }.disposed(by: disposeBag)
+    }
+    
+    private func bindleaveMembershipButton() {
+        leaveMembershipButton.rx.tap.bind { [weak self] in
+            self?.leaveMembershipAlertAction()
         }.disposed(by: disposeBag)
     }
     
@@ -106,6 +122,12 @@ extension SettingViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         }
+    }
+    
+    private func leaveMembershipAction() {
+        self.loginViewModel.leaveMembership()
+        self.navigationController?.popViewController(animated: true)
+        self.tabBarController?.selectedIndex = 0
     }
     
     private func bindEditUserInfoButton() {
@@ -140,10 +162,23 @@ extension SettingViewController {
 
 // MARK: - alert action
 extension SettingViewController {
-    private func deleteMemoAlertAction() {
+    private func signOutAlertAction() {
         let alert = UIAlertController(title: AlertMessageConstant.logout.rawValue, message: AlertMessageConstant.logout.alertText, preferredStyle: .alert)
         let action = UIAlertAction(title: ButtonConstant.logout, style: .default) { [weak self] _ in
             self?.signOutAction()
+        }
+        let cancel = UIAlertAction(title: ButtonConstant.cancel, style: .cancel)
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func leaveMembershipAlertAction() {
+        let alert = UIAlertController(title: AlertMessageConstant.leaveMembership.rawValue, message: AlertMessageConstant.leaveMembership.alertText, preferredStyle: .alert)
+        let action = UIAlertAction(title: ButtonConstant.leaveMembership, style: .default) { [weak self] _ in
+            self?.leaveMembershipAction()
         }
         let cancel = UIAlertAction(title: ButtonConstant.cancel, style: .cancel)
         
@@ -201,8 +236,15 @@ extension SettingViewController {
         
         if loginViewModel.firebaseAuth.currentUser != nil {
             self.view.addSubview(signOutButton)
+            self.view.addSubview(leaveMembershipButton)
             
             signOutButton.snp.makeConstraints { make in
+                make.bottom.equalTo(leaveMembershipButton.snp.top).offset(-12)
+                make.leading.equalToSuperview().offset(16)
+                make.trailing.equalToSuperview().offset(-16)
+                make.height.equalTo(44)
+            }
+            leaveMembershipButton.snp.makeConstraints { make in
                 make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-12)
                 make.leading.equalToSuperview().offset(16)
                 make.trailing.equalToSuperview().offset(-16)
